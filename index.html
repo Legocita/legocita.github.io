@@ -3,92 +3,588 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Legocita Makes creates joyful handmade jewelry, watercolor art, crochet designs, resin pieces, and paper goods by Carmen.">
   <title>Legocita Makes | Cute Crafts by Carmen</title>
   <style>
-    * { box-sizing: border-box; }
+    :root {
+      --teal: #006b73;
+      --deep-teal: #004d55;
+      --sea-glass: #dff3ee;
+      --coral: #ed6670;
+      --blush: #fff1ef;
+      --gold: #c99537;
+      --cream: #fffcf7;
+      --ink: #183f42;
+      --white: #ffffff;
+      --shadow: 0 22px 60px rgba(0, 77, 85, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
-      min-height: 100vh;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(0, 107, 115, 0.12);
+      background: rgba(255, 252, 247, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      width: min(1160px, calc(100% - 40px));
+      min-height: 76px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--deep-teal);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
       display: grid;
       place-items: center;
-      padding: 24px;
-      font-family: Georgia, "Times New Roman", serif;
-      color: #315c5b;
-      text-align: center;
+      color: var(--coral);
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--deep-teal);
+      font-size: 0.94rem;
+      font-weight: 650;
+    }
+
+    .nav-links a:hover {
+      color: var(--coral);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: calc(100vh - 76px);
+      display: grid;
+      align-items: center;
+      padding: 72px 20px;
       background:
-        radial-gradient(circle at 15% 20%, #ffd9e5 0 8%, transparent 9%),
-        radial-gradient(circle at 85% 15%, #d8f1e5 0 10%, transparent 11%),
-        radial-gradient(circle at 80% 85%, #ffe8b6 0 11%, transparent 12%),
-        linear-gradient(135deg, #fffaf6, #f4fbf8);
+        radial-gradient(circle at 8% 12%, rgba(237, 102, 112, 0.16), transparent 25%),
+        radial-gradient(circle at 93% 18%, rgba(54, 165, 152, 0.18), transparent 27%),
+        radial-gradient(circle at 84% 90%, rgba(201, 149, 55, 0.14), transparent 26%),
+        linear-gradient(135deg, #fffaf5, #f4fbf8 52%, #fff8f6);
     }
 
-    main {
-      width: min(760px, 100%);
-      padding: 64px 34px;
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(201, 149, 55, 0.35);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 360px;
+      height: 360px;
+      left: -230px;
+      bottom: -170px;
+    }
+
+    .hero::after {
+      width: 280px;
+      height: 280px;
+      right: -160px;
+      top: 70px;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1160px, 100%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: clamp(42px, 7vw, 100px);
+    }
+
+    .logo-wrap {
+      position: relative;
+      width: min(510px, 90vw);
+      margin: auto;
+      padding: 18px;
+      border-radius: 50%;
       background: rgba(255, 255, 255, 0.9);
-      border: 2px solid #e9c7bf;
-      border-radius: 30px;
-      box-shadow: 0 20px 60px rgba(49, 92, 91, 0.15);
+      box-shadow: var(--shadow);
     }
 
-    .sparkle {
-      font-size: 32px;
-      letter-spacing: 10px;
+    .logo-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border: 1px solid rgba(201, 149, 55, 0.45);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .logo-wrap img {
+      border-radius: 50%;
+    }
+
+    .eyebrow {
+      margin: 0 0 15px;
+      color: var(--coral);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.12;
     }
 
     h1 {
-      margin: 18px 0 4px;
-      color: #c25f78;
-      font-size: clamp(44px, 9vw, 82px);
-      line-height: 1;
+      margin-bottom: 22px;
+      color: var(--deep-teal);
+      font-size: clamp(3.1rem, 6.7vw, 6rem);
+      font-weight: 500;
+      letter-spacing: -0.045em;
     }
 
-    h2 {
-      margin: 12px 0 28px;
-      color: #507f78;
-      font-size: clamp(19px, 4vw, 28px);
-      font-weight: normal;
+    h1 span {
+      color: var(--coral);
+      font-style: italic;
     }
 
-    p {
-      max-width: 590px;
-      margin: 12px auto;
-      font-family: Arial, sans-serif;
-      font-size: 18px;
-      line-height: 1.7;
+    .hero-copy {
+      max-width: 580px;
+      margin-bottom: 30px;
+      font-size: clamp(1.05rem, 2vw, 1.24rem);
     }
 
-    .coming-soon {
-      display: inline-block;
-      margin-top: 26px;
-      padding: 13px 25px;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 24px;
+      border: 2px solid var(--teal);
       border-radius: 999px;
-      color: white;
-      background: #c25f78;
-      font-family: Arial, sans-serif;
-      font-weight: bold;
-      letter-spacing: 1px;
+      font-weight: 750;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 77, 85, 0.14);
+    }
+
+    .button-primary {
+      color: var(--white);
+      background: var(--teal);
+    }
+
+    .button-secondary {
+      color: var(--teal);
+      background: rgba(255, 255, 255, 0.65);
+    }
+
+    .section {
+      padding: 96px 20px;
+    }
+
+    .section-inner {
+      width: min(1100px, 100%);
+      margin: auto;
+    }
+
+    .section-heading {
+      max-width: 690px;
+      margin: 0 auto 52px;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 15px;
+      color: var(--deep-teal);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 500;
+    }
+
+    .section-heading p {
+      margin: 0;
+      font-size: 1.08rem;
+    }
+
+    .collections {
+      background: var(--white);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      min-height: 270px;
+      padding: 34px 28px;
+      border: 1px solid rgba(0, 107, 115, 0.13);
+      border-radius: 24px;
+      background: linear-gradient(145deg, #ffffff, #fbfffd);
+      box-shadow: 0 13px 36px rgba(0, 77, 85, 0.07);
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(237, 102, 112, 0.42);
+    }
+
+    .card-icon {
+      width: 58px;
+      height: 58px;
+      margin-bottom: 25px;
+      display: grid;
+      place-items: center;
+      color: var(--coral);
+      border: 1px solid rgba(201, 149, 55, 0.7);
+      border-radius: 50%;
+      background: var(--blush);
+      font-size: 1.7rem;
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      color: var(--deep-teal);
+      font-size: 1.55rem;
+    }
+
+    .card p {
+      margin: 0;
+    }
+
+    .story {
+      background:
+        linear-gradient(90deg, rgba(223, 243, 238, 0.75), rgba(255, 241, 239, 0.72));
+    }
+
+    .story-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: clamp(45px, 8vw, 100px);
+    }
+
+    .story-art {
+      min-height: 410px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(201, 149, 55, 0.42);
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255,255,255,0.98) 0 24%, transparent 25%),
+        conic-gradient(from 30deg, #dff3ee, #fff1ef, #fff0c9, #e8ddf3, #dff3ee);
+      box-shadow: var(--shadow);
+    }
+
+    .wire-heart {
+      width: 170px;
+      height: 150px;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 8rem;
+      line-height: 1;
+      text-shadow: 0 5px 16px rgba(201, 149, 55, 0.2);
+    }
+
+    .story-copy h2 {
+      margin-bottom: 20px;
+      color: var(--deep-teal);
+      font-size: clamp(2.3rem, 5vw, 4rem);
+      font-weight: 500;
+    }
+
+    .story-copy p {
+      font-size: 1.07rem;
+    }
+
+    .signature {
+      margin-top: 25px;
+      color: var(--coral);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      font-style: italic;
+    }
+
+    .cta {
+      text-align: center;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 18% 25%, rgba(255,255,255,0.1), transparent 23%),
+        linear-gradient(135deg, var(--deep-teal), var(--teal));
+    }
+
+    .cta h2 {
+      margin-bottom: 18px;
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      font-weight: 500;
+    }
+
+    .cta p {
+      max-width: 650px;
+      margin: 0 auto 30px;
+      color: rgba(255,255,255,0.88);
+      font-size: 1.1rem;
+    }
+
+    .cta .button {
+      color: var(--deep-teal);
+      border-color: var(--white);
+      background: var(--white);
+    }
+
+    footer {
+      padding: 35px 20px;
+      text-align: center;
+      color: #517174;
+      background: var(--cream);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 850px) {
+      .nav {
+        min-height: 68px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 52px 20px 72px;
+      }
+
+      .hero-inner,
+      .story-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-text {
+        text-align: center;
+      }
+
+      .hero-copy {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .actions {
+        justify-content: center;
+      }
+
+      .logo-wrap {
+        width: min(390px, 84vw);
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-art {
+        min-height: 310px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .brand {
+        font-size: 1.15rem;
+      }
+
+      .section {
+        padding: 72px 18px;
+      }
+
+      .button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 
 <body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#home">
+        <span class="brand-mark" aria-hidden="true">♥</span>
+        <span>Legocita Makes</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#collections">Collections</a>
+        <a href="#story">Our Story</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
   <main>
-    <div class="sparkle">✦ ♡ ✦</div>
-    <h1>Legocita Makes</h1>
-    <h2>Cute Crafts by Carmen</h2>
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div class="logo-wrap">
+          <img src="legocita-makes-logo.png" alt="Legocita Makes — Cute Crafts by Carmen">
+        </div>
 
-    <p>
-      Handmade with imagination, color, and heart.
-    </p>
+        <div class="hero-text">
+          <p class="eyebrow">Colorful • Meaningful • Handmade</p>
+          <h1>Little works of <span>heart.</span></h1>
+          <p class="hero-copy">
+            Jewelry, watercolor, crochet, resin, and paper creations—each
+            thoughtfully made by Carmen to bring color, personality, and a
+            little joy into everyday life.
+          </p>
 
-    <p>
-      Discover unique jewelry, watercolor creations, crochet designs,
-      resin art, stationery, and delightful handmade treasures.
-    </p>
+          <div class="actions">
+            <a class="button button-primary" href="#collections">Explore the craft</a>
+            <a class="button button-secondary" href="#story">Meet Carmen</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="coming-soon">Our full collection is coming soon!</div>
+    <section class="section collections" id="collections">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Made in small, joyful batches</p>
+          <h2>Creative collections with a story</h2>
+          <p>
+            Legocita Makes celebrates many forms of making, united by vivid
+            color, thoughtful detail, and Carmen’s unmistakable handmade touch.
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">◇</div>
+            <h3>Jewelry & Wire</h3>
+            <p>
+              Playful earrings, pendants, rings, beads, and graceful wirework
+              designed to make the everyday feel special.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">❀</div>
+            <h3>Watercolor & Paper</h3>
+            <p>
+              Bright botanical art, stationery, bookmarks, and small paper
+              treasures inspired by nature, family, and Florida color.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">♡</div>
+            <h3>Fiber & Mixed Media</h3>
+            <p>
+              Crochet, embroidery, resin, clay, and unexpected combinations
+              that turn creative curiosity into something delightful.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section story" id="story">
+      <div class="section-inner story-inner">
+        <div class="story-art" aria-hidden="true">
+          <div class="wire-heart">♡</div>
+        </div>
+
+        <div class="story-copy">
+          <p class="eyebrow">Behind Legocita Makes</p>
+          <h2>Created with curiosity, compassion, and heart.</h2>
+          <p>
+            Carmen is a lifelong maker who sees possibility everywhere—from
+            watercolor and wire to beads, fiber, resin, clay, and even rescued
+            electronic pieces. Legocita Makes is where those discoveries
+            become meaningful handmade treasures.
+          </p>
+          <p>
+            Every piece is an invitation to notice beauty, celebrate
+            individuality, and leave someone a little better than you found them.
+          </p>
+          <p class="signature">Made with love, Carmen</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta" id="contact">
+      <div class="section-inner">
+        <p class="eyebrow">The collection is growing</p>
+        <h2>Something joyful is taking shape.</h2>
+        <p>
+          New pieces, collection galleries, custom-order information, and
+          upcoming events will be added soon.
+        </p>
+        <a class="button" href="mailto:legocitamakes@gmail.com">Say hello</a>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    © 2026 Legocita Makes · Cute Crafts by Carmen
+  </footer>
 </body>
 </html>
