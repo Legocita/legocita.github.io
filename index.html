@@ -572,10 +572,15 @@ h1 span { color: var(--coral); font-style: italic; font-weight: 500; }
   justify-content: center;
   padding: 24px;
   background: rgba(24, 63, 66, 0.92);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
 }
 
-.lightbox-overlay.active { display: flex; }
+.lightbox-overlay.active { display: flex; animation: overlayIn 240ms ease; }
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
 .lightbox-stage {
   position: relative;
@@ -584,6 +589,15 @@ h1 span { color: var(--coral); font-style: italic; font-weight: 500; }
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.lightbox-overlay.active .lightbox-stage {
+  animation: stageIn 380ms var(--ease);
+}
+
+@keyframes stageIn {
+  from { opacity: 0; transform: scale(0.94) translateY(14px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .lightbox-topbar {
@@ -607,12 +621,12 @@ h1 span { color: var(--coral); font-style: italic; font-weight: 500; }
   background: var(--white);
   border: none;
   border-radius: 50%;
-  font-size: 1.15rem;
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition: background 220ms ease, transform 220ms var(--ease), rotate 220ms var(--ease);
 }
 
-.lightbox-close:hover { background: var(--blush); }
+.lightbox-close:hover { background: var(--blush); transform: scale(1.08); rotate: 90deg; }
 
 .lightbox-frame {
   position: relative;
@@ -635,38 +649,68 @@ h1 span { color: var(--coral); font-style: italic; font-weight: 500; }
   object-fit: contain;
   transform-origin: 50% 50%;
   transform: scale(1);
-  will-change: transform;
+  opacity: 1;
+  will-change: transform, opacity;
   user-select: none;
   -webkit-user-drag: none;
-  transition: transform 120ms ease;
+  transition: transform 120ms ease, opacity 260ms ease;
 }
 
-.lightbox-frame.no-transition img { transition: none; }
+.lightbox-frame img.fading { opacity: 0; transition: opacity 160ms ease; }
+.lightbox-frame.no-transition img { transition: opacity 160ms ease; }
 
 .lightbox-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 46px;
-  height: 46px;
+  width: 50px;
+  height: 50px;
   display: grid;
   place-items: center;
   color: var(--deep-teal);
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
   border: none;
   border-radius: 50%;
-  font-size: 1.5rem;
-  line-height: 1;
   cursor: pointer;
-  z-index: 2;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  z-index: 3;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  transition: background 220ms ease, transform 220ms var(--ease), box-shadow 220ms ease;
 }
 
-.lightbox-nav:hover { background: var(--white); }
-.lightbox-prev { left: 14px; }
-.lightbox-next { right: 14px; }
+.lightbox-nav:hover {
+  background: var(--white);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.34);
+}
+.lightbox-nav:active { transform: translateY(-50%) scale(0.96); }
+.lightbox-prev { left: 16px; }
+.lightbox-prev:hover { color: var(--coral); }
+.lightbox-next { right: 16px; }
+.lightbox-next:hover { color: var(--coral); }
 
-.lightbox-caption { margin: 16px 0 2px; color: var(--white); font-size: 1.02rem; text-align: center; }
+.lightbox-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.lightbox-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: background 220ms ease, transform 220ms var(--ease);
+}
+
+.lightbox-dot:hover { background: rgba(255, 255, 255, 0.65); }
+.lightbox-dot.active { background: var(--coral); transform: scale(1.35); }
+
+.lightbox-caption { margin: 14px 0 2px; color: var(--white); font-size: 1.02rem; text-align: center; }
 .lightbox-hint { margin: 0; color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; text-align: center; }
 
 /* ---------- Story / About ---------- */
@@ -813,7 +857,8 @@ footer { padding: 35px 20px; text-align: center; color: #517174; background: var
   .gallery-grid { columns: 2 160px; }
   .story-art { min-height: 310px; }
   .lightbox-frame { height: min(58vh, 560px); }
-  .lightbox-nav { width: 40px; height: 40px; font-size: 1.3rem; }
+  .lightbox-nav { width: 42px; height: 42px; }
+  .lightbox-nav svg { width: 18px; height: 18px; }
 }
 
 @media (max-width: 520px) {
@@ -1256,13 +1301,20 @@ with a question or custom idea.
   <div class="lightbox-stage">
     <div class="lightbox-topbar">
       <span id="lightboxCount"></span>
-      <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close photo viewer">✕</button>
+      <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close photo viewer">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </button>
     </div>
     <div class="lightbox-frame" id="lightboxFrame">
-      <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+      <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 5 8 12 15 19"/></svg>
+      </button>
       <img id="lightboxImg" src="" alt="">
-      <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">›</button>
+      <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 5 16 12 9 19"/></svg>
+      </button>
     </div>
+    <div class="lightbox-dots" id="lightboxDots"></div>
     <p class="lightbox-caption" id="lightboxCaption"></p>
     <p class="lightbox-hint">Click or scroll to zoom · Drag to pan · Swipe or use arrows to browse · Esc to close</p>
   </div>
@@ -1450,19 +1502,64 @@ with a question or custom idea.
     };
   }
 
-  function updateSlide() {
+  var dotsEl = document.getElementById("lightboxDots");
+
+  function buildDots() {
+    if (!dotsEl) return;
+    dotsEl.innerHTML = "";
+    photos.forEach(function (_, i) {
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "lightbox-dot";
+      dot.setAttribute("aria-label", "Go to photo " + (i + 1));
+      dot.addEventListener("click", function (e) {
+        e.stopPropagation();
+        currentIndex = i;
+        updateSlide();
+      });
+      dotsEl.appendChild(dot);
+    });
+  }
+
+  function updateDots() {
+    if (!dotsEl) return;
+    var dots = dotsEl.querySelectorAll(".lightbox-dot");
+    dots.forEach(function (d, i) {
+      d.classList.toggle("active", i === currentIndex);
+    });
+  }
+
+  buildDots();
+
+  function updateSlide(instant) {
     var photo = photos[currentIndex];
-    lbImg.src = photo.src;
-    lbImg.alt = photo.alt;
-    caption.textContent = photo.alt || "";
-    counter.textContent = (currentIndex + 1) + " / " + photos.length;
-    resetZoom();
+
+    function apply() {
+      lbImg.src = photo.src;
+      lbImg.alt = photo.alt;
+      caption.textContent = photo.alt || "";
+      counter.textContent = (currentIndex + 1) + " / " + photos.length;
+      resetZoom();
+      updateDots();
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          lbImg.classList.remove("fading");
+        });
+      });
+    }
+
+    if (instant) {
+      apply();
+    } else {
+      lbImg.classList.add("fading");
+      window.setTimeout(apply, 150);
+    }
   }
 
   function openLightbox(index) {
     currentIndex = index;
     lastFocused = document.activeElement;
-    updateSlide();
+    updateSlide(true);
     overlay.classList.add("active");
     overlay.setAttribute("aria-hidden", "false");
     document.body.classList.add("lightbox-open");
@@ -1527,6 +1624,7 @@ with a question or custom idea.
   });
 
   frame.addEventListener("click", function (e) {
+    if (e.target.closest(".lightbox-nav")) return;
     if (didDrag) {
       didDrag = false;
       return;
@@ -1562,6 +1660,7 @@ with a question or custom idea.
   );
 
   frame.addEventListener("pointerdown", function (e) {
+    if (e.target.closest(".lightbox-nav")) return;
     frame.setPointerCapture(e.pointerId);
     pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
     var ids = Object.keys(pointers);
