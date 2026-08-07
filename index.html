@@ -187,6 +187,33 @@ a { color: inherit; text-decoration: none; }
 .nav-links a.active::after { transform: scaleX(1); transform-origin: left; }
 .nav-links a.active { color: var(--coral); }
 
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--deep-teal);
+  transition: transform 280ms var(--ease), opacity 200ms ease;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 /* ---------- Hero (home) ---------- */
 
 .hero {
@@ -846,7 +873,34 @@ footer { padding: 35px 20px; text-align: center; color: #517174; background: var
 
 @media (max-width: 850px) {
   .nav { min-height: 68px; }
-  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+
+  .nav-links {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--cream);
+    border-bottom: 1px solid rgba(0, 107, 115, 0.12);
+    box-shadow: 0 18px 30px rgba(0, 77, 85, 0.1);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 360ms var(--ease), opacity 260ms ease;
+  }
+
+  .nav-links.open { max-height: 320px; opacity: 1; }
+
+  .nav-links a {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(0, 107, 115, 0.08);
+  }
+  .nav-links a::after { display: none; }
+  .nav-links a.active { background: var(--blush); }
+
   .hero { min-height: auto; padding: 52px 20px 72px; }
   .hero-inner, .story-inner, .contact-grid { grid-template-columns: 1fr; }
   .hero-text { text-align: center; }
@@ -881,7 +935,10 @@ footer { padding: 35px 20px; text-align: center; color: #517174; background: var
 <span class="brand-mark" aria-hidden="true">♥</span>
 <span>Legocita Makes</span>
 </a>
-<div class="nav-links">
+<button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+<span></span><span></span><span></span>
+</button>
+<div class="nav-links" id="navLinks">
 <a href="#home" data-link data-page="home">Home</a>
 <a href="#gallery" data-link data-page="gallery">Gallery</a>
 <a href="#about" data-link data-page="about">About</a>
@@ -1335,6 +1392,49 @@ with a question or custom idea.
   });
 
   var navLinks = Array.prototype.slice.call(document.querySelectorAll("[data-link]"));
+
+  /* ---------- Mobile hamburger menu ---------- */
+
+  var navToggle = document.getElementById("navToggle");
+  var mobileNavLinks = document.getElementById("navLinks");
+
+  function closeMobileMenu() {
+    if (!mobileNavLinks) return;
+    mobileNavLinks.classList.remove("open");
+    if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+  }
+
+  function openMobileMenu() {
+    if (!mobileNavLinks) return;
+    mobileNavLinks.classList.add("open");
+    if (navToggle) navToggle.setAttribute("aria-expanded", "true");
+  }
+
+  if (navToggle && mobileNavLinks) {
+    navToggle.addEventListener("click", function () {
+      var isOpen = mobileNavLinks.classList.contains("open");
+      if (isOpen) closeMobileMenu();
+      else openMobileMenu();
+    });
+
+    mobileNavLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeMobileMenu);
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!mobileNavLinks.classList.contains("open")) return;
+      if (mobileNavLinks.contains(e.target) || navToggle.contains(e.target)) return;
+      closeMobileMenu();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeMobileMenu();
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 850) closeMobileMenu();
+    });
+  }
 
   function showPage(name, scrollTargetId) {
     PAGES.forEach(function (p) {
