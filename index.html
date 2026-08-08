@@ -1,337 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Legocita Makes — handmade jewelry, watercolor art and joyful little works of heart by Carmen." />
-  <title>Legocita Makes | Handmade Jewelry, Art & Little Works of Heart</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --cream:#fbf7ef;
-      --paper:#fffdf8;
-      --ink:#243833;
-      --green:#365f52;
-      --green-deep:#24463d;
-      --sage:#dbe4da;
-      --coral:#d96d61;
-      --blush:#f5dfd8;
-      --berry:#a94a49;
-      --gold:#b78a4b;
-      --line:rgba(36,70,61,.13);
-      --shadow:0 24px 60px rgba(36,70,61,.12);
-      --radius:26px;
-      --serif:"Playfair Display", Georgia, serif;
-      --sans:"DM Sans", system-ui, sans-serif;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
-    img{display:block;max-width:100%}
-    a{color:inherit;text-decoration:none}
-    button{font:inherit}
-
-    .announcement{background:var(--green-deep);color:#fff;text-align:center;padding:9px 18px;font-size:.78rem;letter-spacing:.13em;text-transform:uppercase}
-    .site-header{position:sticky;top:0;z-index:20;background:rgba(251,247,239,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-    .nav{max-width:1240px;margin:auto;min-height:78px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:28px}
-    .brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:1.25rem;font-weight:600;letter-spacing:.01em}
-    .brand-dot{width:11px;height:11px;border-radius:50%;background:var(--coral);box-shadow:18px 0 0 var(--gold),36px 0 0 var(--green)}
-    .nav-links{display:flex;align-items:center;gap:30px;font-size:.89rem;font-weight:600}
-    .nav-links a{position:relative;padding:8px 0}
-    .nav-links a:after{content:"";position:absolute;left:0;right:100%;bottom:2px;height:1px;background:var(--coral);transition:.25s ease}
-    .nav-links a:hover:after{right:0}
-    .nav-cta{border:1px solid var(--green);border-radius:999px;padding:10px 17px!important}
-    .nav-cta:after{display:none}
-    .menu-btn{display:none;background:none;border:0;padding:8px;color:var(--ink);font-size:1.5rem}
-
-    .hero{position:relative;overflow:hidden;padding:72px 28px 88px}
-    .hero:before{content:"";position:absolute;width:460px;height:460px;border-radius:50%;background:rgba(245,223,216,.68);right:-180px;top:-140px;filter:blur(1px)}
-    .hero:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(219,228,218,.75);left:-150px;bottom:-120px}
-    .hero-grid{position:relative;z-index:2;max-width:1240px;margin:auto;display:grid;grid-template-columns:.92fr 1.08fr;gap:72px;align-items:center}
-    .eyebrow{margin:0 0 14px;color:var(--berry);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
-    h1,h2,h3{font-family:var(--serif);line-height:1.08;margin-top:0;color:var(--green-deep)}
-    h1{font-size:clamp(3.7rem,7vw,6.6rem);font-weight:500;letter-spacing:-.045em;margin-bottom:24px}
-    h1 em{color:var(--coral);font-weight:500}
-    .hero-copy{max-width:580px;font-size:1.09rem;color:#4d625d;margin:0 0 32px}
-    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;border-radius:999px;font-size:.87rem;font-weight:700;letter-spacing:.04em;transition:.25s ease}
-    .btn-primary{background:var(--green-deep);color:white;box-shadow:0 10px 25px rgba(36,70,61,.18)}
-    .btn-primary:hover{transform:translateY(-2px);background:var(--green)}
-    .btn-secondary{border:1px solid var(--green);background:rgba(255,255,255,.5)}
-    .btn-secondary:hover{background:#fff}
-    .microcopy{display:flex;gap:18px;flex-wrap:wrap;color:#70817d;font-size:.8rem}
-    .microcopy span:before{content:"✦";color:var(--gold);margin-right:7px}
-
-    .hero-art{position:relative;min-height:590px}
-    .hero-photo{position:absolute;border-radius:34px;overflow:hidden;box-shadow:var(--shadow);background:#eee}
-    .hero-photo.main{width:66%;height:520px;right:0;top:0;transform:rotate(1.5deg)}
-    .hero-photo.small{width:45%;height:305px;left:0;bottom:0;transform:rotate(-3deg);border:10px solid var(--paper)}
-    .hero-photo img{width:100%;height:100%;object-fit:cover}
-    .hero-logo{position:absolute;left:6%;top:8%;width:148px;height:148px;border-radius:50%;padding:12px;background:rgba(255,253,248,.95);box-shadow:0 18px 45px rgba(36,70,61,.17);z-index:3}
-    .hero-logo img{width:100%;height:100%;object-fit:contain}
-    .stamp{position:absolute;right:2%;bottom:15px;width:126px;height:126px;border-radius:50%;background:var(--green-deep);color:#fff;display:grid;place-items:center;text-align:center;font-family:var(--serif);font-size:1.02rem;line-height:1.2;transform:rotate(8deg);box-shadow:0 14px 32px rgba(36,70,61,.22)}
-
-    section{padding:96px 28px}
-    .inner{max-width:1240px;margin:auto}
-    .section-head{max-width:720px;margin-bottom:42px}
-    .section-head h2{font-size:clamp(2.45rem,4.8vw,4.2rem);font-weight:500;letter-spacing:-.035em;margin-bottom:16px}
-    .section-head p{color:#647570;margin:0;font-size:1.02rem}
-
-    .shop-by{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-    .category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-    .category-card{position:relative;min-height:290px;border-radius:22px;overflow:hidden;background:#e6e2da;box-shadow:0 12px 34px rgba(36,70,61,.08)}
-    .category-card img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
-    .category-card:hover img{transform:scale(1.04)}
-    .category-card:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(25,42,37,.76))}
-    .category-label{position:absolute;z-index:2;left:22px;right:22px;bottom:20px;color:#fff}
-    .category-label small{display:block;text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;margin-bottom:5px;opacity:.82}
-    .category-label h3{color:#fff;font-size:1.7rem;margin:0;font-weight:500}
-    .category-art{height:100%;display:grid;place-items:center;background:linear-gradient(145deg,#f4ded6,#e5ebe2);position:relative;overflow:hidden}
-    .category-art svg{width:74%;max-width:230px;filter:drop-shadow(0 15px 22px rgba(36,70,61,.1))}
-
-    .story{background:var(--green-deep);color:#fff;position:relative;overflow:hidden}
-    .story:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.08),transparent 28%),radial-gradient(circle at 85% 75%,rgba(217,109,97,.17),transparent 28%)}
-    .story-grid{position:relative;max-width:1240px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-    .story h2{color:#fff;font-size:clamp(2.7rem,5vw,4.6rem);font-weight:500;letter-spacing:-.035em;margin-bottom:22px}
-    .story p{color:rgba(255,255,255,.78);font-size:1.04rem}
-    .story .eyebrow{color:#efb0a9}
-    .signature{font-family:var(--serif);font-style:italic;font-size:1.45rem;color:#fff!important;margin-top:28px}
-    .maker-collage{display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:220px 220px;gap:14px}
-    .maker-collage figure{margin:0;border-radius:24px;overflow:hidden;background:#ddd}
-    .maker-collage figure:first-child{grid-row:1 / 3}
-    .maker-collage img{width:100%;height:100%;object-fit:cover}
-    .process-card{background:var(--cream)!important;color:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:28px}
-    .process-card strong{font-family:var(--serif);font-size:1.6rem;color:var(--green-deep);font-weight:500;line-height:1.15}
-    .process-card span{font-size:.82rem;color:#6e7e79;margin-top:10px}
-
-    .featured{background:var(--cream)}
-    .featured-top{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:34px}
-    .featured-top .section-head{margin:0}
-    .view-all{font-weight:700;font-size:.84rem;border-bottom:1px solid var(--green);padding-bottom:4px}
-    .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-    .product-card{background:var(--paper);border-radius:24px;overflow:hidden;border:1px solid var(--line);transition:.3s ease}
-    .product-card:hover{transform:translateY(-5px);box-shadow:0 18px 42px rgba(36,70,61,.1)}
-    .product-image{aspect-ratio:4/4.6;overflow:hidden;background:#eee}
-    .product-image img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
-    .product-card:hover img{transform:scale(1.035)}
-    .product-info{padding:20px 21px 23px}
-    .product-info small{text-transform:uppercase;letter-spacing:.13em;color:var(--berry);font-weight:700;font-size:.67rem}
-    .product-info h3{font-family:var(--sans);font-size:1.03rem;color:var(--ink);margin:6px 0 3px}
-    .product-info p{margin:0;color:#74837f;font-size:.84rem}
-
-    .philosophy{padding-top:40px}
-    .quote-box{max-width:1050px;margin:auto;text-align:center;padding:76px 48px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}
-    .quote-box:before{content:"❦";position:absolute;top:24px;left:50%;transform:translateX(-50%);color:var(--gold);font-size:1.6rem}
-    .quote-box h2{font-size:clamp(2.5rem,5vw,4.8rem);font-weight:500;letter-spacing:-.04em;margin-bottom:22px}
-    .quote-box p{max-width:720px;margin:auto;color:#687975}
-
-    .newsletter{padding-top:48px}
-    .newsletter-box{max-width:1240px;margin:auto;background:var(--blush);border-radius:32px;padding:58px 64px;display:grid;grid-template-columns:1.2fr .8fr;gap:45px;align-items:center;position:relative;overflow:hidden}
-    .newsletter-box:after{content:"";position:absolute;width:250px;height:250px;border:1px solid rgba(169,74,73,.15);border-radius:50%;right:-80px;top:-100px;box-shadow:0 0 0 35px rgba(169,74,73,.035),0 0 0 70px rgba(169,74,73,.025)}
-    .newsletter h2{font-size:clamp(2.2rem,4vw,3.5rem);font-weight:500;margin-bottom:10px}
-    .newsletter p{margin:0;color:#6d5a57}
-    .email-button{position:relative;z-index:2;justify-self:end;background:var(--berry);color:#fff;border-radius:999px;padding:15px 23px;font-weight:700;font-size:.86rem}
-
-    footer{padding:48px 28px 32px;background:var(--cream)}
-    .footer-inner{max-width:1240px;margin:auto;display:flex;justify-content:space-between;gap:28px;align-items:center;border-top:1px solid var(--line);padding-top:30px}
-    .footer-brand{font-family:var(--serif);font-size:1.25rem;font-weight:600}
-    .footer-copy{color:#7b8985;font-size:.8rem;text-align:right}
-
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
-    .reveal.show{opacity:1;transform:none}
-
-    @media(max-width:950px){
-      .hero-grid,.story-grid,.newsletter-box{grid-template-columns:1fr}
-      .hero-grid{gap:45px}.hero-text{text-align:center}.hero-copy{margin-left:auto;margin-right:auto}.actions,.microcopy{justify-content:center}
-      .hero-art{max-width:680px;width:100%;margin:auto}.category-grid{grid-template-columns:repeat(2,1fr)}.product-grid{grid-template-columns:repeat(2,1fr)}
-      .email-button{justify-self:start}.featured-top{align-items:start;flex-direction:column}
-    }
-    @media(max-width:720px){
-      .announcement{font-size:.68rem}.nav{min-height:68px;padding:0 18px}.menu-btn{display:block}.nav-links{position:absolute;top:68px;left:0;right:0;background:var(--cream);display:none;flex-direction:column;align-items:stretch;gap:0;padding:10px 18px 18px;border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(36,70,61,.1)}.nav-links.open{display:flex}.nav-links a{padding:13px 8px}.nav-cta{border:0;border-radius:0}
-      .hero{padding:52px 18px 70px}h1{font-size:clamp(3rem,16vw,4.9rem)}.hero-art{min-height:470px}.hero-photo.main{height:410px;width:72%}.hero-photo.small{height:235px;width:48%}.hero-logo{width:112px;height:112px}.stamp{width:102px;height:102px;font-size:.88rem}
-      section{padding:76px 18px}.category-grid,.product-grid{grid-template-columns:1fr}.category-card{min-height:350px}.maker-collage{grid-template-columns:1fr 1fr;grid-template-rows:280px 180px}.maker-collage figure:first-child{grid-column:1/3;grid-row:auto}.quote-box{padding:72px 18px}.newsletter-box{padding:42px 28px}.footer-inner{align-items:flex-start;flex-direction:column}.footer-copy{text-align:left}
-    }
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none}.category-card img,.product-image img{transition:none}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Legocita Makes — handmade jewelry, watercolor art and little works of heart.">
+<title>Legocita Makes | Handmade Jewelry & Art</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fbf7ef;--paper:#fffdf8;--ink:#243833;--green:#365f52;--deep:#24463d;--sage:#dbe4da;--coral:#d96d61;--blush:#f5dfd8;--berry:#a94a49;--gold:#b78a4b;--line:rgba(36,70,61,.13);--shadow:0 24px 60px rgba(36,70,61,.12);--serif:"Playfair Display",Georgia,serif;--sans:"DM Sans",system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font:inherit}.announcement{background:var(--deep);color:#fff;text-align:center;padding:9px 18px;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase}.site-header{position:sticky;top:0;z-index:50;background:rgba(251,247,239,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav{max-width:1240px;margin:auto;min-height:78px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:28px}.brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:1.25rem;font-weight:600}.brand-dot{width:11px;height:11px;border-radius:50%;background:var(--coral);box-shadow:18px 0 0 var(--gold),36px 0 0 var(--green);margin-right:36px}.nav-links{display:flex;align-items:center;gap:26px;font-size:.87rem;font-weight:600}.nav-link{position:relative;padding:9px 0;border:0;background:none;cursor:pointer;color:var(--ink)}.nav-link:after{content:"";position:absolute;left:0;right:100%;bottom:2px;height:1px;background:var(--coral);transition:.25s}.nav-link:hover:after,.nav-link.active:after{right:0}.nav-link.active{color:var(--berry)}.nav-cta{border:1px solid var(--green);border-radius:999px;padding:10px 17px}.nav-cta:after{display:none}.menu-btn{display:none;background:none;border:0;padding:8px;font-size:1.5rem;color:var(--ink)}
+.page-view{display:none;animation:fade .35s ease}.page-view.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.inner{max-width:1240px;margin:auto}.section{padding:88px 28px}.paper{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.eyebrow{margin:0 0 14px;color:var(--berry);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700}h1,h2,h3{font-family:var(--serif);line-height:1.08;color:var(--deep);margin-top:0}h1{font-size:clamp(3.5rem,7vw,6.4rem);font-weight:500;letter-spacing:-.045em;margin-bottom:22px}h1 em,h2 em{color:var(--coral);font-weight:500}h2{font-size:clamp(2.4rem,4.5vw,4rem);font-weight:500;letter-spacing:-.035em;margin-bottom:18px}h3{font-size:1.55rem;font-weight:500}.lead{max-width:690px;font-size:1.08rem;color:#5f716c}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;border-radius:999px;font-size:.86rem;font-weight:700;letter-spacing:.03em;border:0;cursor:pointer}.primary{background:var(--deep);color:#fff;box-shadow:0 10px 25px rgba(36,70,61,.18)}.secondary{border:1px solid var(--green);background:rgba(255,255,255,.55)}.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.page-hero{padding:88px 28px 72px;background:linear-gradient(135deg,var(--cream),#f8eee8)}
+.hero{padding:70px 28px 90px;overflow:hidden;position:relative}.hero:before{content:"";position:absolute;width:450px;height:450px;border-radius:50%;background:rgba(245,223,216,.7);right:-180px;top:-150px}.hero-grid{position:relative;max-width:1240px;margin:auto;display:grid;grid-template-columns:.92fr 1.08fr;gap:70px;align-items:center}.hero-collage{position:relative;min-height:570px}.hero-collage figure{position:absolute;margin:0;overflow:hidden;border-radius:32px;box-shadow:var(--shadow)}.hero-collage .large{right:0;top:0;width:67%;height:510px;transform:rotate(1.5deg)}.hero-collage .small{left:0;bottom:0;width:46%;height:300px;border:10px solid var(--paper);transform:rotate(-3deg)}.hero-collage img{width:100%;height:100%;object-fit:cover}.logo-badge{position:absolute;z-index:5;left:4%;top:7%;width:145px;height:145px;border-radius:50%;background:var(--paper);padding:12px;box-shadow:0 18px 45px rgba(36,70,61,.17)}.logo-badge img{width:100%;height:100%;object-fit:contain}.micro{display:flex;gap:17px;flex-wrap:wrap;color:#72817e;font-size:.8rem;margin-top:25px}.micro span:before{content:"✦";color:var(--gold);margin-right:7px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card,.category{background:var(--paper);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 12px 34px rgba(36,70,61,.06);transition:.25s}.card:hover,.category:hover{transform:translateY(-4px);box-shadow:0 18px 42px rgba(36,70,61,.11)}.card-img{aspect-ratio:4/4.3;overflow:hidden;background:#eee}.card-img img{width:100%;height:100%;object-fit:cover}.card-body{padding:21px}.card-body small,.category small{text-transform:uppercase;letter-spacing:.13em;color:var(--berry);font-weight:700;font-size:.67rem}.card-body h3{font-family:var(--sans);font-size:1.04rem;color:var(--ink);margin:6px 0 3px}.card-body p{margin:0;color:#74837f;font-size:.84rem}.category{position:relative;min-height:330px;background:#ddd}.category img{position:absolute;width:100%;height:100%;object-fit:cover}.category:after{content:"";position:absolute;inset:38% 0 0;background:linear-gradient(transparent,rgba(25,42,37,.78))}.category span{position:absolute;z-index:2;left:22px;bottom:20px;color:#fff}.category small{color:#fff;opacity:.82;display:block}.category strong{display:block;font-family:var(--serif);font-size:1.75rem;font-weight:500}.split{display:grid;grid-template-columns:1.08fr .92fr;gap:65px;align-items:center}.feature-img{border-radius:28px;overflow:hidden;box-shadow:var(--shadow);min-height:480px;background:#e9e5de}.feature-img img{width:100%;height:100%;object-fit:cover}.note{background:var(--blush);padding:32px;border-radius:24px}.note h3{margin-bottom:8px}.pill-row{display:flex;flex-wrap:wrap;gap:9px;margin:24px 0}.pill{padding:8px 13px;border:1px solid var(--line);background:var(--paper);border-radius:999px;font-size:.78rem}.quote{background:var(--deep);color:#fff;padding:64px;border-radius:30px;text-align:center}.quote p{font-family:var(--serif);font-size:clamp(2rem,4vw,3.5rem);line-height:1.2;margin:0;color:#fff}.contact-box{background:var(--deep);color:#fff;border-radius:30px;padding:58px;display:flex;align-items:center;justify-content:space-between;gap:40px}.contact-box h2{color:#fff;margin-bottom:12px}.contact-box p{color:rgba(255,255,255,.76);max-width:650px}.contact-box .btn{background:#fff;color:var(--deep);white-space:nowrap}.shop-intro{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:38px}.shop-intro p{max-width:660px}.back{display:inline-block;margin-top:20px;font-weight:700;border-bottom:1px solid var(--green)}
+footer{padding:42px 28px 30px}.footer{max-width:1240px;margin:auto;border-top:1px solid var(--line);padding-top:28px;display:flex;justify-content:space-between;gap:24px}.footer strong{font-family:var(--serif);font-size:1.2rem}.footer small{color:#7c8986;text-align:right}.hidden-note{font-size:.8rem;color:#7b8985;margin-top:16px}
+@media(max-width:940px){.hero-grid,.split{grid-template-columns:1fr}.hero-grid{gap:45px}.hero-collage{max-width:690px;width:100%;margin:auto}.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(2,1fr)}.contact-box{align-items:flex-start;flex-direction:column}}
+@media(max-width:760px){.nav{min-height:68px;padding:0 18px}.menu-btn{display:block}.nav-links{position:absolute;top:68px;left:0;right:0;background:var(--cream);display:none;flex-direction:column;align-items:stretch;gap:0;padding:10px 18px 18px;border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(36,70,61,.1)}.nav-links.open{display:flex}.nav-link{padding:13px 8px;text-align:left}.nav-cta{border:0;border-radius:0}.section,.page-hero,.hero{padding-left:18px;padding-right:18px}.hero-collage{min-height:465px}.hero-collage .large{height:405px;width:72%}.hero-collage .small{height:225px;width:48%}.logo-badge{width:110px;height:110px}.grid-3,.grid-4{grid-template-columns:1fr}.category{min-height:380px}.contact-box{padding:38px 28px}.footer{flex-direction:column}.footer small{text-align:left}.shop-intro{align-items:flex-start;flex-direction:column}}
+</style>
 </head>
 <body>
-  <div class="announcement">Made by hand in Florida · One little treasure at a time</div>
+<div class="announcement">Made by hand in Florida · One little treasure at a time</div>
+<header class="site-header"><nav class="nav" aria-label="Main navigation">
+<button class="nav-link brand" data-page="home" aria-label="Legocita Makes home"><span class="brand-dot" aria-hidden="true"></span>Legocita Makes</button>
+<button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+<div class="nav-links" id="navLinks">
+<button class="nav-link" data-page="home">Home</button><button class="nav-link" data-page="shop">Shop</button><button class="nav-link" data-page="collections">Collections</button><button class="nav-link" data-page="watercolor">Watercolor + Art</button><button class="nav-link" data-page="about">About</button><button class="nav-link nav-cta" data-page="contact">Contact</button>
+</div></nav></header>
 
-  <header class="site-header">
-    <nav class="nav" aria-label="Main navigation">
-      <a class="brand" href="#home"><span class="brand-dot" aria-hidden="true"></span><span>Legocita Makes</span></a>
-      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
-      <div class="nav-links" id="navLinks">
-        <a href="#home">Home</a>
-        <a href="#shop">Shop</a>
-        <a href="#collections">Collections</a>
-        <a href="#art">Watercolor + Art</a>
-        <a href="#about">About</a>
-        <a href="mailto:legocitamakes@gmail.com" class="nav-cta">Contact</a>
-      </div>
-    </nav>
-  </header>
+<!-- HOME PAGE -->
+<main class="page-view" id="page-home" data-title="Home">
+<section class="hero"><div class="hero-grid"><div><p class="eyebrow">Colorful · thoughtful · handmade</p><h1>Little works<br>of <em>heart.</em></h1><p class="lead">Handmade jewelry, watercolor and unexpected little treasures — thoughtfully created with color, curiosity and a distinctly Legocita touch.</p><div class="buttons"><button class="btn primary" data-page="shop">Explore the jewelry</button><button class="btn secondary" data-page="about">Meet the maker</button></div><div class="micro"><span>Small batches</span><span>Made in Florida</span><span>Custom ideas welcome</span></div></div><div class="hero-collage"><div class="logo-badge"><img src="legocita-makes-logo.png" alt="Legocita Makes logo"></div><figure class="large"><img src="https://images.pexels.com/photos/32424208/pexels-photo-32424208.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="Handmade jewelry inspiration"></figure><figure class="small"><img src="https://images.pexels.com/photos/32424225/pexels-photo-32424225.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Colorful earrings inspiration"></figure></div></div></section>
+<section class="section paper"><div class="inner"><p class="eyebrow">Explore Legocita</p><h2>A little boutique with<br>many ways to <em>create.</em></h2><div class="grid-4"><button class="category nav-card" data-page="shop"><img src="https://images.pexels.com/photos/32424218/pexels-photo-32424218.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Earrings"><span><small>Wear a little joy</small><strong>Jewelry</strong></span></button><button class="category nav-card" data-page="collections"><img src="https://images.pexels.com/photos/37129475/pexels-photo-37129475.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Collections"><span><small>Browse by mood</small><strong>Collections</strong></span></button><button class="category nav-card" data-page="watercolor"><img src="https://images.pexels.com/photos/1767016/pexels-photo-1767016.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Watercolor supplies"><span><small>Paint + paper</small><strong>Watercolor + Art</strong></span></button><button class="category nav-card" data-page="about"><img src="https://images.pexels.com/photos/1053687/pexels-photo-1053687.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Creative workspace"><span><small>Behind the making</small><strong>Meet Carmen</strong></span></button></div></div></section>
+<section class="section"><div class="inner"><div class="contact-box"><div><p class="eyebrow" style="color:#efb0a9">Have something special in mind?</p><h2>Custom ideas are always welcome.</h2><p>See a style you love, want a different color, or have an idea for a meaningful handmade gift? Tell me what you’re imagining.</p></div><button class="btn" data-page="contact">Start a conversation →</button></div></div></section>
+</main>
 
-  <main id="home">
-    <section class="hero">
-      <div class="hero-grid">
-        <div class="hero-text reveal">
-          <p class="eyebrow">Colorful · thoughtful · handmade</p>
-          <h1>Little works<br>of <em>heart.</em></h1>
-          <p class="hero-copy">Handmade jewelry, watercolor and unexpected little treasures — thoughtfully created with color, curiosity and a distinctly Legocita touch.</p>
-          <div class="actions">
-            <a href="#shop" class="btn btn-primary">Explore the jewelry</a>
-            <a href="#about" class="btn btn-secondary">Meet the maker</a>
-          </div>
-          <div class="microcopy"><span>Small batches</span><span>Made in Florida</span><span>Custom ideas welcome</span></div>
-        </div>
+<!-- SHOP PAGE -->
+<main class="page-view" id="page-shop" data-title="Shop">
+<section class="page-hero"><div class="inner"><p class="eyebrow">The jewelry shop</p><h1>Wear something <em>joyful.</em></h1><p class="lead">A growing collection of earrings, necklaces, bracelets, rings and small accessories — handmade in colorful little batches.</p></div></section>
+<section class="section paper"><div class="inner"><div class="shop-intro"><div><p class="eyebrow">Current pieces</p><h2>Handmade, not mass made.</h2></div><button class="btn secondary" data-page="contact">Ask about a piece</button></div><div class="grid-3">
+<article class="card"><div class="card-img"><img src="https://images.pexels.com/photos/32424208/pexels-photo-32424208.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="Earrings"></div><div class="card-body"><small>Earrings</small><h3>Citrus Drop Earrings</h3><p>Handmade · product details coming soon</p></div></article>
+<article class="card"><div class="card-img"><img src="https://images.pexels.com/photos/32424225/pexels-photo-32424225.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Earrings"></div><div class="card-body"><small>Earrings</small><h3>Sunshine Drops</h3><p>Handmade · product details coming soon</p></div></article>
+<article class="card"><div class="card-img"><img src="https://images.pexels.com/photos/37129475/pexels-photo-37129475.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Necklace"></div><div class="card-body"><small>Necklaces</small><h3>Layered Color Necklace</h3><p>Handmade · product details coming soon</p></div></article>
+<article class="card"><div class="card-img"><img src="https://images.pexels.com/photos/11449103/pexels-photo-11449103.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Bracelet"></div><div class="card-body"><small>Bracelets</small><h3>Color Story Bracelet</h3><p>Handmade · product details coming soon</p></div></article>
+<article class="card"><div class="card-img"><img src="https://images.pexels.com/photos/32424218/pexels-photo-32424218.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Statement earrings"></div><div class="card-body"><small>Earrings</small><h3>Playful Statement Pair</h3><p>Handmade · product details coming soon</p></div></article>
+<article class="card"><div class="card-img"><img src="https://images.pexels.com/photos/32424208/pexels-photo-32424208.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="Accessory"></div><div class="card-body"><small>Accessories</small><h3>Little Treasure No. 06</h3><p>Handmade · product details coming soon</p></div></article>
+</div><div class="note" style="margin-top:36px"><h3>Your real pieces go here next.</h3><p>These photographs are temporary placeholders. As your own product photos are added, this becomes the real storefront. Prices and purchase buttons can be added when you’re ready.</p></div></div></section>
+</main>
 
-        <div class="hero-art reveal" aria-label="A colorful preview of Legocita Makes">
-          <div class="hero-logo"><img src="legocita-makes-logo.png" alt="Legocita Makes logo"></div>
-          <figure class="hero-photo main"><img src="https://images.pexels.com/photos/32424208/pexels-photo-32424208.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Colorful handmade orange earrings placeholder"></figure>
-          <figure class="hero-photo small"><img src="https://images.pexels.com/photos/32424225/pexels-photo-32424225.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bright handmade yellow earrings placeholder"></figure>
-          <div class="stamp">made<br>with a little<br>joy ✦</div>
-        </div>
-      </div>
-    </section>
+<!-- COLLECTIONS PAGE -->
+<main class="page-view" id="page-collections" data-title="Collections">
+<section class="page-hero"><div class="inner"><p class="eyebrow">Browse by collection</p><h1>Made for different <em>moods.</em></h1><p class="lead">Collections give your work personality and make it easy for visitors to discover pieces that feel like them.</p></div></section>
+<section class="section paper"><div class="inner"><div class="grid-3"><button class="category nav-card" data-page="shop"><img src="https://images.pexels.com/photos/32424218/pexels-photo-32424218.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Botanical jewelry"><span><small>Flowers · leaves · nature</small><strong>Botanical</strong></span></button><button class="category nav-card" data-page="shop"><img src="https://images.pexels.com/photos/32424208/pexels-photo-32424208.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="Colorful jewelry"><span><small>Bright · happy · playful</small><strong>Color Stories</strong></span></button><button class="category nav-card" data-page="shop"><img src="https://images.pexels.com/photos/37129475/pexels-photo-37129475.jpeg?auto=compress&cs=tinysrgb&w=900" alt="One of a kind jewelry"><span><small>Just one of these</small><strong>One of a Kind</strong></span></button></div><div class="quote" style="margin-top:70px"><p>Some pieces begin with a plan. Others begin with “I wonder what happens if…”</p></div></div></section>
+</main>
 
-    <section class="shop-by" id="collections">
-      <div class="inner">
-        <div class="section-head reveal">
-          <p class="eyebrow">Find your favorite</p>
-          <h2>Made to be noticed.<br>Made to be loved.</h2>
-          <p>Legocita Makes is colorful by nature. Browse the kinds of pieces you’ll find here now — and the collections still growing on Carmen’s workbench.</p>
-        </div>
-        <div class="category-grid">
-          <a class="category-card reveal" href="#shop">
-            <img src="https://images.pexels.com/photos/32424218/pexels-photo-32424218.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Colorful earrings placeholder">
-            <div class="category-label"><small>Wear a little joy</small><h3>Earrings</h3></div>
-          </a>
-          <a class="category-card reveal" href="#shop">
-            <img src="https://images.pexels.com/photos/37129475/pexels-photo-37129475.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Handmade necklaces placeholder">
-            <div class="category-label"><small>Layer + collect</small><h3>Necklaces</h3></div>
-          </a>
-          <a class="category-card reveal" href="#shop">
-            <img src="https://images.pexels.com/photos/11449103/pexels-photo-11449103.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Colorful bracelets placeholder">
-            <div class="category-label"><small>Color for every day</small><h3>Bracelets + Rings</h3></div>
-          </a>
-          <a class="category-card reveal" href="#art" id="art">
-            <div class="category-art">
-              <svg viewBox="0 0 240 260" role="img" aria-label="Watercolor style botanical illustration">
-                <defs>
-                  <filter id="soft"><feGaussianBlur stdDeviation=".7"/></filter>
-                </defs>
-                <path d="M118 232 C126 186 125 139 118 83" fill="none" stroke="#4e775d" stroke-width="5" stroke-linecap="round"/>
-                <path d="M121 178 C90 165 71 145 58 119" fill="none" stroke="#4e775d" stroke-width="4" stroke-linecap="round"/>
-                <path d="M120 151 C150 140 167 119 180 92" fill="none" stroke="#4e775d" stroke-width="4" stroke-linecap="round"/>
-                <ellipse cx="72" cy="132" rx="25" ry="14" transform="rotate(32 72 132)" fill="#8bb08b" opacity=".8" filter="url(#soft)"/>
-                <ellipse cx="91" cy="159" rx="27" ry="14" transform="rotate(27 91 159)" fill="#6e9c79" opacity=".75"/>
-                <ellipse cx="157" cy="125" rx="27" ry="14" transform="rotate(-34 157 125)" fill="#789f75" opacity=".78"/>
-                <ellipse cx="170" cy="102" rx="24" ry="13" transform="rotate(-42 170 102)" fill="#9bb68a" opacity=".7"/>
-                <circle cx="118" cy="72" r="32" fill="#d96d61" opacity=".78"/>
-                <circle cx="96" cy="77" r="21" fill="#e9a091" opacity=".76"/>
-                <circle cx="139" cy="80" r="23" fill="#bd5960" opacity=".72"/>
-                <circle cx="116" cy="54" r="19" fill="#f1b7a3" opacity=".76"/>
-                <circle cx="120" cy="77" r="8" fill="#b78a4b" opacity=".9"/>
-              </svg>
-            </div>
-            <div class="category-label"><small>Painted + paper treasures</small><h3>Watercolor + Art</h3></div>
-          </a>
-        </div>
-      </div>
-    </section>
+<!-- WATERCOLOR PAGE -->
+<main class="page-view" id="page-watercolor" data-title="Watercolor + Art">
+<section class="page-hero"><div class="inner"><p class="eyebrow">Watercolor + art</p><h1>Color beyond the <em>jewelry box.</em></h1><p class="lead">Watercolor, paper pieces, illustrated details and the occasional creative detour all have a home at Legocita Makes.</p></div></section>
+<section class="section paper"><div class="inner"><div class="split"><div class="feature-img"><img src="https://images.pexels.com/photos/1767016/pexels-photo-1767016.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Watercolor art materials"></div><div><p class="eyebrow">Painted by hand</p><h2>Small art with plenty of personality.</h2><p class="lead">This space is reserved for watercolor work, cards, painted keepsakes and mixed-media pieces, so the art can breathe instead of being mixed into the jewelry shop.</p><div class="pill-row"><span class="pill">Watercolor</span><span class="pill">Botanicals</span><span class="pill">Paper goods</span><span class="pill">Painted gifts</span><span class="pill">Mixed media</span></div><button class="back nav-link" data-page="contact">Ask about a custom art piece →</button></div></div></div></section>
+</main>
 
-    <section class="featured" id="shop">
-      <div class="inner">
-        <div class="featured-top">
-          <div class="section-head reveal">
-            <p class="eyebrow">A peek at the work</p>
-            <h2>Joyful pieces,<br>one at a time.</h2>
-            <p>These are still reference photographs for now. As your own product photography is added, these cards become the front window of the shop.</p>
-          </div>
-          <a class="view-all" href="mailto:legocitamakes@gmail.com?subject=Legocita%20Makes%20piece%20inquiry">Ask about a piece →</a>
-        </div>
-        <div class="product-grid">
-          <article class="product-card reveal">
-            <div class="product-image"><img src="https://images.pexels.com/photos/32424208/pexels-photo-32424208.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Orange beaded earrings placeholder"></div>
-            <div class="product-info"><small>Earrings</small><h3>Citrus Drop Earrings</h3><p>Colorful · playful · handmade</p></div>
-          </article>
-          <article class="product-card reveal">
-            <div class="product-image"><img src="https://images.pexels.com/photos/32424225/pexels-photo-32424225.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Yellow beaded earrings placeholder"></div>
-            <div class="product-info"><small>Earrings</small><h3>Sunshine Mini Drops</h3><p>Bright · lightweight · cheerful</p></div>
-          </article>
-          <article class="product-card reveal">
-            <div class="product-image"><img src="https://images.pexels.com/photos/37129475/pexels-photo-37129475.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Colorful necklaces placeholder"></div>
-            <div class="product-info"><small>Necklaces</small><h3>Color Story Pendants</h3><p>Collected · expressive · one of a kind</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
+<!-- ABOUT PAGE -->
+<main class="page-view" id="page-about" data-title="About">
+<section class="page-hero"><div class="inner"><p class="eyebrow">Behind Legocita Makes</p><h1>Made with curiosity,<br>color & <em>heart.</em></h1></div></section>
+<section class="section paper"><div class="inner"><div class="split"><div><p class="eyebrow">Meet the maker</p><h2>Hi, I’m Carmen.</h2><p class="lead">Legocita Makes grew from my love of making things with my hands and my inability to leave a beautiful idea unexplored.</p><p>Some days that means bending wire into a tiny flower. Other days it means watercolor, crochet, beads, resin, paper — or something completely unexpected. I love experimenting, combining materials and turning little ideas into pieces that feel happy, personal and handmade.</p><p>I don’t want every piece to look exactly alike. The charm is in discovering something a little different.</p><div class="pill-row"><span class="pill">Made in Florida</span><span class="pill">Small batches</span><span class="pill">Handmade details</span><span class="pill">Creative experiments welcome</span></div></div><div class="note"><h3>Why “Makes”?</h3><p>Because Legocita isn’t limited to one craft. Jewelry may be at the heart of the shop, but watercolor, crochet, paper, resin and new experiments are all part of the story.</p></div></div></div></section>
+</main>
 
-    <section class="story" id="about">
-      <div class="story-grid">
-        <div class="maker-collage reveal">
-          <figure><img src="https://images.pexels.com/photos/37129475/pexels-photo-37129475.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Colorful jewelry and maker materials placeholder"></figure>
-          <figure><img src="https://images.pexels.com/photos/32424218/pexels-photo-32424218.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Tiny colorful earrings placeholder"></figure>
-          <figure class="process-card"><strong>Wire. Paint. Beads. Fiber. Curiosity.</strong><span>There’s always something new taking shape.</span></figure>
-        </div>
-        <div class="reveal">
-          <p class="eyebrow">Behind Legocita Makes</p>
-          <h2>A little bit botanical. A little bit whimsical. Always handmade.</h2>
-          <p>Hi, I’m Carmen. Legocita Makes grew from my love of making things with my hands and my inability to leave a beautiful idea unexplored. Some days that means bending wire into a tiny flower. Other days it means watercolor, crochet, beads, resin, paper — or something completely unexpected.</p>
-          <p>Every piece here is made in small batches with curiosity, color and a little bit of heart.</p>
-          <p class="signature">Made with love, Carmen</p>
-        </div>
-      </div>
-    </section>
+<!-- CONTACT PAGE -->
+<main class="page-view" id="page-contact" data-title="Contact">
+<section class="page-hero"><div class="inner"><p class="eyebrow">Say hello</p><h1>Let’s make something <em>special.</em></h1><p class="lead">Questions about a piece, custom colors, gifts, availability or a new idea? I’d love to hear from you.</p></div></section>
+<section class="section"><div class="inner"><div class="contact-box"><div><p class="eyebrow" style="color:#efb0a9">Contact Legocita Makes</p><h2>Tell me what caught your eye.</h2><p>Email is the easiest way to ask about current pieces or start a custom conversation.</p></div><a class="btn" href="mailto:legocitamakes@gmail.com?subject=Hello%20Legocita%20Makes">Email Legocita Makes →</a></div><div class="note" style="margin-top:32px"><h3>A helpful note</h3><p>If you’re asking about a specific piece, include the name or a screenshot. For custom work, tell me the colors, style, occasion and any idea you already have in mind.</p></div></div></section>
+</main>
 
-    <section class="philosophy">
-      <div class="quote-box reveal">
-        <p class="eyebrow">The Legocita spirit</p>
-        <h2>Beautiful things don’t have to be serious to feel special.</h2>
-        <p>Color can be elegant. Whimsy can be polished. Handmade can feel elevated and still make you smile. That is the space Legocita Makes is designed to live in.</p>
-      </div>
-    </section>
-
-    <section class="newsletter" id="contact">
-      <div class="newsletter-box reveal">
-        <div>
-          <p class="eyebrow">Something special in mind?</p>
-          <h2>Custom ideas are welcome.</h2>
-          <p>Tell me about a color, theme, gift or piece you’ve been imagining. I’d love to hear it.</p>
-        </div>
-        <a class="email-button" href="mailto:legocitamakes@gmail.com?subject=Custom%20Legocita%20Makes%20idea">Email Legocita Makes →</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">Legocita Makes</div>
-      <div class="footer-copy">Handmade jewelry, art & little works of heart.<br>© 2026 Legocita Makes · Florida</div>
-    </div>
-  </footer>
-
-  <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const navLinks = document.getElementById('navLinks');
-    menuBtn.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      menuBtn.textContent = open ? '×' : '☰';
-    });
-    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      menuBtn.setAttribute('aria-expanded','false');
-      menuBtn.textContent='☰';
-    }));
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('show'); });
-    }, { threshold: .12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
+<footer><div class="footer"><strong>Legocita Makes</strong><small>Handmade jewelry, watercolor & little works of heart.<br>© 2026 Legocita Makes</small></div></footer>
+<script>
+const pages=[...document.querySelectorAll('.page-view')];
+const menuBtn=document.getElementById('menuBtn');
+const navLinks=document.getElementById('navLinks');
+function showPage(name, push=true){
+  if(!document.getElementById('page-'+name)) name='home';
+  pages.forEach(p=>p.classList.toggle('active',p.id==='page-'+name));
+  document.querySelectorAll('[data-page]').forEach(el=>el.classList.toggle('active',el.classList.contains('nav-link')&&el.dataset.page===name));
+  const current=document.getElementById('page-'+name);
+  document.title='Legocita Makes | '+current.dataset.title;
+  navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
+  if(push){history.pushState({page:name},'',name==='home'?'#home':'#'+name)}
+  window.scrollTo({top:0,behavior:'instant'});
+}
+document.addEventListener('click',e=>{const target=e.target.closest('[data-page]');if(target){e.preventDefault();showPage(target.dataset.page)}});
+menuBtn.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',open)});
+window.addEventListener('popstate',()=>showPage((location.hash||'#home').slice(1),false));
+showPage((location.hash||'#home').slice(1),false);
+</script>
 </body>
 </html>
