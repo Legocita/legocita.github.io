@@ -1,1839 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Legocita Makes creates joyful handmade jewelry, watercolor art, crochet designs, resin pieces, and paper goods by Carmen.">
-<title>Legocita Makes | Cute Crafts by Carmen</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --teal: #006b73;
-  --deep-teal: #004d55;
-  --sea-glass: #dff3ee;
-  --coral: #ed6670;
-  --blush: #fff1ef;
-  --gold: #c99537;
-  --cream: #fffcf7;
-  --ink: #183f42;
-  --white: #ffffff;
-  --shadow: 0 22px 60px rgba(0, 77, 85, 0.13);
-  --shadow-lift: 0 18px 40px rgba(0, 77, 85, 0.16), 0 4px 10px rgba(0, 77, 85, 0.08);
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body: "Inter", "Segoe UI", Arial, sans-serif;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
-body {
-  margin: 0;
-  color: var(--ink);
-  background: var(--cream);
-  font-family: var(--font-body);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-body.lightbox-open { overflow: hidden; }
-
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
-
-/* ---------- Page switching ---------- */
-
-.page { display: none; }
-.page.active { display: block; animation: pageIn 480ms var(--ease); }
-
-@keyframes pageIn {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ---------- Scroll reveal ---------- */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
-}
-
-.reveal.in-view { opacity: 1; transform: translateY(0); }
-
-.reveal-stagger.in-view > * { transition-delay: calc(var(--stagger-i, 0) * 70ms); }
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal.in-view, .page.active, .hero, .hero::before, .hero::after, .logo-wrap {
-    animation: none !important;
-    transition: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-}
-
-/* ---------- Scroll progress + back to top ---------- */
-
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  width: 0%;
-  background: linear-gradient(90deg, var(--coral), var(--gold), var(--teal));
-  z-index: 100;
-  transition: width 80ms linear;
-}
-
-.back-to-top {
-  position: fixed;
-  right: 22px;
-  bottom: 22px;
-  width: 48px;
-  height: 48px;
-  border: none;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--teal);
-  color: var(--white);
-  font-size: 1.2rem;
-  cursor: pointer;
-  box-shadow: var(--shadow-lift);
-  opacity: 0;
-  transform: translateY(12px) scale(0.9);
-  pointer-events: none;
-  transition: opacity 260ms ease, transform 260ms var(--ease), background 260ms ease;
-  z-index: 90;
-}
-
-.back-to-top.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-.back-to-top:hover { background: var(--coral); transform: translateY(-3px) scale(1.05); }
-
-/* ---------- Header / Nav ---------- */
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-bottom: 1px solid rgba(0, 107, 115, 0.12);
-  background: rgba(255, 252, 247, 0.94);
-  backdrop-filter: blur(12px);
-}
-
-.nav {
-  width: min(1160px, calc(100% - 40px));
-  min-height: 76px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 28px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--deep-teal);
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 700;
-}
-
-.brand-mark {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  color: var(--coral);
-  border: 1.5px solid var(--gold);
-  border-radius: 50%;
-  font-size: 1.1rem;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  color: var(--deep-teal);
-  font-size: 0.94rem;
-  font-weight: 650;
-}
-
-.nav-links a {
-  position: relative;
-  padding-bottom: 6px;
-  cursor: pointer;
-  transition: color 220ms ease;
-}
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--coral);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 320ms var(--ease);
-}
-.nav-links a:hover { color: var(--coral); }
-.nav-links a:hover::after,
-.nav-links a.active::after { transform: scaleX(1); transform-origin: left; }
-.nav-links a.active { color: var(--coral); }
-
-.nav-toggle {
-  display: none;
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-
-.nav-toggle span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--deep-teal);
-  transition: transform 280ms var(--ease), opacity 200ms ease;
-}
-
-.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-/* ---------- Hero (home) ---------- */
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  min-height: calc(100vh - 76px);
-  display: grid;
-  align-items: center;
-  padding: 72px 20px;
-  background:
-    radial-gradient(circle at 8% 12%, rgba(237, 102, 112, 0.16), transparent 25%),
-    radial-gradient(circle at 93% 18%, rgba(54, 165, 152, 0.18), transparent 27%),
-    radial-gradient(circle at 84% 90%, rgba(201, 149, 55, 0.14), transparent 26%),
-    linear-gradient(135deg, #fffaf5, #f4fbf8 52%, #fff8f6);
-  background-size: 140% 140%;
-  animation: heroDrift 22s ease-in-out infinite alternate;
-}
-
-@keyframes heroDrift {
-  0%   { background-position: 0% 0%; }
-  100% { background-position: 100% 60%; }
-}
-
-.hero::before, .hero::after {
-  content: "";
-  position: absolute;
-  border: 1px solid rgba(201, 149, 55, 0.35);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: ringFloat 9s ease-in-out infinite;
-}
-
-.hero::before { width: 360px; height: 360px; left: -230px; bottom: -170px; }
-.hero::after { width: 280px; height: 280px; right: -160px; top: 70px; animation-delay: 1.6s; }
-
-@keyframes ringFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-16px); }
-}
-
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  width: min(1160px, 100%);
-  margin: auto;
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  align-items: center;
-  gap: clamp(42px, 7vw, 100px);
-}
-
-.logo-wrap {
-  position: relative;
-  width: min(510px, 90vw);
-  margin: auto;
-  padding: 18px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: var(--shadow);
-  animation: logoGlow 5s ease-in-out infinite;
-}
-
-@keyframes logoGlow {
-  0%, 100% { box-shadow: var(--shadow); }
-  50% { box-shadow: 0 26px 68px rgba(237, 102, 112, 0.22), 0 0 0 14px rgba(201, 149, 55, 0.06); }
-}
-
-.logo-wrap::after {
-  content: "";
-  position: absolute;
-  inset: 9px;
-  border: 1px solid rgba(201, 149, 55, 0.45);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-
-.logo-wrap img { border-radius: 50%; }
-
-.eyebrow {
-  margin: 0 0 15px;
-  color: var(--coral);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-h1, h2, h3 {
-  margin-top: 0;
-  font-family: var(--font-display);
-  font-optical-sizing: auto;
-  line-height: 1.1;
-}
-
-h1 {
-  margin-bottom: 22px;
-  color: var(--deep-teal);
-  font-size: clamp(3.1rem, 6.7vw, 6.4rem);
-  font-weight: 480;
-  letter-spacing: -0.045em;
-}
-
-h1 span { color: var(--coral); font-style: italic; font-weight: 500; }
-
-.hero-copy {
-  max-width: 580px;
-  margin-bottom: 30px;
-  font-size: clamp(1.05rem, 2vw, 1.24rem);
-}
-
-.actions { display: flex; flex-wrap: wrap; gap: 14px; }
-
-.button {
-  position: relative;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  padding: 0 24px;
-  border: 2px solid var(--teal);
-  border-radius: 999px;
-  font-weight: 750;
-  cursor: pointer;
-  transition: transform 280ms var(--ease), box-shadow 280ms var(--ease), background 280ms var(--ease), border-color 280ms var(--ease);
-}
-
-.button::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.35), transparent 60%);
-  opacity: 0;
-  transition: opacity 280ms ease;
-  pointer-events: none;
-}
-
-.button:hover::after { opacity: 1; }
-.button:hover { transform: translateY(-3px) scale(1.015); box-shadow: 0 14px 30px rgba(0, 77, 85, 0.2); }
-.button:active { transform: translateY(-1px) scale(0.99); }
-.button-primary { color: var(--white); background: var(--teal); }
-.button-secondary { color: var(--teal); background: rgba(255, 255, 255, 0.65); }
-
-/* ---------- Page hero (inner pages) ---------- */
-
-.page-hero {
-  position: relative;
-  overflow: hidden;
-  padding: 74px 20px 60px;
-  text-align: center;
-  background:
-    radial-gradient(circle at 10% 20%, rgba(237, 102, 112, 0.14), transparent 26%),
-    radial-gradient(circle at 90% 15%, rgba(54, 165, 152, 0.16), transparent 27%),
-    linear-gradient(135deg, #fffaf5, #f4fbf8 52%, #fff8f6);
-}
-
-.page-hero .eyebrow { justify-content: center; }
-
-.page-hero h1 {
-  font-size: clamp(2.6rem, 6vw, 4.4rem);
-  margin-bottom: 14px;
-}
-
-.page-hero p {
-  max-width: 620px;
-  margin: 0 auto;
-  font-size: 1.08rem;
-}
-
-/* ---------- Generic sections ---------- */
-
-.section { padding: 96px 20px; }
-.section-inner { width: min(1100px, 100%); margin: auto; }
-
-.section-heading { max-width: 690px; margin: 0 auto 52px; text-align: center; }
-.section-heading h2 {
-  margin-bottom: 15px;
-  color: var(--deep-teal);
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  font-weight: 500;
-}
-.section-heading p { margin: 0; font-size: 1.08rem; }
-
-.collections { background: var(--white); }
-
-.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-
-.card {
-  min-height: 270px;
-  padding: 34px 28px;
-  border: 1px solid rgba(0, 107, 115, 0.13);
-  border-radius: 24px;
-  background: linear-gradient(145deg, #ffffff, #fbfffd);
-  box-shadow: 0 13px 36px rgba(0, 77, 85, 0.07);
-  transition: transform 320ms var(--ease), box-shadow 320ms var(--ease), border-color 320ms var(--ease);
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(237, 102, 112, 0.42);
-  box-shadow: var(--shadow-lift);
-}
-
-.card:hover .card-icon {
-  transform: scale(1.1) rotate(-6deg);
-  background: var(--coral);
-  color: var(--white);
-}
-
-@media (min-width: 851px) {
-  .card-grid .card:nth-child(2) { margin-top: 30px; }
-  .card-grid .card:nth-child(3) { margin-top: -12px; }
-}
-
-.card-icon {
-  width: 58px;
-  height: 58px;
-  margin-bottom: 25px;
-  display: grid;
-  place-items: center;
-  color: var(--coral);
-  border: 1px solid rgba(201, 149, 55, 0.7);
-  border-radius: 50%;
-  background: var(--blush);
-  font-size: 1.7rem;
-  transition: transform 320ms var(--ease), background 320ms var(--ease), color 320ms var(--ease);
-}
-
-.card h3 { margin-bottom: 12px; color: var(--deep-teal); font-size: 1.55rem; }
-.card p { margin: 0; }
-.card .card-link { display: inline-block; margin-top: 16px; color: var(--teal); font-weight: 700; cursor: pointer; }
-.card .card-link:hover { color: var(--coral); }
-
-/* ---------- Gallery ---------- */
-
-.gallery { background: var(--cream); }
-
-.gallery-group { margin-bottom: 56px; }
-.gallery-group:last-child { margin-bottom: 0; }
-
-.gallery-group h3 {
-  margin-bottom: 6px;
-  color: var(--deep-teal);
-  font-size: 1.5rem;
-  text-align: center;
-}
-
-.gallery-group .group-sub {
-  margin: 0 0 22px;
-  text-align: center;
-  color: #517174;
-  font-size: 0.95rem;
-}
-
-.gallery-subrow { margin-bottom: 38px; }
-.gallery-subrow:last-child { margin-bottom: 0; }
-
-.gallery-subrow h4 {
-  margin: 0 0 14px;
-  color: var(--teal);
-  font-size: 1.05rem;
-  font-weight: 750;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.gallery-grid {
-  columns: 4 220px;
-  column-gap: 18px;
-}
-
-.gallery-tile {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  break-inside: avoid;
-  margin-bottom: 18px;
-  overflow: hidden;
-  border-radius: 18px;
-  background: var(--white);
-  border: 1.5px dashed rgba(0, 107, 115, 0.3);
-  box-shadow: 0 10px 26px rgba(0, 77, 85, 0.06);
-  transition: box-shadow 320ms var(--ease), transform 320ms var(--ease);
-}
-
-.gallery-tile.placeholder,
-.gallery-tile.reference {
-  aspect-ratio: 1 / 1;
-}
-
-.gallery-tile img { width: 100%; height: auto; display: block; object-fit: cover; transition: transform 420ms var(--ease); }
-
-.gallery-tile.placeholder {
-  display: grid;
-  place-items: center;
-  gap: 8px;
-  color: var(--teal);
-  font-size: 0.85rem;
-  font-weight: 650;
-  text-align: center;
-  padding: 10px;
-}
-
-.gallery-tile.placeholder span.icon { font-size: 1.6rem; color: var(--gold); }
-
-.gallery-tile:not(.placeholder) {
-  cursor: zoom-in;
-  border-style: solid;
-  border-color: rgba(0, 107, 115, 0.13);
-}
-
-.gallery-tile:not(.placeholder):hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lift);
-}
-.gallery-tile:not(.placeholder):hover img { transform: scale(1.08); }
-.gallery-tile:not(.placeholder):focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
-
-.gallery-tile.reference {
-  background: linear-gradient(160deg, #ffffff, #fbfffd);
-  border-style: solid;
-  border-color: rgba(0, 107, 115, 0.16);
-  position: relative;
-}
-
-.ref-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(0, 107, 115, 0.9);
-  color: var(--white);
-  font-size: 0.62rem;
-  font-weight: 750;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.ref-icon { width: 62%; height: 62%; }
-
-.gallery-tile.reference .caption {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 0.72rem;
-  color: var(--teal);
-  font-weight: 650;
-}
-
-.gallery-tile.stock {
-  position: relative;
-}
-
-.stock-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 2;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(24, 63, 66, 0.85);
-  color: var(--white);
-  font-size: 0.62rem;
-  font-weight: 750;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  pointer-events: none;
-}
-
-/* ---------- Lightbox ---------- */
-
-.lightbox-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  background: rgba(24, 63, 66, 0.92);
-  backdrop-filter: blur(6px);
-}
-
-.lightbox-overlay.active { display: flex; animation: overlayIn 240ms ease; }
-
-@keyframes overlayIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.lightbox-stage {
-  position: relative;
-  width: min(980px, 94vw);
-  max-height: 92vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.lightbox-overlay.active .lightbox-stage {
-  animation: stageIn 380ms var(--ease);
-}
-
-@keyframes stageIn {
-  from { opacity: 0; transform: scale(0.94) translateY(14px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.lightbox-topbar {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-  color: var(--white);
-  font-size: 0.9rem;
-  font-weight: 650;
-  letter-spacing: 0.02em;
-}
-
-.lightbox-close {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  color: var(--deep-teal);
-  background: var(--white);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  transition: background 220ms ease, transform 220ms var(--ease), rotate 220ms var(--ease);
-}
-
-.lightbox-close:hover { background: var(--blush); transform: scale(1.08); rotate: 90deg; }
-
-.lightbox-frame {
-  position: relative;
-  width: 100%;
-  height: min(70vh, 700px);
-  overflow: hidden;
-  border-radius: 22px;
-  background: var(--ink);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
-  touch-action: none;
-  cursor: zoom-in;
-}
-
-.lightbox-frame.zoomed { cursor: grab; }
-.lightbox-frame.dragging { cursor: grabbing; }
-
-.lightbox-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transform-origin: 50% 50%;
-  transform: scale(1);
-  opacity: 1;
-  will-change: transform, opacity;
-  user-select: none;
-  -webkit-user-drag: none;
-  transition: transform 120ms ease, opacity 260ms ease;
-}
-
-.lightbox-frame img.fading { opacity: 0; transition: opacity 160ms ease; }
-.lightbox-frame.no-transition img { transition: opacity 160ms ease; }
-
-.lightbox-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  display: grid;
-  place-items: center;
-  color: var(--deep-teal);
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(6px);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 3;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
-  transition: background 220ms ease, transform 220ms var(--ease), box-shadow 220ms ease;
-}
-
-.lightbox-nav:hover {
-  background: var(--white);
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.34);
-}
-.lightbox-nav:active { transform: translateY(-50%) scale(0.96); }
-.lightbox-prev { left: 16px; }
-.lightbox-prev:hover { color: var(--coral); }
-.lightbox-next { right: 16px; }
-.lightbox-next:hover { color: var(--coral); }
-
-.lightbox-dots {
-  display: flex;
-  justify-content: center;
-  gap: 7px;
-  margin-top: 14px;
-}
-
-.lightbox-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
-  cursor: pointer;
-  border: none;
-  padding: 0;
-  transition: background 220ms ease, transform 220ms var(--ease);
-}
-
-.lightbox-dot:hover { background: rgba(255, 255, 255, 0.65); }
-.lightbox-dot.active { background: var(--coral); transform: scale(1.35); }
-
-.lightbox-caption { margin: 14px 0 2px; color: var(--white); font-size: 1.02rem; text-align: center; }
-.lightbox-hint { margin: 0; color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; text-align: center; }
-
-/* ---------- Story / About ---------- */
-
-.story {
-  background: linear-gradient(90deg, rgba(223, 243, 238, 0.75), rgba(255, 241, 239, 0.72));
-}
-
-.story-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: clamp(45px, 8vw, 100px);
-}
-
-.story-art {
-  min-height: 410px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(201, 149, 55, 0.42);
-  border-radius: 32px;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(255,255,255,0.98) 0 24%, transparent 25%),
-    conic-gradient(from 30deg, #dff3ee, #fff1ef, #fff0c9, #e8ddf3, #dff3ee);
-  box-shadow: var(--shadow);
-}
-
-.wire-heart {
-  width: 170px;
-  height: 150px;
-  display: grid;
-  place-items: center;
-  color: var(--gold);
-  font-family: var(--font-display);
-  font-size: 8rem;
-  line-height: 1;
-  text-shadow: 0 5px 16px rgba(201, 149, 55, 0.2);
-}
-
-.story-copy h2 { margin-bottom: 20px; color: var(--deep-teal); font-size: clamp(2.3rem, 5vw, 4rem); font-weight: 500; }
-.story-copy p { font-size: 1.07rem; }
-
-.signature {
-  margin-top: 25px;
-  color: var(--coral);
-  font-family: var(--font-display);
-  font-size: 1.55rem;
-  font-style: italic;
-}
-
-.values-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  margin-top: 20px;
-}
-
-.value {
-  padding: 28px 24px;
-  border-radius: 20px;
-  background: var(--white);
-  border: 1px solid rgba(0, 107, 115, 0.12);
-  box-shadow: 0 12px 30px rgba(0, 77, 85, 0.06);
-}
-
-.value h3 { margin-bottom: 10px; color: var(--deep-teal); font-size: 1.2rem; }
-.value p { margin: 0; font-size: 0.98rem; }
-
-/* ---------- Contact ---------- */
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: clamp(36px, 6vw, 70px);
-  align-items: start;
-}
-
-.contact-card {
-  padding: 36px;
-  border-radius: 26px;
-  background: var(--white);
-  border: 1px solid rgba(0, 107, 115, 0.13);
-  box-shadow: 0 16px 40px rgba(0, 77, 85, 0.08);
-}
-
-.contact-card h3 { color: var(--deep-teal); margin-bottom: 14px; font-size: 1.4rem; }
-.contact-card p { margin: 0 0 18px; }
-
-.contact-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
-
-.contact-list li {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-size: 1rem;
-}
-
-.contact-list .icon {
-  width: 40px;
-  height: 40px;
-  flex: none;
-  display: grid;
-  place-items: center;
-  color: var(--coral);
-  border: 1px solid rgba(201, 149, 55, 0.6);
-  border-radius: 50%;
-  background: var(--blush);
-}
-
-.contact-note {
-  padding: 26px;
-  border-radius: 22px;
-  background: var(--sea-glass);
-  color: var(--deep-teal);
-  font-size: 0.98rem;
-}
-
-/* ---------- CTA ---------- */
-
-.cta {
-  text-align: center;
-  color: var(--white);
-  background:
-    radial-gradient(circle at 18% 25%, rgba(255,255,255,0.1), transparent 23%),
-    linear-gradient(135deg, var(--deep-teal), var(--teal));
-}
-
-.cta h2 { margin-bottom: 18px; font-size: clamp(2.4rem, 5vw, 4.3rem); font-weight: 500; }
-.cta p { max-width: 650px; margin: 0 auto 30px; color: rgba(255,255,255,0.88); font-size: 1.1rem; }
-.cta .button { color: var(--deep-teal); border-color: var(--white); background: var(--white); }
-
-footer { padding: 35px 20px; text-align: center; color: #517174; background: var(--cream); font-size: 0.92rem; }
-
-@media (max-width: 850px) {
-  .nav { min-height: 68px; }
-  .nav-toggle { display: flex; }
-
-  .nav-links {
-    position: absolute;
-    top: 68px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    background: var(--cream);
-    border-bottom: 1px solid rgba(0, 107, 115, 0.12);
-    box-shadow: 0 18px 30px rgba(0, 77, 85, 0.1);
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 360ms var(--ease), opacity 260ms ease;
-  }
-
-  .nav-links.open { max-height: 320px; opacity: 1; }
-
-  .nav-links a {
-    padding: 16px 24px;
-    border-bottom: 1px solid rgba(0, 107, 115, 0.08);
-  }
-  .nav-links a::after { display: none; }
-  .nav-links a.active { background: var(--blush); }
-
-  .hero { min-height: auto; padding: 52px 20px 72px; }
-  .hero-inner, .story-inner, .contact-grid { grid-template-columns: 1fr; }
-  .hero-text { text-align: center; }
-  .hero-copy { margin-left: auto; margin-right: auto; }
-  .actions { justify-content: center; }
-  .logo-wrap { width: min(390px, 84vw); }
-  .card-grid, .values-grid { grid-template-columns: 1fr; }
-  .gallery-grid { columns: 2 160px; }
-  .story-art { min-height: 310px; }
-  .lightbox-frame { height: min(58vh, 560px); }
-  .lightbox-nav { width: 42px; height: 42px; }
-  .lightbox-nav svg { width: 18px; height: 18px; }
-}
-
-@media (max-width: 520px) {
-  .brand { font-size: 1.15rem; }
-  .section { padding: 72px 18px; }
-  .button { width: 100%; }
-  .lightbox-hint { display: none; }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Legocita Makes — handmade jewelry, watercolor art and joyful little works of heart by Carmen." />
+  <title>Legocita Makes | Handmade Jewelry, Art & Little Works of Heart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --cream:#fbf7ef;
+      --paper:#fffdf8;
+      --ink:#243833;
+      --green:#365f52;
+      --green-deep:#24463d;
+      --sage:#dbe4da;
+      --coral:#d96d61;
+      --blush:#f5dfd8;
+      --berry:#a94a49;
+      --gold:#b78a4b;
+      --line:rgba(36,70,61,.13);
+      --shadow:0 24px 60px rgba(36,70,61,.12);
+      --radius:26px;
+      --serif:"Playfair Display", Georgia, serif;
+      --sans:"DM Sans", system-ui, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
+    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+
+    .announcement{background:var(--green-deep);color:#fff;text-align:center;padding:9px 18px;font-size:.78rem;letter-spacing:.13em;text-transform:uppercase}
+    .site-header{position:sticky;top:0;z-index:20;background:rgba(251,247,239,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav{max-width:1240px;margin:auto;min-height:78px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:1.25rem;font-weight:600;letter-spacing:.01em}
+    .brand-dot{width:11px;height:11px;border-radius:50%;background:var(--coral);box-shadow:18px 0 0 var(--gold),36px 0 0 var(--green)}
+    .nav-links{display:flex;align-items:center;gap:30px;font-size:.89rem;font-weight:600}
+    .nav-links a{position:relative;padding:8px 0}
+    .nav-links a:after{content:"";position:absolute;left:0;right:100%;bottom:2px;height:1px;background:var(--coral);transition:.25s ease}
+    .nav-links a:hover:after{right:0}
+    .nav-cta{border:1px solid var(--green);border-radius:999px;padding:10px 17px!important}
+    .nav-cta:after{display:none}
+    .menu-btn{display:none;background:none;border:0;padding:8px;color:var(--ink);font-size:1.5rem}
+
+    .hero{position:relative;overflow:hidden;padding:72px 28px 88px}
+    .hero:before{content:"";position:absolute;width:460px;height:460px;border-radius:50%;background:rgba(245,223,216,.68);right:-180px;top:-140px;filter:blur(1px)}
+    .hero:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(219,228,218,.75);left:-150px;bottom:-120px}
+    .hero-grid{position:relative;z-index:2;max-width:1240px;margin:auto;display:grid;grid-template-columns:.92fr 1.08fr;gap:72px;align-items:center}
+    .eyebrow{margin:0 0 14px;color:var(--berry);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+    h1,h2,h3{font-family:var(--serif);line-height:1.08;margin-top:0;color:var(--green-deep)}
+    h1{font-size:clamp(3.7rem,7vw,6.6rem);font-weight:500;letter-spacing:-.045em;margin-bottom:24px}
+    h1 em{color:var(--coral);font-weight:500}
+    .hero-copy{max-width:580px;font-size:1.09rem;color:#4d625d;margin:0 0 32px}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;border-radius:999px;font-size:.87rem;font-weight:700;letter-spacing:.04em;transition:.25s ease}
+    .btn-primary{background:var(--green-deep);color:white;box-shadow:0 10px 25px rgba(36,70,61,.18)}
+    .btn-primary:hover{transform:translateY(-2px);background:var(--green)}
+    .btn-secondary{border:1px solid var(--green);background:rgba(255,255,255,.5)}
+    .btn-secondary:hover{background:#fff}
+    .microcopy{display:flex;gap:18px;flex-wrap:wrap;color:#70817d;font-size:.8rem}
+    .microcopy span:before{content:"✦";color:var(--gold);margin-right:7px}
+
+    .hero-art{position:relative;min-height:590px}
+    .hero-photo{position:absolute;border-radius:34px;overflow:hidden;box-shadow:var(--shadow);background:#eee}
+    .hero-photo.main{width:66%;height:520px;right:0;top:0;transform:rotate(1.5deg)}
+    .hero-photo.small{width:45%;height:305px;left:0;bottom:0;transform:rotate(-3deg);border:10px solid var(--paper)}
+    .hero-photo img{width:100%;height:100%;object-fit:cover}
+    .hero-logo{position:absolute;left:6%;top:8%;width:148px;height:148px;border-radius:50%;padding:12px;background:rgba(255,253,248,.95);box-shadow:0 18px 45px rgba(36,70,61,.17);z-index:3}
+    .hero-logo img{width:100%;height:100%;object-fit:contain}
+    .stamp{position:absolute;right:2%;bottom:15px;width:126px;height:126px;border-radius:50%;background:var(--green-deep);color:#fff;display:grid;place-items:center;text-align:center;font-family:var(--serif);font-size:1.02rem;line-height:1.2;transform:rotate(8deg);box-shadow:0 14px 32px rgba(36,70,61,.22)}
+
+    section{padding:96px 28px}
+    .inner{max-width:1240px;margin:auto}
+    .section-head{max-width:720px;margin-bottom:42px}
+    .section-head h2{font-size:clamp(2.45rem,4.8vw,4.2rem);font-weight:500;letter-spacing:-.035em;margin-bottom:16px}
+    .section-head p{color:#647570;margin:0;font-size:1.02rem}
+
+    .shop-by{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .category-card{position:relative;min-height:290px;border-radius:22px;overflow:hidden;background:#e6e2da;box-shadow:0 12px 34px rgba(36,70,61,.08)}
+    .category-card img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
+    .category-card:hover img{transform:scale(1.04)}
+    .category-card:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(25,42,37,.76))}
+    .category-label{position:absolute;z-index:2;left:22px;right:22px;bottom:20px;color:#fff}
+    .category-label small{display:block;text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;margin-bottom:5px;opacity:.82}
+    .category-label h3{color:#fff;font-size:1.7rem;margin:0;font-weight:500}
+    .category-art{height:100%;display:grid;place-items:center;background:linear-gradient(145deg,#f4ded6,#e5ebe2);position:relative;overflow:hidden}
+    .category-art svg{width:74%;max-width:230px;filter:drop-shadow(0 15px 22px rgba(36,70,61,.1))}
+
+    .story{background:var(--green-deep);color:#fff;position:relative;overflow:hidden}
+    .story:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.08),transparent 28%),radial-gradient(circle at 85% 75%,rgba(217,109,97,.17),transparent 28%)}
+    .story-grid{position:relative;max-width:1240px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .story h2{color:#fff;font-size:clamp(2.7rem,5vw,4.6rem);font-weight:500;letter-spacing:-.035em;margin-bottom:22px}
+    .story p{color:rgba(255,255,255,.78);font-size:1.04rem}
+    .story .eyebrow{color:#efb0a9}
+    .signature{font-family:var(--serif);font-style:italic;font-size:1.45rem;color:#fff!important;margin-top:28px}
+    .maker-collage{display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:220px 220px;gap:14px}
+    .maker-collage figure{margin:0;border-radius:24px;overflow:hidden;background:#ddd}
+    .maker-collage figure:first-child{grid-row:1 / 3}
+    .maker-collage img{width:100%;height:100%;object-fit:cover}
+    .process-card{background:var(--cream)!important;color:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:28px}
+    .process-card strong{font-family:var(--serif);font-size:1.6rem;color:var(--green-deep);font-weight:500;line-height:1.15}
+    .process-card span{font-size:.82rem;color:#6e7e79;margin-top:10px}
+
+    .featured{background:var(--cream)}
+    .featured-top{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:34px}
+    .featured-top .section-head{margin:0}
+    .view-all{font-weight:700;font-size:.84rem;border-bottom:1px solid var(--green);padding-bottom:4px}
+    .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .product-card{background:var(--paper);border-radius:24px;overflow:hidden;border:1px solid var(--line);transition:.3s ease}
+    .product-card:hover{transform:translateY(-5px);box-shadow:0 18px 42px rgba(36,70,61,.1)}
+    .product-image{aspect-ratio:4/4.6;overflow:hidden;background:#eee}
+    .product-image img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
+    .product-card:hover img{transform:scale(1.035)}
+    .product-info{padding:20px 21px 23px}
+    .product-info small{text-transform:uppercase;letter-spacing:.13em;color:var(--berry);font-weight:700;font-size:.67rem}
+    .product-info h3{font-family:var(--sans);font-size:1.03rem;color:var(--ink);margin:6px 0 3px}
+    .product-info p{margin:0;color:#74837f;font-size:.84rem}
+
+    .philosophy{padding-top:40px}
+    .quote-box{max-width:1050px;margin:auto;text-align:center;padding:76px 48px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}
+    .quote-box:before{content:"❦";position:absolute;top:24px;left:50%;transform:translateX(-50%);color:var(--gold);font-size:1.6rem}
+    .quote-box h2{font-size:clamp(2.5rem,5vw,4.8rem);font-weight:500;letter-spacing:-.04em;margin-bottom:22px}
+    .quote-box p{max-width:720px;margin:auto;color:#687975}
+
+    .newsletter{padding-top:48px}
+    .newsletter-box{max-width:1240px;margin:auto;background:var(--blush);border-radius:32px;padding:58px 64px;display:grid;grid-template-columns:1.2fr .8fr;gap:45px;align-items:center;position:relative;overflow:hidden}
+    .newsletter-box:after{content:"";position:absolute;width:250px;height:250px;border:1px solid rgba(169,74,73,.15);border-radius:50%;right:-80px;top:-100px;box-shadow:0 0 0 35px rgba(169,74,73,.035),0 0 0 70px rgba(169,74,73,.025)}
+    .newsletter h2{font-size:clamp(2.2rem,4vw,3.5rem);font-weight:500;margin-bottom:10px}
+    .newsletter p{margin:0;color:#6d5a57}
+    .email-button{position:relative;z-index:2;justify-self:end;background:var(--berry);color:#fff;border-radius:999px;padding:15px 23px;font-weight:700;font-size:.86rem}
+
+    footer{padding:48px 28px 32px;background:var(--cream)}
+    .footer-inner{max-width:1240px;margin:auto;display:flex;justify-content:space-between;gap:28px;align-items:center;border-top:1px solid var(--line);padding-top:30px}
+    .footer-brand{font-family:var(--serif);font-size:1.25rem;font-weight:600}
+    .footer-copy{color:#7b8985;font-size:.8rem;text-align:right}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.show{opacity:1;transform:none}
+
+    @media(max-width:950px){
+      .hero-grid,.story-grid,.newsletter-box{grid-template-columns:1fr}
+      .hero-grid{gap:45px}.hero-text{text-align:center}.hero-copy{margin-left:auto;margin-right:auto}.actions,.microcopy{justify-content:center}
+      .hero-art{max-width:680px;width:100%;margin:auto}.category-grid{grid-template-columns:repeat(2,1fr)}.product-grid{grid-template-columns:repeat(2,1fr)}
+      .email-button{justify-self:start}.featured-top{align-items:start;flex-direction:column}
+    }
+    @media(max-width:720px){
+      .announcement{font-size:.68rem}.nav{min-height:68px;padding:0 18px}.menu-btn{display:block}.nav-links{position:absolute;top:68px;left:0;right:0;background:var(--cream);display:none;flex-direction:column;align-items:stretch;gap:0;padding:10px 18px 18px;border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(36,70,61,.1)}.nav-links.open{display:flex}.nav-links a{padding:13px 8px}.nav-cta{border:0;border-radius:0}
+      .hero{padding:52px 18px 70px}h1{font-size:clamp(3rem,16vw,4.9rem)}.hero-art{min-height:470px}.hero-photo.main{height:410px;width:72%}.hero-photo.small{height:235px;width:48%}.hero-logo{width:112px;height:112px}.stamp{width:102px;height:102px;font-size:.88rem}
+      section{padding:76px 18px}.category-grid,.product-grid{grid-template-columns:1fr}.category-card{min-height:350px}.maker-collage{grid-template-columns:1fr 1fr;grid-template-rows:280px 180px}.maker-collage figure:first-child{grid-column:1/3;grid-row:auto}.quote-box{padding:72px 18px}.newsletter-box{padding:42px 28px}.footer-inner{align-items:flex-start;flex-direction:column}.footer-copy{text-align:left}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none}.category-card img,.product-image img{transition:none}}
+  </style>
 </head>
 <body>
+  <div class="announcement">Made by hand in Florida · One little treasure at a time</div>
 
-<div class="scroll-progress" id="scrollProgress"></div>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#home"><span class="brand-dot" aria-hidden="true"></span><span>Legocita Makes</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#collections">Collections</a>
+        <a href="#art">Watercolor + Art</a>
+        <a href="#about">About</a>
+        <a href="mailto:legocitamakes@gmail.com" class="nav-cta">Contact</a>
+      </div>
+    </nav>
+  </header>
 
-<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+  <main id="home">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-text reveal">
+          <p class="eyebrow">Colorful · thoughtful · handmade</p>
+          <h1>Little works<br>of <em>heart.</em></h1>
+          <p class="hero-copy">Handmade jewelry, watercolor and unexpected little treasures — thoughtfully created with color, curiosity and a distinctly Legocita touch.</p>
+          <div class="actions">
+            <a href="#shop" class="btn btn-primary">Explore the jewelry</a>
+            <a href="#about" class="btn btn-secondary">Meet the maker</a>
+          </div>
+          <div class="microcopy"><span>Small batches</span><span>Made in Florida</span><span>Custom ideas welcome</span></div>
+        </div>
 
-<header class="site-header">
-<nav class="nav" aria-label="Main navigation">
-<a class="brand" href="#home" data-link data-page="home">
-<span class="brand-mark" aria-hidden="true">♥</span>
-<span>Legocita Makes</span>
-</a>
-<button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-<span></span><span></span><span></span>
-</button>
-<div class="nav-links" id="navLinks">
-<a href="#home" data-link data-page="home">Home</a>
-<a href="#gallery" data-link data-page="gallery">Gallery</a>
-<a href="#about" data-link data-page="about">About</a>
-<a href="#contact" data-link data-page="contact">Contact</a>
-</div>
-</nav>
-</header>
+        <div class="hero-art reveal" aria-label="A colorful preview of Legocita Makes">
+          <div class="hero-logo"><img src="legocita-makes-logo.png" alt="Legocita Makes logo"></div>
+          <figure class="hero-photo main"><img src="https://images.pexels.com/photos/32424208/pexels-photo-32424208.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Colorful handmade orange earrings placeholder"></figure>
+          <figure class="hero-photo small"><img src="https://images.pexels.com/photos/32424225/pexels-photo-32424225.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bright handmade yellow earrings placeholder"></figure>
+          <div class="stamp">made<br>with a little<br>joy ✦</div>
+        </div>
+      </div>
+    </section>
 
-<!-- ============ HOME ============ -->
-<div class="page" id="page-home">
-<main>
-<section class="hero">
-<div class="hero-inner">
-<div class="logo-wrap">
-<img src="legocita-makes-logo.png" alt="Legocita Makes — Cute Crafts by Carmen">
-</div>
-<div class="hero-text">
-<p class="eyebrow">Colorful • Meaningful • Handmade</p>
-<h1>Little works of <span>heart.</span></h1>
-<p class="hero-copy">
-Jewelry, watercolor, crochet, resin, and paper creations—each
-thoughtfully made by Carmen to bring color, personality, and a
-little joy into everyday life.
-</p>
-<div class="actions">
-<a class="button button-primary" href="#gallery" data-link data-page="gallery">Explore the craft</a>
-<a class="button button-secondary" href="#about" data-link data-page="about">Meet Carmen</a>
-</div>
-</div>
-</div>
-</section>
+    <section class="shop-by" id="collections">
+      <div class="inner">
+        <div class="section-head reveal">
+          <p class="eyebrow">Find your favorite</p>
+          <h2>Made to be noticed.<br>Made to be loved.</h2>
+          <p>Legocita Makes is colorful by nature. Browse the kinds of pieces you’ll find here now — and the collections still growing on Carmen’s workbench.</p>
+        </div>
+        <div class="category-grid">
+          <a class="category-card reveal" href="#shop">
+            <img src="https://images.pexels.com/photos/32424218/pexels-photo-32424218.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Colorful earrings placeholder">
+            <div class="category-label"><small>Wear a little joy</small><h3>Earrings</h3></div>
+          </a>
+          <a class="category-card reveal" href="#shop">
+            <img src="https://images.pexels.com/photos/37129475/pexels-photo-37129475.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Handmade necklaces placeholder">
+            <div class="category-label"><small>Layer + collect</small><h3>Necklaces</h3></div>
+          </a>
+          <a class="category-card reveal" href="#shop">
+            <img src="https://images.pexels.com/photos/11449103/pexels-photo-11449103.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Colorful bracelets placeholder">
+            <div class="category-label"><small>Color for every day</small><h3>Bracelets + Rings</h3></div>
+          </a>
+          <a class="category-card reveal" href="#art" id="art">
+            <div class="category-art">
+              <svg viewBox="0 0 240 260" role="img" aria-label="Watercolor style botanical illustration">
+                <defs>
+                  <filter id="soft"><feGaussianBlur stdDeviation=".7"/></filter>
+                </defs>
+                <path d="M118 232 C126 186 125 139 118 83" fill="none" stroke="#4e775d" stroke-width="5" stroke-linecap="round"/>
+                <path d="M121 178 C90 165 71 145 58 119" fill="none" stroke="#4e775d" stroke-width="4" stroke-linecap="round"/>
+                <path d="M120 151 C150 140 167 119 180 92" fill="none" stroke="#4e775d" stroke-width="4" stroke-linecap="round"/>
+                <ellipse cx="72" cy="132" rx="25" ry="14" transform="rotate(32 72 132)" fill="#8bb08b" opacity=".8" filter="url(#soft)"/>
+                <ellipse cx="91" cy="159" rx="27" ry="14" transform="rotate(27 91 159)" fill="#6e9c79" opacity=".75"/>
+                <ellipse cx="157" cy="125" rx="27" ry="14" transform="rotate(-34 157 125)" fill="#789f75" opacity=".78"/>
+                <ellipse cx="170" cy="102" rx="24" ry="13" transform="rotate(-42 170 102)" fill="#9bb68a" opacity=".7"/>
+                <circle cx="118" cy="72" r="32" fill="#d96d61" opacity=".78"/>
+                <circle cx="96" cy="77" r="21" fill="#e9a091" opacity=".76"/>
+                <circle cx="139" cy="80" r="23" fill="#bd5960" opacity=".72"/>
+                <circle cx="116" cy="54" r="19" fill="#f1b7a3" opacity=".76"/>
+                <circle cx="120" cy="77" r="8" fill="#b78a4b" opacity=".9"/>
+              </svg>
+            </div>
+            <div class="category-label"><small>Painted + paper treasures</small><h3>Watercolor + Art</h3></div>
+          </a>
+        </div>
+      </div>
+    </section>
 
-<section class="section collections">
-<div class="section-inner">
-<div class="section-heading reveal">
-<p class="eyebrow">Made in small, joyful batches</p>
-<h2>Creative collections with a story</h2>
-<p>
-Legocita Makes celebrates many forms of making, united by vivid
-color, thoughtful detail, and Carmen's unmistakable handmade touch.
-</p>
-</div>
-<div class="card-grid">
-<article class="card reveal">
-<div class="card-icon" aria-hidden="true">◇</div>
-<h3>Jewelry & Wire</h3>
-<p>
-Playful earrings, pendants, rings, beads, and graceful wirework
-designed to make the everyday feel special.
-</p>
-<a class="card-link" href="#jewelry" data-link data-page="jewelry">View pieces →</a>
-</article>
-<article class="card reveal">
-<div class="card-icon" aria-hidden="true">❀</div>
-<h3>Watercolor & Paper</h3>
-<p>
-Bright botanical art, stationery, bookmarks, and small paper
-treasures inspired by nature, family, and Florida color.
-</p>
-<a class="card-link" href="#watercolor" data-link data-page="watercolor">View pieces →</a>
-</article>
-<article class="card reveal">
-<div class="card-icon" aria-hidden="true">♡</div>
-<h3>Fiber & Mixed Media</h3>
-<p>
-Crochet, embroidery, resin, clay, and unexpected combinations
-that turn creative curiosity into something delightful.
-</p>
-<a class="card-link" href="#fiber" data-link data-page="fiber">View pieces →</a>
-</article>
-</div>
-</div>
-</section>
+    <section class="featured" id="shop">
+      <div class="inner">
+        <div class="featured-top">
+          <div class="section-head reveal">
+            <p class="eyebrow">A peek at the work</p>
+            <h2>Joyful pieces,<br>one at a time.</h2>
+            <p>These are still reference photographs for now. As your own product photography is added, these cards become the front window of the shop.</p>
+          </div>
+          <a class="view-all" href="mailto:legocitamakes@gmail.com?subject=Legocita%20Makes%20piece%20inquiry">Ask about a piece →</a>
+        </div>
+        <div class="product-grid">
+          <article class="product-card reveal">
+            <div class="product-image"><img src="https://images.pexels.com/photos/32424208/pexels-photo-32424208.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Orange beaded earrings placeholder"></div>
+            <div class="product-info"><small>Earrings</small><h3>Citrus Drop Earrings</h3><p>Colorful · playful · handmade</p></div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image"><img src="https://images.pexels.com/photos/32424225/pexels-photo-32424225.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Yellow beaded earrings placeholder"></div>
+            <div class="product-info"><small>Earrings</small><h3>Sunshine Mini Drops</h3><p>Bright · lightweight · cheerful</p></div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image"><img src="https://images.pexels.com/photos/37129475/pexels-photo-37129475.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Colorful necklaces placeholder"></div>
+            <div class="product-info"><small>Necklaces</small><h3>Color Story Pendants</h3><p>Collected · expressive · one of a kind</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<section class="section cta">
-<div class="section-inner">
-<p class="eyebrow">The collection is growing</p>
-<h2>Something joyful is taking shape.</h2>
-<p>
-New pieces, collection galleries, custom-order information, and
-upcoming events will be added soon.
-</p>
-<a class="button" href="#contact" data-link data-page="contact">Say hello</a>
-</div>
-</section>
-</main>
-</div>
+    <section class="story" id="about">
+      <div class="story-grid">
+        <div class="maker-collage reveal">
+          <figure><img src="https://images.pexels.com/photos/37129475/pexels-photo-37129475.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Colorful jewelry and maker materials placeholder"></figure>
+          <figure><img src="https://images.pexels.com/photos/32424218/pexels-photo-32424218.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Tiny colorful earrings placeholder"></figure>
+          <figure class="process-card"><strong>Wire. Paint. Beads. Fiber. Curiosity.</strong><span>There’s always something new taking shape.</span></figure>
+        </div>
+        <div class="reveal">
+          <p class="eyebrow">Behind Legocita Makes</p>
+          <h2>A little bit botanical. A little bit whimsical. Always handmade.</h2>
+          <p>Hi, I’m Carmen. Legocita Makes grew from my love of making things with my hands and my inability to leave a beautiful idea unexplored. Some days that means bending wire into a tiny flower. Other days it means watercolor, crochet, beads, resin, paper — or something completely unexpected.</p>
+          <p>Every piece here is made in small batches with curiosity, color and a little bit of heart.</p>
+          <p class="signature">Made with love, Carmen</p>
+        </div>
+      </div>
+    </section>
 
-<!-- ============ GALLERY ============ -->
-<div class="page" id="page-gallery">
-<main>
-<section class="page-hero">
-<p class="eyebrow">A peek at the work</p>
-<h1>Gallery</h1>
-<p>Click or tap any finished photo to zoom in on the details. The pieces below are placeholder references until Carmen's real photography is ready — swap them in anytime.</p>
-</section>
+    <section class="philosophy">
+      <div class="quote-box reveal">
+        <p class="eyebrow">The Legocita spirit</p>
+        <h2>Beautiful things don’t have to be serious to feel special.</h2>
+        <p>Color can be elegant. Whimsy can be polished. Handmade can feel elevated and still make you smile. That is the space Legocita Makes is designed to live in.</p>
+      </div>
+    </section>
 
-<section class="section gallery">
-<div class="section-inner">
+    <section class="newsletter" id="contact">
+      <div class="newsletter-box reveal">
+        <div>
+          <p class="eyebrow">Something special in mind?</p>
+          <h2>Custom ideas are welcome.</h2>
+          <p>Tell me about a color, theme, gift or piece you’ve been imagining. I’d love to hear it.</p>
+        </div>
+        <a class="email-button" href="mailto:legocitamakes@gmail.com?subject=Custom%20Legocita%20Makes%20idea">Email Legocita Makes →</a>
+      </div>
+    </section>
+  </main>
 
-<div class="gallery-group" id="jewelry">
-<h3>Jewelry & Wire</h3>
-<p class="group-sub">Real reference photos below — licensed stock images standing in until Carmen's own photography is ready. Click any photo to zoom in on the detail.</p>
-
-<div class="gallery-subrow">
-<h4>Earrings</h4>
-<div class="gallery-grid">
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/32424218/pexels-photo-32424218.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Vibrant colorful beaded earrings, reference style">
-</div>
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/32424208/pexels-photo-32424208.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Colorful handmade beaded earrings, reference style">
-</div>
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/32424225/pexels-photo-32424225.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Colorful beaded earrings close-up, reference style">
-</div>
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/32424217/pexels-photo-32424217.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Colorful cherry-shaped beaded earring, reference style">
-</div>
-
-</div>
-</div>
-
-<div class="gallery-subrow">
-<h4>Necklaces</h4>
-<div class="gallery-grid">
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/37129475/pexels-photo-37129475.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Variety of vibrant handmade beaded necklaces and pendants, reference style">
-</div>
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/2360503/pexels-photo-2360503.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Vibrant beaded necklace close-up, reference style">
-</div>
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/10029927/pexels-photo-10029927.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Collection of handmade beaded necklaces on a wooden table, reference style">
-</div>
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/30139741/pexels-photo-30139741.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Colorful beaded necklaces, reference style">
-</div>
-
-</div>
-</div>
-
-<div class="gallery-subrow">
-<h4>Bracelets</h4>
-<div class="gallery-grid">
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/11449103/pexels-photo-11449103.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Colorful handmade beaded bracelets on display, reference style">
-</div>
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/8886920/pexels-photo-8886920.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Vibrant gold and red beaded bracelet, reference style">
-</div>
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/32424222/pexels-photo-32424222.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Wrist with vibrant beaded bracelets, reference style">
-</div>
-
-<div class="gallery-tile stock reveal">
-<span class="stock-badge">Stock photo</span>
-<img src="https://images.pexels.com/photos/7585697/pexels-photo-7585697.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Trying on a handmade beaded bracelet, reference style">
-</div>
-
-</div>
-</div>
-</div>
-
-<div class="gallery-group" id="watercolor">
-<h3>Watercolor & Paper</h3>
-<p class="group-sub">Reference styles below — botanical blooms and paper goods, ready to swap for Carmen's real photography.</p>
-<div class="gallery-grid">
-
-<div class="gallery-tile placeholder reference reveal">
-<span class="ref-badge">Reference</span>
-<svg viewBox="0 0 100 100" class="ref-icon" aria-hidden="true">
-<path d="M50 88 C50 60, 50 45, 50 30" stroke="#006b73" stroke-width="3" fill="none" stroke-linecap="round"/>
-<path d="M50 55 C35 50, 30 40, 40 35" stroke="#006b73" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-<circle cx="50" cy="25" r="14" fill="#ed6670" opacity="0.85"/>
-<circle cx="38" cy="30" r="10" fill="#c99537" opacity="0.7"/>
-<circle cx="62" cy="30" r="10" fill="#006b73" opacity="0.6"/>
-</svg>
-<span class="caption">Botanical watercolor</span>
-</div>
-
-<div class="gallery-tile placeholder reference reveal">
-<span class="ref-badge">Reference</span>
-<svg viewBox="0 0 100 100" class="ref-icon" aria-hidden="true">
-<path d="M50 88 C50 60, 50 45, 50 30" stroke="#006b73" stroke-width="3" fill="none" stroke-linecap="round"/>
-<path d="M50 55 C35 50, 30 40, 40 35" stroke="#006b73" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-<circle cx="50" cy="25" r="14" fill="#006b73" opacity="0.85"/>
-<circle cx="38" cy="30" r="10" fill="#ed6670" opacity="0.7"/>
-<circle cx="62" cy="30" r="10" fill="#c99537" opacity="0.6"/>
-</svg>
-<span class="caption">Botanical watercolor</span>
-</div>
-
-<div class="gallery-tile placeholder reference reveal">
-<span class="ref-badge">Reference</span>
-<svg viewBox="0 0 100 100" class="ref-icon" aria-hidden="true">
-<rect x="26" y="18" width="48" height="64" rx="6" fill="#fffcf7" stroke="#c99537" stroke-width="2.5"/>
-<line x1="34" y1="34" x2="66" y2="34" stroke="#dff3ee" stroke-width="4"/>
-<line x1="34" y1="46" x2="66" y2="46" stroke="#fff1ef" stroke-width="4"/>
-<line x1="34" y1="58" x2="54" y2="58" stroke="#dff3ee" stroke-width="4"/>
-<circle cx="66" cy="66" r="7" fill="#ed6670"/>
-</svg>
-<span class="caption">Stationery & bookmarks</span>
-</div>
-
-<div class="gallery-tile placeholder reference reveal">
-<span class="ref-badge">Reference</span>
-<svg viewBox="0 0 100 100" class="ref-icon" aria-hidden="true">
-<path d="M50 88 C50 60, 50 45, 50 30" stroke="#006b73" stroke-width="3" fill="none" stroke-linecap="round"/>
-<path d="M50 55 C35 50, 30 40, 40 35" stroke="#006b73" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-<circle cx="50" cy="25" r="14" fill="#c99537" opacity="0.85"/>
-<circle cx="38" cy="30" r="10" fill="#006b73" opacity="0.7"/>
-<circle cx="62" cy="30" r="10" fill="#ed6670" opacity="0.6"/>
-</svg>
-<span class="caption">Botanical watercolor</span>
-</div>
-
-</div>
-</div>
-
-<div class="gallery-group" id="fiber">
-<h3>Fiber & Mixed Media</h3>
-<p class="group-sub">Reference styles below — crochet, resin, and mixed-media pieces, ready to swap for Carmen's real photography.</p>
-<div class="gallery-grid">
-
-<div class="gallery-tile placeholder reference reveal">
-<span class="ref-badge">Reference</span>
-<svg viewBox="0 0 100 100" class="ref-icon" aria-hidden="true">
-<circle cx="50" cy="55" r="26" fill="none" stroke="#c99537" stroke-width="3"/>
-<path d="M50 29 C65 35, 76 50, 65 65 C58 74, 44 76, 35 68" fill="none" stroke="#ed6670" stroke-width="3" stroke-linecap="round"/>
-<path d="M30 45 C25 55, 30 68, 42 74" fill="none" stroke="#006b73" stroke-width="3" stroke-linecap="round"/>
-<circle cx="50" cy="20" r="5" fill="#c99537"/>
-</svg>
-<span class="caption">Yarn & stitch work</span>
-</div>
-
-<div class="gallery-tile placeholder reference reveal">
-<span class="ref-badge">Reference</span>
-<svg viewBox="0 0 100 100" class="ref-icon" aria-hidden="true">
-<circle cx="50" cy="55" r="26" fill="none" stroke="#c99537" stroke-width="3"/>
-<path d="M50 29 C65 35, 76 50, 65 65 C58 74, 44 76, 35 68" fill="none" stroke="#006b73" stroke-width="3" stroke-linecap="round"/>
-<path d="M30 45 C25 55, 30 68, 42 74" fill="none" stroke="#ed6670" stroke-width="3" stroke-linecap="round"/>
-<circle cx="50" cy="20" r="5" fill="#004d55"/>
-</svg>
-<span class="caption">Yarn & stitch work</span>
-</div>
-
-<div class="gallery-tile placeholder reference reveal">
-<span class="ref-badge">Reference</span>
-<svg viewBox="0 0 100 100" class="ref-icon" aria-hidden="true">
-<path d="M30 70 Q50 20 70 70 Q50 85 30 70 Z" fill="#dff3ee" stroke="#c99537" stroke-width="2.5"/>
-<circle cx="50" cy="55" r="8" fill="#ed6670" opacity="0.75"/>
-<circle cx="42" cy="65" r="4" fill="#006b73" opacity="0.7"/>
-</svg>
-<span class="caption">Resin piece</span>
-</div>
-
-<div class="gallery-tile placeholder reference reveal">
-<span class="ref-badge">Reference</span>
-<svg viewBox="0 0 100 100" class="ref-icon" aria-hidden="true">
-<circle cx="50" cy="55" r="26" fill="none" stroke="#c99537" stroke-width="3"/>
-<path d="M50 29 C65 35, 76 50, 65 65 C58 74, 44 76, 35 68" fill="none" stroke="#c99537" stroke-width="3" stroke-linecap="round"/>
-<path d="M30 45 C25 55, 30 68, 42 74" fill="none" stroke="#ed6670" stroke-width="3" stroke-linecap="round"/>
-<circle cx="50" cy="20" r="5" fill="#006b73"/>
-</svg>
-<span class="caption">Yarn & stitch work</span>
-</div>
-
-</div>
-</div>
-
-</div>
-</section>
-</main>
-</div>
-
-<!-- ============ ABOUT ============ -->
-<div class="page" id="page-about">
-<main>
-<section class="page-hero">
-<p class="eyebrow">Behind Legocita Makes</p>
-<h1>Meet Carmen</h1>
-<p>A lifelong maker turning color, curiosity, and care into handmade treasures.</p>
-</section>
-
-<section class="section story">
-<div class="section-inner story-inner">
-<div class="story-art reveal" aria-hidden="true">
-<div class="wire-heart">♡</div>
-</div>
-<div class="story-copy reveal">
-<p class="eyebrow">The story so far</p>
-<h2>Created with curiosity, compassion, and heart.</h2>
-<p>
-Carmen is a lifelong maker who sees possibility everywhere—from
-watercolor and wire to beads, fiber, resin, clay, and even rescued
-electronic pieces. Legocita Makes is where those discoveries
-become meaningful handmade treasures.
-</p>
-<p>
-Every piece is an invitation to notice beauty, celebrate
-individuality, and leave someone a little better than you found them.
-</p>
-<p class="signature">Made with love, Carmen</p>
-</div>
-</div>
-</section>
-
-<section class="section collections">
-<div class="section-inner">
-<div class="section-heading reveal">
-<p class="eyebrow">How it comes together</p>
-<h2>What guides the work</h2>
-<p>A few principles that show up in every piece, no matter the material.</p>
-</div>
-<div class="values-grid">
-<div class="value reveal">
-<h3>Small, joyful batches</h3>
-<p>Pieces are made a few at a time, so each one gets real attention rather than being rushed through a production line.</p>
-</div>
-<div class="value reveal">
-<h3>Color with intention</h3>
-<p>Every palette is chosen deliberately—drawing from nature, mood, and a genuine love of vivid, cheerful combinations.</p>
-</div>
-<div class="value reveal">
-<h3>Materials with character</h3>
-<p>Wire, beads, resin, fiber, and even rescued odds and ends are treated as building blocks for something new and meaningful.</p>
-</div>
-</div>
-</div>
-</section>
-
-<section class="section cta">
-<div class="section-inner">
-<p class="eyebrow">See it for yourself</p>
-<h2>Take a look at the gallery.</h2>
-<p>
-Browse jewelry, watercolor, and fiber work, or reach out directly
-with a question or custom idea.
-</p>
-<div class="actions" style="justify-content:center;">
-<a class="button" href="#gallery" data-link data-page="gallery">View the gallery</a>
-</div>
-</div>
-</section>
-</main>
-</div>
-
-<!-- ============ CONTACT ============ -->
-<div class="page" id="page-contact">
-<main>
-<section class="page-hero">
-<p class="eyebrow">Say hello</p>
-<h1>Contact</h1>
-<p>Questions, custom order ideas, or just want to say hi? Reach out below.</p>
-</section>
-
-<section class="section">
-<div class="section-inner contact-grid">
-
-<div class="contact-card reveal">
-<h3>Get in touch</h3>
-<p>The easiest way to reach Legocita Makes right now is by email. A reply usually comes within a couple of days.</p>
-<ul class="contact-list">
-<li>
-<span class="icon" aria-hidden="true">✉</span>
-<a href="mailto:legocitamakes@gmail.com">legocitamakes@gmail.com</a>
-</li>
-<li>
-<span class="icon" aria-hidden="true">📍</span>
-<span>Based in Florida, shipping available</span>
-</li>
-</ul>
-<div class="actions" style="margin-top:24px;">
-<a class="button button-primary" href="mailto:legocitamakes@gmail.com">Email Legocita Makes</a>
-</div>
-</div>
-
-<div class="contact-note reveal">
-<h3 style="margin-top:0;">Custom orders welcome</h3>
-<p style="margin:0;">Have an idea for a custom piece — a color palette, a favorite stone, or a design you've been picturing? Include as much detail as you can in your email and Carmen will follow up with next steps.</p>
-</div>
-
-</div>
-</section>
-</main>
-</div>
-
-<footer>
-© 2026 Legocita Makes · Cute Crafts by Carmen
-</footer>
-
-<!-- Zoomable lightbox: activates automatically on any real gallery photo -->
-<div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Photo viewer">
-  <div class="lightbox-stage">
-    <div class="lightbox-topbar">
-      <span id="lightboxCount"></span>
-      <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close photo viewer">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
-      </button>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Legocita Makes</div>
+      <div class="footer-copy">Handmade jewelry, art & little works of heart.<br>© 2026 Legocita Makes · Florida</div>
     </div>
-    <div class="lightbox-frame" id="lightboxFrame">
-      <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 5 8 12 15 19"/></svg>
-      </button>
-      <img id="lightboxImg" src="" alt="">
-      <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 5 16 12 9 19"/></svg>
-      </button>
-    </div>
-    <div class="lightbox-dots" id="lightboxDots"></div>
-    <p class="lightbox-caption" id="lightboxCaption"></p>
-    <p class="lightbox-hint">Click or scroll to zoom · Drag to pan · Swipe or use arrows to browse · Esc to close</p>
-  </div>
-</div>
+  </footer>
 
-<script>
-(function () {
-  "use strict";
-
-  /* ---------- Page router (hash-based single-page navigation) ---------- */
-
-  var PAGES = ["home", "gallery", "about", "contact"];
-  var SUBSECTION_TO_PAGE = { jewelry: "gallery", watercolor: "gallery", fiber: "gallery" };
-
-  var pageEls = {};
-  PAGES.forEach(function (name) {
-    pageEls[name] = document.getElementById("page-" + name);
-  });
-
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll("[data-link]"));
-
-  /* ---------- Mobile hamburger menu ---------- */
-
-  var navToggle = document.getElementById("navToggle");
-  var mobileNavLinks = document.getElementById("navLinks");
-
-  function closeMobileMenu() {
-    if (!mobileNavLinks) return;
-    mobileNavLinks.classList.remove("open");
-    if (navToggle) navToggle.setAttribute("aria-expanded", "false");
-  }
-
-  function openMobileMenu() {
-    if (!mobileNavLinks) return;
-    mobileNavLinks.classList.add("open");
-    if (navToggle) navToggle.setAttribute("aria-expanded", "true");
-  }
-
-  if (navToggle && mobileNavLinks) {
-    navToggle.addEventListener("click", function () {
-      var isOpen = mobileNavLinks.classList.contains("open");
-      if (isOpen) closeMobileMenu();
-      else openMobileMenu();
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuBtn.textContent = open ? '×' : '☰';
     });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+      menuBtn.textContent='☰';
+    }));
 
-    mobileNavLinks.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", closeMobileMenu);
-    });
-
-    document.addEventListener("click", function (e) {
-      if (!mobileNavLinks.classList.contains("open")) return;
-      if (mobileNavLinks.contains(e.target) || navToggle.contains(e.target)) return;
-      closeMobileMenu();
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeMobileMenu();
-    });
-
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 850) closeMobileMenu();
-    });
-  }
-
-  function showPage(name, scrollTargetId) {
-    PAGES.forEach(function (p) {
-      pageEls[p].classList.toggle("active", p === name);
-    });
-    navLinks.forEach(function (link) {
-      var linkPage = link.getAttribute("data-page");
-      var isTopNav = link.parentElement && link.parentElement.classList.contains("nav-links");
-      if (isTopNav) {
-        link.classList.toggle("active", linkPage === name || SUBSECTION_TO_PAGE[linkPage] === name && linkPage === name);
-      }
-    });
-    // Highlight the correct top-nav item even when landing on a subsection
-    navLinks.forEach(function (link) {
-      var isTopNav = link.parentElement && link.parentElement.classList.contains("nav-links");
-      if (isTopNav) {
-        link.classList.toggle("active", link.getAttribute("data-page") === name);
-      }
-    });
-
-    if (scrollTargetId) {
-      var target = document.getElementById(scrollTargetId);
-      if (target) {
-        window.setTimeout(function () {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 30);
-        return;
-      }
-    }
-    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
-  }
-
-  function routeFromHash() {
-    var hash = (location.hash || "").replace("#", "").trim();
-    if (!hash) {
-      showPage("home");
-      return;
-    }
-    if (PAGES.indexOf(hash) !== -1) {
-      showPage(hash);
-      return;
-    }
-    if (SUBSECTION_TO_PAGE[hash]) {
-      showPage(SUBSECTION_TO_PAGE[hash], hash);
-      return;
-    }
-    showPage("home");
-  }
-
-  window.addEventListener("hashchange", routeFromHash);
-  routeFromHash();
-
-  /* ---------- Scroll-reveal on entering viewport ---------- */
-
-  var revealObserver = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in-view");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
-  );
-
-  function observeReveals() {
-    document.querySelectorAll(".reveal:not(.in-view)").forEach(function (el) {
-      revealObserver.observe(el);
-    });
-  }
-
-  observeReveals();
-  // Re-scan whenever a page becomes active, since hidden elements can't be observed reliably
-  window.addEventListener("hashchange", function () {
-    window.setTimeout(observeReveals, 60);
-  });
-
-  /* ---------- Scroll progress bar + back-to-top button ---------- */
-
-  var scrollProgressEl = document.getElementById("scrollProgress");
-  var backToTopEl = document.getElementById("backToTop");
-
-  function onScroll() {
-    var scrollTop = window.scrollY || document.documentElement.scrollTop;
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    if (scrollProgressEl) scrollProgressEl.style.width = pct + "%";
-    if (backToTopEl) backToTopEl.classList.toggle("visible", scrollTop > 480);
-  }
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
-  if (backToTopEl) {
-    backToTopEl.addEventListener("click", function () {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
-  /* ---------- Button hover glow follows cursor ---------- */
-
-  document.querySelectorAll(".button").forEach(function (btn) {
-    btn.addEventListener("pointermove", function (e) {
-      var rect = btn.getBoundingClientRect();
-      btn.style.setProperty("--mx", ((e.clientX - rect.left) / rect.width) * 100 + "%");
-      btn.style.setProperty("--my", ((e.clientY - rect.top) / rect.height) * 100 + "%");
-    });
-  });
-
-  /* ---------- Lightbox (only activates if real gallery photos exist) ---------- */
-
-  var tiles = Array.prototype.slice.call(document.querySelectorAll(".gallery-tile:not(.placeholder)"));
-  if (!tiles.length) return;
-
-  var photos = tiles.map(function (tile) {
-    var img = tile.querySelector("img");
-    return { src: img ? img.currentSrc || img.src : "", alt: img ? img.alt || "" : "" };
-  });
-
-  var overlay = document.getElementById("lightboxOverlay");
-  var frame = document.getElementById("lightboxFrame");
-  var lbImg = document.getElementById("lightboxImg");
-  var caption = document.getElementById("lightboxCaption");
-  var counter = document.getElementById("lightboxCount");
-  var btnClose = document.getElementById("lightboxClose");
-  var btnPrev = document.getElementById("lightboxPrev");
-  var btnNext = document.getElementById("lightboxNext");
-
-  var currentIndex = 0;
-  var lastFocused = null;
-
-  var scale = 1;
-  var originX = 50;
-  var originY = 50;
-  var pointers = {};
-  var dragging = false;
-  var didDrag = false;
-  var dragStart = { x: 0, y: 0, originX: 50, originY: 50 };
-  var pinchStartDist = 0;
-  var pinchStartScale = 1;
-
-  function clamp(val, min, max) {
-    return Math.max(min, Math.min(max, val));
-  }
-
-  function applyTransform() {
-    lbImg.style.transformOrigin = originX + "% " + originY + "%";
-    lbImg.style.transform = "scale(" + scale + ")";
-    frame.classList.toggle("zoomed", scale > 1);
-  }
-
-  function resetZoom() {
-    scale = 1;
-    originX = 50;
-    originY = 50;
-    applyTransform();
-  }
-
-  function pointFromEvent(clientX, clientY) {
-    var rect = frame.getBoundingClientRect();
-    return {
-      xPercent: clamp(((clientX - rect.left) / rect.width) * 100, 0, 100),
-      yPercent: clamp(((clientY - rect.top) / rect.height) * 100, 0, 100)
-    };
-  }
-
-  var dotsEl = document.getElementById("lightboxDots");
-
-  function buildDots() {
-    if (!dotsEl) return;
-    dotsEl.innerHTML = "";
-    photos.forEach(function (_, i) {
-      var dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "lightbox-dot";
-      dot.setAttribute("aria-label", "Go to photo " + (i + 1));
-      dot.addEventListener("click", function (e) {
-        e.stopPropagation();
-        currentIndex = i;
-        updateSlide();
-      });
-      dotsEl.appendChild(dot);
-    });
-  }
-
-  function updateDots() {
-    if (!dotsEl) return;
-    var dots = dotsEl.querySelectorAll(".lightbox-dot");
-    dots.forEach(function (d, i) {
-      d.classList.toggle("active", i === currentIndex);
-    });
-  }
-
-  buildDots();
-
-  function updateSlide(instant) {
-    var photo = photos[currentIndex];
-
-    function apply() {
-      lbImg.src = photo.src;
-      lbImg.alt = photo.alt;
-      caption.textContent = photo.alt || "";
-      counter.textContent = (currentIndex + 1) + " / " + photos.length;
-      resetZoom();
-      updateDots();
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          lbImg.classList.remove("fading");
-        });
-      });
-    }
-
-    if (instant) {
-      apply();
-    } else {
-      lbImg.classList.add("fading");
-      window.setTimeout(apply, 150);
-    }
-  }
-
-  function openLightbox(index) {
-    currentIndex = index;
-    lastFocused = document.activeElement;
-    updateSlide(true);
-    overlay.classList.add("active");
-    overlay.setAttribute("aria-hidden", "false");
-    document.body.classList.add("lightbox-open");
-    btnClose.focus();
-    document.addEventListener("keydown", onKeydown);
-  }
-
-  function closeLightbox() {
-    overlay.classList.remove("active");
-    overlay.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("lightbox-open");
-    document.removeEventListener("keydown", onKeydown);
-    resetZoom();
-    if (lastFocused && typeof lastFocused.focus === "function") {
-      lastFocused.focus();
-    }
-  }
-
-  function showPrev() {
-    currentIndex = (currentIndex - 1 + photos.length) % photos.length;
-    updateSlide();
-  }
-
-  function showNext() {
-    currentIndex = (currentIndex + 1) % photos.length;
-    updateSlide();
-  }
-
-  function onKeydown(e) {
-    if (e.key === "Escape") closeLightbox();
-    else if (e.key === "ArrowLeft") showPrev();
-    else if (e.key === "ArrowRight") showNext();
-  }
-
-  tiles.forEach(function (tile, index) {
-    tile.setAttribute("tabindex", "0");
-    tile.setAttribute("role", "button");
-    tile.setAttribute("aria-label", "View larger photo: " + (photos[index].alt || "gallery photo"));
-    tile.addEventListener("click", function () {
-      openLightbox(index);
-    });
-    tile.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        openLightbox(index);
-      }
-    });
-  });
-
-  btnClose.addEventListener("click", closeLightbox);
-  btnPrev.addEventListener("click", function (e) {
-    e.stopPropagation();
-    showPrev();
-  });
-  btnNext.addEventListener("click", function (e) {
-    e.stopPropagation();
-    showNext();
-  });
-
-  overlay.addEventListener("click", function (e) {
-    if (e.target === overlay) closeLightbox();
-  });
-
-  frame.addEventListener("click", function (e) {
-    if (e.target.closest(".lightbox-nav")) return;
-    if (didDrag) {
-      didDrag = false;
-      return;
-    }
-    if (scale === 1) {
-      var p = pointFromEvent(e.clientX, e.clientY);
-      originX = p.xPercent;
-      originY = p.yPercent;
-      scale = 2.5;
-    } else {
-      resetZoom();
-      return;
-    }
-    applyTransform();
-  });
-
-  frame.addEventListener(
-    "wheel",
-    function (e) {
-      e.preventDefault();
-      var p = pointFromEvent(e.clientX, e.clientY);
-      var next = clamp(scale + (e.deltaY < 0 ? 0.35 : -0.35), 1, 4);
-      if (next === 1) {
-        resetZoom();
-        return;
-      }
-      originX = p.xPercent;
-      originY = p.yPercent;
-      scale = next;
-      applyTransform();
-    },
-    { passive: false }
-  );
-
-  frame.addEventListener("pointerdown", function (e) {
-    if (e.target.closest(".lightbox-nav")) return;
-    frame.setPointerCapture(e.pointerId);
-    pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
-    var ids = Object.keys(pointers);
-
-    if (ids.length === 2) {
-      var pts = ids.map(function (id) { return pointers[id]; });
-      pinchStartDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
-      pinchStartScale = scale;
-      dragging = false;
-    } else if (ids.length === 1) {
-      dragging = true;
-      didDrag = false;
-      frame.classList.add("no-transition");
-      dragStart = { x: e.clientX, y: e.clientY, originX: originX, originY: originY };
-    }
-  });
-
-  frame.addEventListener("pointermove", function (e) {
-    if (!pointers[e.pointerId]) return;
-    pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
-    var ids = Object.keys(pointers);
-
-    if (ids.length === 2) {
-      var pts = ids.map(function (id) { return pointers[id]; });
-      var dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
-      if (pinchStartDist > 0) {
-        scale = clamp(pinchStartScale * (dist / pinchStartDist), 1, 4);
-        applyTransform();
-      }
-      return;
-    }
-
-    if (dragging) {
-      var dx = e.clientX - dragStart.x;
-      var dy = e.clientY - dragStart.y;
-
-      if (Math.abs(dx) > 6 || Math.abs(dy) > 6) didDrag = true;
-
-      if (scale > 1) {
-        var rect = frame.getBoundingClientRect();
-        originX = clamp(dragStart.originX - (dx / rect.width) * 100, 0, 100);
-        originY = clamp(dragStart.originY - (dy / rect.height) * 100, 0, 100);
-        applyTransform();
-        frame.classList.add("dragging");
-      }
-    }
-  });
-
-  function endPointer(e) {
-    delete pointers[e.pointerId];
-    var ids = Object.keys(pointers);
-
-    if (ids.length < 2) pinchStartDist = 0;
-
-    if (ids.length === 0 && dragging) {
-      if (scale === 1 && didDrag) {
-        var dx = e.clientX - dragStart.x;
-        var dy = e.clientY - dragStart.y;
-        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
-          if (dx < 0) showNext();
-          else showPrev();
-        }
-      }
-      dragging = false;
-      frame.classList.remove("dragging");
-      frame.classList.remove("no-transition");
-    }
-  }
-
-  frame.addEventListener("pointerup", endPointer);
-  frame.addEventListener("pointercancel", endPointer);
-})();
-</script>
-
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('show'); });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
