@@ -1,0 +1,20 @@
+title: Legocita Makes
+description: "Handmade jewelry, watercolor art, and little works of heart — made with love in Florida."
+url: "https://legocitamakes.com"
+baseurl: ""
+
+markdown: kramdown
+permalink: pretty
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - generate_pages.py
+  - SETUP.md
