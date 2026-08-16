@@ -1,3 +1,40 @@
+# Update: "About Carmen" → "Meet Carmen"
+
+If you're updating an already-live site, do these two things first:
+
+1. **Delete the old `about/` folder** from the GitHub repo (uploading new files
+   never deletes old ones automatically). Go to the `about` folder on GitHub,
+   delete `index.md` inside it, and commit.
+2. **Upload everything in this new build** on top of the existing repo,
+   overwriting files with the same names. This adds a new `meet-carmen/`
+   folder, updates `_data/nav.yml`, `_layouts/default.html`, and
+   `assets/css/style.css`, and adds a new `_includes/video-teaser.html`.
+
+What changed:
+- The nav item is now "Meet Carmen" and links to `/meet-carmen/`.
+- That one page now has six sections you can jump to from a sub-nav bar:
+  My Story, Inside My Studio, Watch Me Create, My Creative Process,
+  From Inspiration to Finished Piece, and About Legocita Makes.
+- A reusable "See how I made this" button (`_includes/video-teaser.html`)
+  can be dropped onto any product page — it links straight to a matching
+  video card on the Meet Carmen page. One example is already wired up on
+  the Reclaimed Electronics page.
+
+## Adding a new "See how I made this" link on any product page
+
+1. On the Meet Carmen page (`meet-carmen/index.md`), find the "Watch Me
+   Create" section and add a new video card with a unique `id`, e.g.
+   `id="video-crochet-bracelet"`.
+2. On the relevant product page, add:
+   ```
+   {% include video-teaser.html anchor="crochet-bracelet" %}
+   ```
+   (the `anchor` value must match the part after `video-` in the id you used).
+3. When you have a real video, swap the placeholder `<div class="ph">...`
+   inside that card for an embedded video (e.g. a YouTube `<iframe>`).
+
+---
+
 # Setting up on legocita.github.io
 
 This folder is a complete Jekyll site. GitHub Pages runs Jekyll automatically —

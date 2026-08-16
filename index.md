@@ -91,7 +91,7 @@ permalink: /
       <h2>Hi, I'm Carmen.</h2>
       <p>I started Legocita Makes because creating has always brought me joy. I love transforming simple materials — watercolor paint, wire, yarn, and reclaimed parts — into meaningful gifts that make people smile.</p>
       <p>Every watercolor painting, every bead, every piece of wire is handcrafted right here in Florida. My hope is that each creation leaves someone a little happier than before.</p>
-      <a class="btn btn-outline" href="{{ '/about/' | relative_url }}">Read My Story</a>
+      <a class="btn btn-outline" href="{{ '/meet-carmen/#my-story' | relative_url }}">Read My Story</a>
     </div>
   </div>
 </section>
