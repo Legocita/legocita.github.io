@@ -264,11 +264,43 @@ nav.main-nav > ul > li.active > a{
   position:relative;
   padding:76px 0 88px;
   text-align:center;
+  overflow:hidden;
   background:
     radial-gradient(ellipse at 12% 15%, rgba(145,185,199,0.35) 0%, transparent 45%),
     radial-gradient(ellipse at 88% 12%, rgba(215,166,197,0.28) 0%, transparent 42%),
     radial-gradient(ellipse at 50% 105%, rgba(167,181,154,0.38) 0%, transparent 55%);
 }
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-repeat:no-repeat;
+  background-image:
+    url('/assets/images/decor/rose.svg'),
+    url('/assets/images/decor/shell.svg'),
+    url('/assets/images/decor/lavender.svg'),
+    url('/assets/images/decor/bird.svg'),
+    url('/assets/images/decor/leaf-sprig.svg'),
+    url('/assets/images/decor/flower-simple.svg');
+  background-position:
+    -8px -6px,
+    calc(100% + 6px) 10px,
+    12px calc(100% - 4px),
+    calc(100% - 18px) calc(100% - 14px),
+    50% -14px,
+    46% calc(100% - 6px);
+  background-size:
+    76px 76px,
+    64px 60px,
+    46px 64px,
+    58px 48px,
+    50px 58px,
+    30px 30px;
+  opacity:.9;
+}
+.hero .container{ position:relative; z-index:1; }
 .hero .eyebrow{ display:block; margin-bottom:14px; }
 .hero h1{ margin-bottom:18px; }
 .hero .lede{
@@ -309,10 +341,34 @@ nav.main-nav > ul > li.active > a{
 
 /* ---------- Page header (sub pages) ---------- */
 .page-header{
+  position:relative;
+  overflow:hidden;
   padding:56px 0 34px;
   text-align:center;
   background:linear-gradient(180deg, var(--shell) 0%, var(--cream) 100%);
 }
+.page-header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-repeat:no-repeat;
+  background-image:
+    url('/assets/images/decor/leaf-sprig.svg'),
+    url('/assets/images/decor/flower-simple.svg'),
+    url('/assets/images/decor/strawberry.svg');
+  background-position:
+    -6px -8px,
+    calc(100% + 4px) calc(100% - 6px),
+    calc(100% - 14px) -6px;
+  background-size:
+    46px 54px,
+    28px 28px,
+    30px 36px;
+  opacity:.85;
+}
+.page-header .container{ position:relative; z-index:1; }
 .breadcrumbs{
   font-size:.72rem;
   letter-spacing:.05em;
@@ -621,3 +677,31 @@ footer.site-footer .script{ font-size:2rem; color:var(--warm-white); margin-bott
   display:flex; align-items:center; justify-content:center;
   font-size:1rem;
 }
+
+/* ---------- Icon badges — colorful circle icons (What We Create) ---------- */
+.icon-badges{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+  gap:22px;
+  text-align:center;
+}
+.icon-badge{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+.icon-badge-circle{
+  width:64px; height:64px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 18px rgba(59,55,47,0.14);
+}
+.icon-badge-circle img{ width:28px; height:28px; }
+.icon-badge span{
+  font-family:'Cinzel', serif;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--ink);
+}
+.icon-badge.bg-sage .icon-badge-circle{ background:var(--leaf); }
+.icon-badge.bg-sky .icon-badge-circle{ background:var(--ocean); }
+.icon-badge.bg-wildflower .icon-badge-circle{ background:var(--lavender); }
+.icon-badge.bg-driftwood .icon-badge-circle{ background:var(--driftwood); }
+.icon-badge.bg-strawberry .icon-badge-circle{ background:var(--strawberry); }
+.icon-badge.bg-sunflower .icon-badge-circle{ background:var(--sunflower); }
