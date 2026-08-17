@@ -2,49 +2,40 @@
 
 ## What's fixed/new in this update
 
-**The bug:** the botanical decorations were anchored to the full browser
-width instead of your actual content column — on a wide monitor that put
-them way out near the edge of the screen, far from the cards and text, and
-sometimes clipped. Fixed: decorations are now positioned relative to the
-1180px content column itself, so they sit close to the headline and cards
-no matter how wide the browser window is.
+**1. Header overlap bug — fixed.** The nav bar had 11 top-level items plus
+the logo/brand text, and at most desktop widths they didn't actually fit
+in the space they were given — the layout was quietly squeezing your logo
+text until it wrapped and collided with "Home". Fixed by:
+- Never letting the logo/brand shrink or wrap.
+- Trimming the nav link size slightly so more items fit comfortably.
+- Widening the header's available row and switching to the mobile-style
+  slide-out menu a bit earlier (below ~1300px window width) so it never
+  has to cram — a wide phone/tablet browser now gets the clean hamburger
+  menu instead of a squeezed row.
 
-**Floating motion:** every sprinkle now gently drifts (a slow rise/fall
-with a little rotation, ~6-9 seconds per cycle, all slightly offset from
-each other so they don't move in sync).
+**2. Each nav tab now hovers a different color**, pulled from across your
+palette — Jewelry hovers leaf green, Watercolor hovers ocean blue, Crochet
+& Fiber hovers lavender, Reimagined hovers driftwood, Healing Hands hovers
+strawberry, Seasonal & Special hovers sunflower gold, and so on through
+all 11 tabs. The current page's tab keeps that same color instead of
+always being forest green.
 
-**Two new botanicals:** jasmine and baby's breath, added to the existing
-set (rose, wildflower, lavender, leaf sprig, strawberry, shell, bird).
-
-**Every page is genuinely different now:** each of the 38 pages gets its
-own reproducible combination of 2–3 flowers/leaves/shells in different
-corner positions — the homepage hero has the fullest set (6), sub-pages
-get 2–3. Re-running the generator always produces the same result per
-page (no shuffling every time you rebuild).
-
-**Hidden on small screens** (phones) to avoid clutter — sprinkles show on
-tablet/desktop widths only.
+**3. Flowers are bigger and there are more of them.** Every page now has:
+- 5 flowers/leaves/shells around the page header (up from 2–3), sized
+  noticeably larger.
+- A *second*, smaller cluster of 2 flowers down near the bottom
+  "custom order" call-to-action section, so the botanical touches carry
+  through the page instead of only showing up at the top.
+- The homepage hero now has 8, plus 2 more near the bottom CTA.
 
 ## What you need to upload
-This one's a full re-upload of all 38 pages, since the per-page sprinkle
-combinations are baked into each file's HTML (not just the shared CSS this
-time):
-- `assets/css/style.css` (updated — new sprinkle/float system)
-- `assets/images/decor/` (2 new files: `jasmine.svg`, `baby-breath.svg`)
-- All 38 `.html` pages (each has its own sprinkle set baked in)
+This is a full re-upload again (all 38 pages changed, since each page's
+flower placement is baked into its HTML) — plus the updated CSS file:
+- `assets/css/style.css` (header fix + hover colors + sizing)
+- All 38 `.html` pages
 
 ## Uploading
 Go to https://github.com/Legocita/legocita.github.io, upload everything in
-this folder (drag the whole unzipped folder in, or use GitHub Desktop),
-commit to `main`. Check https://legocitamakes.com after a minute or two.
-
-## Adjusting a page's flowers later
-Each page's sprinkles live near the top of its `<section class="page-header">`
-(or `<section class="hero">` on the homepage), inside a `<div class="sprinkles">`
-block. Each flower is one line:
-```html
-<span class="sprinkle" style="top:-10px; left:-30px; width:34px; height:40px;
-  background-image:url('/assets/images/decor/rose.svg'); animation-delay:-2s;"></span>
-```
-Swap the file name in `background-image` for any icon in `assets/images/decor/`,
-or nudge `top/left/right/bottom` to reposition it.
+this folder, commit to `main`. Check https://legocitamakes.com after a
+minute or two — try resizing your browser window narrower to see the nav
+switch cleanly to the hamburger menu instead of overlapping.
