@@ -1,47 +1,50 @@
 # Legocita Makes — Plain HTML Site (no Jekyll)
 
-Every page is a real, complete `.html` file — no build step.
+## What's fixed/new in this update
 
-## What's new in this update — and exactly what you need to upload
-Only three things changed. You do NOT need to re-upload all 38 pages —
-just these:
+**The bug:** the botanical decorations were anchored to the full browser
+width instead of your actual content column — on a wide monitor that put
+them way out near the edge of the screen, far from the cards and text, and
+sometimes clipped. Fixed: decorations are now positioned relative to the
+1180px content column itself, so they sit close to the headline and cards
+no matter how wide the browser window is.
 
-1. **`assets/css/style.css`** (updated) — added the botanical corner
-   sprinkles that now show on every page's header automatically, plus the
-   colorful icon-badge styling.
-2. **`assets/images/decor/`** (new folder, 13 small SVG files) — the
-   hand-drawn rose, shells, birds, strawberries, lavender, leaf sprigs, and
-   the six category icon badges.
-3. **`index.html`** (homepage only) — added the new "What We Create" row
-   of colorful icon badges linking to each shop category.
+**Floating motion:** every sprinkle now gently drifts (a slow rise/fall
+with a little rotation, ~6-9 seconds per cycle, all slightly offset from
+each other so they don't move in sync).
 
-Every other page (all 37 category and sub-pages) automatically picks up
-the new corner sprinkles through the shared CSS file — you don't need to
-touch them individually.
+**Two new botanicals:** jasmine and baby's breath, added to the existing
+set (rose, wildflower, lavender, leaf sprig, strawberry, shell, bird).
 
-## What the sprinkles look like
-- **Every page header** (all sub-pages) now has a small leaf sprig in the
-  top-left corner, a tiny wildflower bottom-right, and a strawberry accent
-  top-right — subtle, consistent, and automatic.
-- **The homepage hero** has a fuller scattering: a rose, a shell, a
-  lavender sprig, a little bird, a leaf sprig, and a wildflower, using
-  colors from across your full palette.
-- **The new "What We Create" row** uses six colored circle badges (like
-  the one you liked from the moodboard) — sage green for Jewelry, ocean
-  blue for Watercolor, wildflower purple for Crochet & Fiber, driftwood
-  for Reimagined, strawberry for Healing Hands, sunflower gold for
-  Seasonal & Special — each links straight to that category page.
+**Every page is genuinely different now:** each of the 38 pages gets its
+own reproducible combination of 2–3 flowers/leaves/shells in different
+corner positions — the homepage hero has the fullest set (6), sub-pages
+get 2–3. Re-running the generator always produces the same result per
+page (no shuffling every time you rebuild).
+
+**Hidden on small screens** (phones) to avoid clutter — sprinkles show on
+tablet/desktop widths only.
+
+## What you need to upload
+This one's a full re-upload of all 38 pages, since the per-page sprinkle
+combinations are baked into each file's HTML (not just the shared CSS this
+time):
+- `assets/css/style.css` (updated — new sprinkle/float system)
+- `assets/images/decor/` (2 new files: `jasmine.svg`, `baby-breath.svg`)
+- All 38 `.html` pages (each has its own sprinkle set baked in)
 
 ## Uploading
-Go to https://github.com/Legocita/legocita.github.io and upload just the
-three items above (drag the `decor` folder in directly, or use GitHub
-Desktop). Commit to `main`, then check https://legocitamakes.com after a
-minute or two.
+Go to https://github.com/Legocita/legocita.github.io, upload everything in
+this folder (drag the whole unzipped folder in, or use GitHub Desktop),
+commit to `main`. Check https://legocitamakes.com after a minute or two.
 
-## Adding more sprinkles later
-All the individual decoration SVGs are reusable — drop an `<img>` tag
-referencing any file in `assets/images/decor/` anywhere you'd like on a
-page, e.g.:
+## Adjusting a page's flowers later
+Each page's sprinkles live near the top of its `<section class="page-header">`
+(or `<section class="hero">` on the homepage), inside a `<div class="sprinkles">`
+block. Each flower is one line:
 ```html
-<img src="/assets/images/decor/strawberry.svg" style="width:40px;">
+<span class="sprinkle" style="top:-10px; left:-30px; width:34px; height:40px;
+  background-image:url('/assets/images/decor/rose.svg'); animation-delay:-2s;"></span>
 ```
+Swap the file name in `background-image` for any icon in `assets/images/decor/`,
+or nudge `top/left/right/bottom` to reposition it.
