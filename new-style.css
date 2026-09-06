@@ -145,3 +145,56 @@ p {
     min-height: 320px;
   }
 }
+/* WORKBENCH */
+.workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(36px, 6vw, 90px);
+  align-items: center;
+  padding: clamp(70px, 9vw, 130px);
+  background: var(--ivory);
+}
+
+.section-heading {
+  max-width: 520px;
+}
+
+.eyebrow {
+  margin-bottom: 14px;
+  color: var(--copper);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.workbench h2 {
+  margin-bottom: 22px;
+  color: var(--deep);
+  font-size: clamp(2.2rem, 4vw, 4.5rem);
+  line-height: 1.05;
+}
+
+.workbench .section-heading > p:not(.eyebrow) {
+  color: var(--ink);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.workbench img {
+  width: 100%;
+  max-height: 620px;
+  object-fit: cover;
+  border-radius: 34px 10px 34px 10px;
+  box-shadow: 0 24px 60px rgba(47, 61, 51, 0.18);
+}
+
+@media (max-width: 780px) {
+  .workbench {
+    grid-template-columns: 1fr;
+    padding: 64px 24px;
+  }
+
+  .workbench img {
+    max-height: 460px;
+  }
+}
