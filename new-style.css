@@ -410,3 +410,44 @@ img{max-width:100%;display:block} a{color:inherit}
     max-width:82vw!important;
   }
 }
+
+
+/* FINAL SIZE LOCK — larger approved logo */
+.wordmark-approved .approved-logo{
+  width:430px!important;
+  max-width:48vw!important;
+}
+.footer-brand .footer-approved-logo{
+  width:560px!important;
+  max-width:82vw!important;
+}
+
+@media (max-width:980px){
+  .wordmark-approved .approved-logo{
+    width:360px!important;
+    max-width:52vw!important;
+  }
+  .footer-brand .footer-approved-logo{
+    width:500px!important;
+    max-width:86vw!important;
+  }
+}
+
+@media (max-width:720px){
+  .wordmark-approved .approved-logo{
+    width:270px!important;
+    max-width:68vw!important;
+  }
+  .footer-brand .footer-approved-logo{
+    width:360px!important;
+    max-width:88vw!important;
+  }
+}
+
+
+/* FINAL COLOR LOCK — keep header/footer consistent while scrolling */
+.site-header,
+.nav-shell,
+.site-footer{
+  background:#273126!important;
+}
