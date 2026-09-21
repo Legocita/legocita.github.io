@@ -93,3 +93,126 @@ img{max-width:100%;display:block} a{color:inherit}
   .request-panel,.custom-card{align-items:flex-start;flex-direction:column;padding:28px}
   .split-media,.split-media img{min-height:340px}.collection-card{min-height:112px}
 }
+
+.feature-mini-grid{
+  max-width:1100px;
+  margin:0 auto 34px;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.mini-card{
+  padding:26px;
+  border:1px solid var(--line);
+  background:#fff;
+  text-align:center;
+}
+.mini-card img{
+  width:52px;
+  height:52px;
+  margin:0 auto 14px;
+  object-fit:contain;
+}
+.mini-card h3{
+  margin:0 0 8px;
+  color:var(--forest);
+  font-size:1.25rem;
+  font-weight:500;
+}
+.mini-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:.95rem;
+}
+.healing-icon-panel{
+  min-height:360px;
+  background:var(--sage-soft);
+}
+.healing-icon-panel img{
+  width:150px;
+  height:150px;
+  min-height:0;
+  object-fit:contain;
+}
+.healing-tags{
+  justify-content:flex-start;
+  margin:24px 0 28px;
+}
+@media (max-width:720px){
+  .feature-mini-grid{grid-template-columns:1fr}
+  .healing-tags{justify-content:flex-start}
+}
+
+.inquiry-link{
+  cursor:pointer;
+}
+.plain-link-button{
+  background:none;
+  border:0;
+  padding:0;
+  font:inherit;
+}
+.inquiry-section{
+  background:var(--paper);
+}
+.inquiry-card{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:48px;
+  padding:42px;
+  background:var(--cream);
+  border:1px solid var(--line);
+}
+.inquiry-card h2{
+  margin:0 0 16px;
+  font-size:clamp(2rem,3.5vw,3.5rem);
+  font-weight:400;
+  line-height:1.08;
+}
+.inquiry-card p{
+  color:var(--muted);
+}
+.inquiry-form{
+  display:grid;
+  gap:10px;
+}
+.inquiry-form label{
+  font:700 .72rem Arial,sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--forest);
+}
+.inquiry-form input,
+.inquiry-form textarea{
+  width:100%;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+  padding:13px 14px;
+  font:inherit;
+}
+.inquiry-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:8px;
+}
+.inquiry-email{
+  margin:6px 0 0;
+  font-size:.95rem;
+}
+.copy-status{
+  min-height:1.3em;
+  margin:0;
+  color:var(--forest)!important;
+  font-weight:700;
+}
+@media (max-width:720px){
+  .inquiry-card{
+    grid-template-columns:1fr;
+    gap:24px;
+    padding:28px;
+  }
+}
