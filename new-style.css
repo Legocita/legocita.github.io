@@ -115,10 +115,11 @@ img{max-width:100%;display:block} a{color:inherit}
   margin: 0 auto 14px;
   display: block;
 }
-  width:52px;
-  height:52px;
-  margin:0 auto 14px;
-  object-fit:contain;
+  .bat-topper-photo{
+  width: 100%;
+  max-width: 240px;
+  height: 180px;
+  object-fit: cover;
 }
 .mini-card h3{
   margin:0 0 8px;
