@@ -18,7 +18,7 @@ img{max-width:100%;display:block} a{color:inherit}
 .site-nav a{color:var(--white);text-decoration:none;text-transform:uppercase;font:600 .7rem/1.2 Arial,sans-serif;letter-spacing:.075em;opacity:.95;white-space:nowrap;display:inline-flex;align-items:center}
 .site-nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:6px}
 .site-nav a:not(:last-child)::after{
-  content:"♥";
+  content:"🍓";
   display:inline-block;
   margin-left:10px;
   color:#d9a37d;
@@ -695,4 +695,26 @@ img{max-width:100%;display:block} a{color:inherit}
     object-position:left center!important;
     filter:contrast(1.05) brightness(1.03)!important;
   }
+}
+
+
+/* STRAWBERRY NAV SEPARATORS */
+.site-nav a:not(:last-child)::after{
+  content:"🍓"!important;
+  display:inline-block!important;
+  margin-left:9px!important;
+  font-size:.62rem!important;
+  line-height:1!important;
+  text-decoration:none!important;
+  text-decoration-line:none!important;
+  opacity:.95!important;
+  transform:translateY(-1px)!important;
+}
+.site-nav a:hover::after{
+  text-decoration:none!important;
+  text-decoration-line:none!important;
+}
+.strawberry-mark{
+  font-size:.42em;
+  vertical-align:.12em;
 }
