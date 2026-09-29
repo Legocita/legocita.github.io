@@ -770,3 +770,37 @@ img{max-width:100%;display:block} a{color:inherit}
   .header-brand-leaf{width:30px!important;height:33px!important;}
   .footer-brand .footer-approved-logo{width:220px!important;max-width:64vw!important;}
 }
+
+
+/* RESTORE APPROVED WHITE HEADER LOGO — do not recreate with text */
+.header-brand,
+.header-brand-text,
+.header-legocita,
+.header-makes,
+.header-brand-leaf{
+  all:unset;
+}
+.wordmark-approved .approved-logo.header-logo{
+  display:block!important;
+  width:470px!important;
+  max-width:40vw!important;
+  height:auto!important;
+  max-height:88px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+  filter:none!important;
+}
+@media (min-width:721px) and (max-width:1360px){
+  .wordmark-approved .approved-logo.header-logo{
+    width:360px!important;
+    max-width:58vw!important;
+    max-height:74px!important;
+  }
+}
+@media (max-width:720px){
+  .wordmark-approved .approved-logo.header-logo{
+    width:285px!important;
+    max-width:70vw!important;
+    max-height:64px!important;
+  }
+}
