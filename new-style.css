@@ -696,3 +696,77 @@ img{max-width:100%;display:block} a{color:inherit}
     filter:contrast(1.05) brightness(1.03)!important;
   }
 }
+
+
+/* HEADER BRAND — larger LEGOCITA, readable cursive Makes, leaf on right */
+.header-brand{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  flex:0 0 auto!important;
+  text-decoration:none!important;
+  color:#fffdf8!important;
+}
+.header-brand-text{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  white-space:nowrap;
+  line-height:1;
+}
+.header-legocita{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:2.55rem;
+  font-weight:800;
+  letter-spacing:.045em;
+  color:#fffdf8;
+  text-shadow:0 1px 0 rgba(255,255,255,.15);
+}
+.header-makes{
+  font-family:"Snell Roundhand","Brush Script MT","Segoe Script",cursive;
+  font-size:2.35rem;
+  font-weight:600;
+  letter-spacing:.015em;
+  color:#fffdf8;
+}
+.header-brand-leaf{
+  width:42px!important;
+  height:46px!important;
+  object-fit:contain!important;
+  filter:brightness(0) invert(1)!important;
+  flex:0 0 auto;
+}
+
+/* Navigation: no underlines on separators; warm botanical hover */
+.site-nav a,
+.site-nav a:hover{
+  text-decoration:none!important;
+}
+.site-nav a:hover{
+  color:#efc29e!important;
+  opacity:1!important;
+}
+.site-nav a:not(:last-child)::after{
+  text-decoration:none!important;
+  color:#d9a37d!important;
+}
+
+/* Smaller round footer mark */
+.footer-brand .footer-approved-logo{
+  width:300px!important;
+  max-width:52vw!important;
+}
+@media (min-width:721px) and (max-width:1360px){
+  .header-legocita{font-size:2.25rem;}
+  .header-makes{font-size:2.05rem;}
+  .header-brand-leaf{width:38px!important;height:42px!important;}
+  .footer-brand .footer-approved-logo{width:260px!important;max-width:46vw!important;}
+}
+@media (max-width:720px){
+  .header-brand{gap:8px!important;}
+  .header-brand-text{gap:7px;}
+  .header-legocita{font-size:1.6rem;}
+  .header-makes{font-size:1.5rem;}
+  .header-brand-leaf{width:30px!important;height:33px!important;}
+  .footer-brand .footer-approved-logo{width:220px!important;max-width:64vw!important;}
+}
