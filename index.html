@@ -471,47 +471,27 @@
 </style>
 
 
-<style id="ten-page-animations">
-/* Ten page-specific animated inspiration cards */
+
+
+<style id="legocita-story-animations">
 .hash-companion{display:none!important}
 .hash-companion.active-page{display:block!important}
-.page-animation{
-  margin:34px auto 54px!important;
-  width:min(880px,88%);
-  padding:28px 24px 30px!important;
-  text-align:center;
-  border-radius:22px;
-  background:linear-gradient(135deg,#f7f1e7,#e7eee3);
-  box-shadow:0 10px 30px rgba(39,49,38,.10);
+.story-animation{
+ width:min(920px,90%);margin:38px auto 58px!important;padding:24px 22px 30px!important;
+ text-align:center;border-radius:24px;background:linear-gradient(145deg,#fbf7ef,#e8efe5);
+ box-shadow:0 12px 34px rgba(39,49,38,.11);overflow:hidden
 }
-.animation-label{
-  margin:0 0 8px;
-  color:#6b765f;
-  font:700 .72rem/1.3 Arial,sans-serif;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-.cute-animation{position:relative;height:92px;max-width:420px;margin:0 auto}
-.anim-step{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  color:#273126;font-size:3.7rem;opacity:0;
-}
-.anim-a{animation:stepA 9s infinite both}
-.anim-b{animation:stepB 9s infinite both}
-.anim-c{animation:stepC 9s infinite both}
-.page-quote{
-  max-width:690px;margin:4px auto 0;
-  border:0;padding:0;
-  color:#273126;
-  font:italic clamp(1.25rem,2.5vw,1.8rem)/1.45 Georgia,serif;
-}
-@keyframes stepA{0%,27%{opacity:1;transform:scale(1) rotate(-4deg)}33%,100%{opacity:0;transform:scale(.7) rotate(8deg)}}
-@keyframes stepB{0%,29%{opacity:0;transform:scale(.7)}36%,61%{opacity:1;transform:scale(1)}67%,100%{opacity:0;transform:scale(.72)}}
-@keyframes stepC{0%,63%{opacity:0;transform:translateY(10px) scale(.75)}71%,94%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0}}
-@media(prefers-reduced-motion:reduce){
- .anim-a,.anim-b{display:none}.anim-c{opacity:1;animation:none}
-}
+.story-stage{position:relative;height:205px;max-width:620px;margin:auto}
+.story-svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:#344334;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.story-svg .fill{fill:#e9a184;stroke:#344334}.story-svg .fill2{fill:#d8bb78;stroke:#344334}.story-svg .fill3{fill:#a9b99b;stroke:#344334}.story-svg .leaf{fill:#a9b99b;stroke:#344334}.story-svg .glow{fill:#f2d99d;stroke:none;opacity:.28}.story-svg .spark{stroke:#d29b58}
+.story-a{animation:storyA 9.5s infinite both}.story-b{animation:storyB 9.5s infinite both}.story-c{animation:storyC 9.5s infinite both}
+.story-quote{max-width:720px;margin:2px auto 0;border:0;padding:0;color:#273126;font:italic clamp(1.3rem,2.7vw,1.9rem)/1.45 Georgia,serif;animation:quoteGlow 9.5s infinite both}
+@keyframes storyA{0%,25%{opacity:1;transform:translateY(0) rotate(-1deg)}12%{transform:translateY(2px) rotate(1deg)}31%,100%{opacity:0;transform:scale(.93)}}
+@keyframes storyB{0%,27%{opacity:0;transform:scale(.9)}35%,57%{opacity:1;transform:scale(1)}63%,100%{opacity:0;transform:scale(.94)}}
+@keyframes storyC{0%,59%{opacity:0;transform:scale(.88)}68%,92%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.96)}}
+@keyframes quoteGlow{0%,66%{opacity:.28;transform:translateY(6px)}73%,94%{opacity:1;transform:none}100%{opacity:.28}}
+@media(prefers-reduced-motion:reduce){.story-a,.story-b{display:none}.story-c{opacity:1;animation:none}.story-quote{opacity:1;animation:none}}
+@media(max-width:600px){.story-stage{height:165px}.story-animation{width:92%;padding:18px 12px 24px!important}}
 </style>
 </head>
 <body>
@@ -901,95 +881,85 @@
         <p id="message-sent" hidden><strong>Thank you! Your message was sent successfully. I’ll get back to you soon.</strong></p>
       </div>
     </section>
-  <section class="page-animation hash-companion" data-route="jewelry">
-      <p class="animation-label">✨ Earrings do a happy little swing ✨</p>
-      <div class="cute-animation" aria-hidden="true">
-        <span class="anim-step anim-a">⌒◇</span>
-        <span class="anim-step anim-b">♡</span>
-        <span class="anim-step anim-c">◇⌒</span>
+  <section class="story-animation hash-companion" data-route="jewelry">
+      <div class="story-stage" aria-hidden="true">
+        <svg class="story-svg story-a" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M105 20 Q180 2 255 20 M125 22 L125 100 M235 22 L235 100 M115 102 Q180 112 245 102 L232 126 Q180 136 128 126 Z"/><path d="M84 35 Q66 58 82 78 M276 35 Q294 58 278 78"/><path class="leaf" d="M84 50 q-22-12-26 6 q18 8 26-6 M276 50 q22-12 26 6 q-18 8-26-6"/></svg>
+        <svg class="story-svg story-b" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M135 36 q-18 12-5 30 M225 36 q18 12 5 30"/><path d="M130 64 L130 92 M230 64 L230 92"/><path class="fill" d="M130 90 C110 105 116 136 130 146 C144 136 150 105 130 90 Z M230 90 C210 105 216 136 230 146 C244 136 250 105 230 90 Z"/></svg>
+        <svg class="story-svg story-c" viewBox="0 0 360 180" role="img" aria-hidden="true"><path class="fill" d="M180 145 C130 110 105 84 112 58 C120 30 157 32 180 60 C203 32 240 30 248 58 C255 84 230 110 180 145 Z"/><path class="spark" d="M82 55 l8-8 m-4 18 l10-2 M278 55 l-8-8 m4 18 l-10-2"/></svg>
       </div>
-      <blockquote class="page-quote" data-en="Wear what makes you smile — joy is always in style." data-es="Lleva lo que te haga sonreír — la alegría siempre está de moda.">Wear what makes you smile — joy is always in style.</blockquote>
+      <blockquote class="story-quote" data-en="Wear what makes you smile — joy is always in style." data-es="Lleva lo que te haga sonreír — la alegría siempre está de moda.">Wear what makes you smile — joy is always in style.</blockquote>
     </section>
-<section class="page-animation hash-companion" data-route="tiny-treasures">
-      <p class="animation-label">🌿 A tiny fern grows under a cloche 🌿</p>
-      <div class="cute-animation" aria-hidden="true">
-        <span class="anim-step anim-a">🌱</span>
-        <span class="anim-step anim-b">🌿</span>
-        <span class="anim-step anim-c">🔮</span>
+<section class="story-animation hash-companion" data-route="tiny-treasures">
+      <div class="story-stage" aria-hidden="true">
+        <svg class="story-svg story-a" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M180 130 Q180 96 180 72"/><ellipse class="fill" cx="180" cy="137" rx="13" ry="8"/><path class="leaf" d="M180 94 q-30-25-40 2 q25 15 40-2"/></svg>
+        <svg class="story-svg story-b" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M180 145 Q165 98 184 35"/><path class="leaf" d="M176 122 q-32-18-39 2 q26 13 39-2 M178 103 q28-22 37-3 q-22 16-37 3 M179 83 q-27-20-34-1 q22 15 34 1 M181 64 q23-18 30-2 q-18 14-30 2"/></svg>
+        <svg class="story-svg story-c" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M115 138 H245 M126 134 V91 Q126 40 180 40 Q234 40 234 91 V134"/><path class="leaf" d="M180 128 Q165 94 183 60 M177 105 q-24-16-30 1 q20 12 30-1 M180 86 q22-17 28-2 q-18 12-28 2"/><circle class="glow" cx="180" cy="83" r="55"/></svg>
       </div>
-      <blockquote class="page-quote" data-en="Little things can hold the biggest wonder." data-es="Las cosas pequeñas pueden guardar la mayor maravilla.">Little things can hold the biggest wonder.</blockquote>
+      <blockquote class="story-quote" data-en="Little things can hold the biggest wonder." data-es="Las cosas pequeñas pueden guardar la mayor maravilla.">Little things can hold the biggest wonder.</blockquote>
     </section>
-<section class="page-animation hash-companion" data-route="3d-printed-treasures">
-      <p class="animation-label">🧵 A tiny idea builds layer by layer 🧵</p>
-      <div class="cute-animation" aria-hidden="true">
-        <span class="anim-step anim-a">·</span>
-        <span class="anim-step anim-b">≋</span>
-        <span class="anim-step anim-c">★</span>
+<section class="story-animation hash-companion" data-route="3d-printed-treasures">
+      <div class="story-stage" aria-hidden="true">
+        <svg class="story-svg story-a" viewBox="0 0 360 180" role="img" aria-hidden="true"><circle class="fill" cx="180" cy="90" r="12"/></svg>
+        <svg class="story-svg story-b" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M120 120 H240 M130 102 H230 M140 84 H220 M150 66 H210 M160 48 H200"/></svg>
+        <svg class="story-svg story-c" viewBox="0 0 360 180" role="img" aria-hidden="true"><path class="fill" d="M180 35 l15 36 39 3-30 25 10 38-34-20-34 20 10-38-30-25 39-3z"/></svg>
       </div>
-      <blockquote class="page-quote" data-en="Great things often begin one tiny layer at a time." data-es="Las grandes cosas suelen comenzar una pequeña capa a la vez.">Great things often begin one tiny layer at a time.</blockquote>
+      <blockquote class="story-quote" data-en="Great things often begin one tiny layer at a time." data-es="Las grandes cosas suelen comenzar una pequeña capa a la vez.">Great things often begin one tiny layer at a time.</blockquote>
     </section>
-<section class="page-animation hash-companion" data-route="healing-hands">
-      <p class="animation-label">🩺 A caring heart comes to life 🩺</p>
-      <div class="cute-animation" aria-hidden="true">
-        <span class="anim-step anim-a">♡</span>
-        <span class="anim-step anim-b">♥</span>
-        <span class="anim-step anim-c">🩺</span>
+<section class="story-animation hash-companion" data-route="healing-hands">
+      <div class="story-stage" aria-hidden="true">
+        <svg class="story-svg story-a" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M82 112 q38-45 82-12 l16 14 16-14 q44-33 82 12 M82 112 q35 35 98 38 q63-3 98-38"/></svg>
+        <svg class="story-svg story-b" viewBox="0 0 360 180" role="img" aria-hidden="true"><path class="fill" d="M180 145 C130 110 105 84 112 58 C120 30 157 32 180 60 C203 32 240 30 248 58 C255 84 230 110 180 145 Z"/><path class="spark" d="M82 55 l8-8 m-4 18 l10-2 M278 55 l-8-8 m4 18 l-10-2"/></svg>
+        <svg class="story-svg story-c" viewBox="0 0 360 180" role="img" aria-hidden="true"><circle class="glow" cx="180" cy="90" r="58"/><path class="fill" d="M180 132 C145 108 130 88 136 68 C142 47 165 49 180 68 C195 49 218 47 224 68 C230 88 215 108 180 132 Z"/></svg>
       </div>
-      <blockquote class="page-quote" data-en="Kind hands can change an ordinary day into a healing one." data-es="Unas manos bondadosas pueden convertir un día común en uno sanador.">Kind hands can change an ordinary day into a healing one.</blockquote>
+      <blockquote class="story-quote" data-en="Kind hands can change an ordinary day into a healing one." data-es="Unas manos bondadosas pueden convertir un día común en uno sanador.">Kind hands can change an ordinary day into a healing one.</blockquote>
     </section>
-<section class="page-animation hash-companion" data-route="collections">
-      <p class="animation-label">🌸 A little bouquet blooms 🌸</p>
-      <div class="cute-animation" aria-hidden="true">
-        <span class="anim-step anim-a">·</span>
-        <span class="anim-step anim-b">🌱</span>
-        <span class="anim-step anim-c">🌸</span>
+<section class="story-animation hash-companion" data-route="collections">
+      <div class="story-stage" aria-hidden="true">
+        <svg class="story-svg story-a" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M180 135 Q176 92 190 50"/><path class="leaf" d="M184 78 q-34-24-42 0 q27 18 42 0"/></svg>
+        <svg class="story-svg story-b" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M115 135 Q180 100 245 45"/><path class="leaf" d="M150 112 q-28-20-35 0 q23 15 35 0 M190 87 q28-22 36-2 q-22 16-36 2 M220 65 q-25-18-31 0 q20 13 31 0"/></svg>
+        <svg class="story-svg story-c" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M180 145 L150 80 M180 145 L180 65 M180 145 L212 82"/><circle class="fill" cx="150" cy="70" r="22"/><circle class="fill2" cx="180" cy="55" r="24"/><circle class="fill3" cx="214" cy="72" r="22"/></svg>
       </div>
-      <blockquote class="page-quote" data-en="Follow your curiosity — beautiful things grow there." data-es="Sigue tu curiosidad — allí crecen cosas hermosas.">Follow your curiosity — beautiful things grow there.</blockquote>
+      <blockquote class="story-quote" data-en="Follow your curiosity — beautiful things grow there." data-es="Sigue tu curiosidad — allí crecen cosas hermosas.">Follow your curiosity — beautiful things grow there.</blockquote>
     </section>
-<section class="page-animation hash-companion" data-route="custom">
-      <p class="animation-label">✏️ A sketch becomes something special ✏️</p>
-      <div class="cute-animation" aria-hidden="true">
-        <span class="anim-step anim-a">✎</span>
-        <span class="anim-step anim-b">◇</span>
-        <span class="anim-step anim-c">✨</span>
+<section class="story-animation hash-companion" data-route="custom">
+      <div class="story-stage" aria-hidden="true">
+        <svg class="story-svg story-a" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M115 125 L225 45 L242 62 L132 142 Z"/><path class="fill" d="M115 125 L132 142 L105 151 Z"/></svg>
+        <svg class="story-svg story-b" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M112 132 Q142 52 180 96 Q220 35 248 78 Q230 126 180 138 Q142 144 112 132"/><path class="spark" d="M102 54 l12-12 m-5 24 l16-3"/></svg>
+        <svg class="story-svg story-c" viewBox="0 0 360 180" role="img" aria-hidden="true"><path class="fill" d="M180 35 l10 38 38 10-38 10-10 38-10-38-38-10 38-10z"/><path d="M115 55 l15 15 M245 55 l-15 15"/></svg>
       </div>
-      <blockquote class="page-quote" data-en="Your idea deserves a little room to become something wonderful." data-es="Tu idea merece espacio para convertirse en algo maravilloso.">Your idea deserves a little room to become something wonderful.</blockquote>
+      <blockquote class="story-quote" data-en="Your idea deserves a little room to become something wonderful." data-es="Tu idea merece espacio para convertirse en algo maravilloso.">Your idea deserves a little room to become something wonderful.</blockquote>
     </section>
-<section class="page-animation hash-companion" data-route="events">
-      <p class="animation-label">🎉 Confetti turns into a celebration 🎉</p>
-      <div class="cute-animation" aria-hidden="true">
-        <span class="anim-step anim-a">· ·</span>
-        <span class="anim-step anim-b">🎀</span>
-        <span class="anim-step anim-c">🎉</span>
+<section class="story-animation hash-companion" data-route="events">
+      <div class="story-stage" aria-hidden="true">
+        <svg class="story-svg story-a" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M180 145 V92"/><path class="fill" d="M180 94 q-30-26 0-48 q30 22 0 48"/><path class="leaf" d="M180 120 q-30-20-38 0 q24 14 38 0"/></svg>
+        <svg class="story-svg story-b" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M180 145 L150 80 M180 145 L180 65 M180 145 L212 82"/><circle class="fill" cx="150" cy="70" r="22"/><circle class="fill2" cx="180" cy="55" r="24"/><circle class="fill3" cx="214" cy="72" r="22"/></svg>
+        <svg class="story-svg story-c" viewBox="0 0 360 180" role="img" aria-hidden="true"><rect x="125" y="75" width="110" height="70" rx="4"/><path d="M180 75 V145 M118 75 H242 M180 75 q-45-8-32-30 q18-18 32 30 M180 75 q45-8 32-30 q-18-18-32 30"/><path class="fill" d="M126 76 H234 V144 H126 Z"/></svg>
       </div>
-      <blockquote class="page-quote" data-en="Celebrate the little moments — they become the good old days." data-es="Celebra los pequeños momentos — algún día serán los buenos tiempos.">Celebrate the little moments — they become the good old days.</blockquote>
+      <blockquote class="story-quote" data-en="Celebrate the little moments — they become the good old days." data-es="Celebra los pequeños momentos — algún día serán los buenos tiempos.">Celebrate the little moments — they become the good old days.</blockquote>
     </section>
-<section class="page-animation hash-companion" data-route="sewing">
-      <p class="animation-label">🧵 Thread dances into a bow 🧵</p>
-      <div class="cute-animation" aria-hidden="true">
-        <span class="anim-step anim-a">〰</span>
-        <span class="anim-step anim-b">🧵</span>
-        <span class="anim-step anim-c">🎀</span>
+<section class="story-animation hash-companion" data-route="sewing">
+      <div class="story-stage" aria-hidden="true">
+        <svg class="story-svg story-a" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M75 100 C120 40 150 150 195 86 C225 45 255 100 286 70"/><circle cx="75" cy="100" r="5"/></svg>
+        <svg class="story-svg story-b" viewBox="0 0 360 180" role="img" aria-hidden="true"><path stroke-dasharray="9 8" d="M80 110 Q180 35 280 110"/><path class="leaf" d="M180 78 q-26-24-36-2 q22 17 36 2 M180 78 q26-24 36-2 q-22 17-36 2"/></svg>
+        <svg class="story-svg story-c" viewBox="0 0 360 180" role="img" aria-hidden="true"><path class="fill" d="M180 90 q-50-48-72-12 q-12 30 72 24 q84 6 72-24 q-22-36-72 12 Z"/><circle class="fill2" cx="180" cy="96" r="14"/><path d="M170 108 l-24 40 M190 108 l24 40"/></svg>
       </div>
-      <blockquote class="page-quote" data-en="A little patience, a little thread, and a lot of heart." data-es="Un poco de paciencia, un poco de hilo y mucho corazón.">A little patience, a little thread, and a lot of heart.</blockquote>
+      <blockquote class="story-quote" data-en="A little patience, a little thread, and a lot of heart." data-es="Un poco de paciencia, un poco de hilo y mucho corazón.">A little patience, a little thread, and a lot of heart.</blockquote>
     </section>
-<section class="page-animation hash-companion" data-route="about">
-      <p class="animation-label">🎨 A brushstroke becomes a heart 🎨</p>
-      <div class="cute-animation" aria-hidden="true">
-        <span class="anim-step anim-a">〰</span>
-        <span class="anim-step anim-b">🎨</span>
-        <span class="anim-step anim-c">♥</span>
+<section class="story-animation hash-companion" data-route="about">
+      <div class="story-stage" aria-hidden="true">
+        <svg class="story-svg story-a" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M120 138 L215 43 L232 60 L137 155 Z"/><path class="fill" d="M120 138 q-22 8-28 24 q20-2 45-7z"/></svg>
+        <svg class="story-svg story-b" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M180 140 Q175 92 190 42"/><path class="fill2" d="M184 80 q-40-30-48 0 q32 22 48 0 M185 104 q38-27 46 1 q-31 19-46-1"/></svg>
+        <svg class="story-svg story-c" viewBox="0 0 360 180" role="img" aria-hidden="true"><path class="fill" d="M180 145 C130 110 105 84 112 58 C120 30 157 32 180 60 C203 32 240 30 248 58 C255 84 230 110 180 145 Z"/><path class="spark" d="M82 55 l8-8 m-4 18 l10-2 M278 55 l-8-8 m4 18 l-10-2"/></svg>
       </div>
-      <blockquote class="page-quote" data-en="Keep making what feels like you. That is where the magic lives." data-es="Sigue creando lo que se sienta como tú. Allí vive la magia.">Keep making what feels like you. That is where the magic lives.</blockquote>
+      <blockquote class="story-quote" data-en="Keep making what feels like you. That is where the magic lives." data-es="Sigue creando lo que se sienta como tú. Allí vive la magia.">Keep making what feels like you. That is where the magic lives.</blockquote>
     </section>
-<section class="page-animation hash-companion" data-route="inquiry">
-      <p class="animation-label">💌 A note folds into a happy message 💌</p>
-      <div class="cute-animation" aria-hidden="true">
-        <span class="anim-step anim-a">▭</span>
-        <span class="anim-step anim-b">✉</span>
-        <span class="anim-step anim-c">💌</span>
+<section class="story-animation hash-companion" data-route="inquiry">
+      <div class="story-stage" aria-hidden="true">
+        <svg class="story-svg story-a" viewBox="0 0 360 180" role="img" aria-hidden="true"><rect x="120" y="42" width="120" height="100" rx="6"/><path d="M145 72 H215 M145 92 H205 M145 112 H220"/></svg>
+        <svg class="story-svg story-b" viewBox="0 0 360 180" role="img" aria-hidden="true"><rect x="105" y="62" width="150" height="92" rx="6"/><path d="M108 68 L180 118 L252 68 M108 150 L158 108 M252 150 L202 108"/></svg>
+        <svg class="story-svg story-c" viewBox="0 0 360 180" role="img" aria-hidden="true"><path d="M105 135 V65 H255 V135 Z M105 68 L180 118 L255 68"/><path class="fill" d="M180 70 C162 48 132 58 138 82 C143 99 160 111 180 125 C200 111 217 99 222 82 C228 58 198 48 180 70 Z"/></svg>
       </div>
-      <blockquote class="page-quote" data-en="A simple hello can be the beginning of something lovely." data-es="Un simple hola puede ser el comienzo de algo hermoso.">A simple hello can be the beginning of something lovely.</blockquote>
+      <blockquote class="story-quote" data-en="A simple hello can be the beginning of something lovely." data-es="Un simple hola puede ser el comienzo de algo hermoso.">A simple hello can be the beginning of something lovely.</blockquote>
     </section>
 </main>
 
