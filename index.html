@@ -43,40 +43,24 @@
       text-decoration-line: none !important;
     }
 
-    /* Soft color-changing hover effect */
+    /* Clear, high-contrast menu hover */
     .site-nav a {
       position: relative;
       transition:
-        color .22s ease,
-        background-color .22s ease,
-        transform .22s ease,
-        opacity .22s ease !important;
-      border-radius: 999px;
-      padding: 8px 4px;
-    }
-
-    .site-nav a:nth-child(4n+1):hover,
-    .site-nav a:nth-child(4n+1):focus-visible {
-      color: #f3c9a8 !important;
-    }
-
-    .site-nav a:nth-child(4n+2):hover,
-    .site-nav a:nth-child(4n+2):focus-visible {
-      color: #c9ddb9 !important;
-    }
-
-    .site-nav a:nth-child(4n+3):hover,
-    .site-nav a:nth-child(4n+3):focus-visible {
-      color: #f6d9df !important;
-    }
-
-    .site-nav a:nth-child(4n):hover,
-    .site-nav a:nth-child(4n):focus-visible {
-      color: #e5d0a5 !important;
+        color .18s ease,
+        background-color .18s ease,
+        transform .18s ease,
+        box-shadow .18s ease,
+        opacity .18s ease !important;
+      border-radius: 8px;
+      padding: 9px 8px;
     }
 
     .site-nav a:hover,
     .site-nav a:focus-visible {
+      color: #273126 !important;
+      background: #f4efe5 !important;
+      box-shadow: 0 2px 10px rgba(0,0,0,.18);
       transform: translateY(-1px);
       opacity: 1 !important;
       outline: none;
@@ -87,6 +71,44 @@
     .site-nav a:focus-visible::after {
       text-decoration: none !important;
       text-decoration-line: none !important;
+    }
+
+    /* Spanish labels are longer: give the navigation more room and
+       reduce its type slightly so it never crowds the logo. */
+    html[lang="es"] .site-nav {
+      gap: 3px !important;
+    }
+
+    html[lang="es"] .site-nav a {
+      font-size: .62rem !important;
+      letter-spacing: .045em !important;
+      padding-left: 5px !important;
+      padding-right: 5px !important;
+    }
+
+    @media (min-width: 1361px) {
+      html[lang="es"] .header-approved-logo {
+        width: 405px !important;
+        max-width: 29vw !important;
+      }
+
+      html[lang="es"] .nav-shell {
+        gap: 10px !important;
+      }
+    }
+
+    @media (max-width: 1500px) and (min-width: 1361px) {
+      html[lang="es"] .header-approved-logo {
+        width: 350px !important;
+        max-width: 25vw !important;
+      }
+
+      html[lang="es"] .site-nav a {
+        font-size: .58rem !important;
+        letter-spacing: .025em !important;
+        padding-left: 3px !important;
+        padding-right: 3px !important;
+      }
     }
 
     /* Footer layout */
@@ -688,6 +710,8 @@
       <div class="footer-social" aria-label="Share Legocita Makes">
         <a class="share-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flegocitamakes.com" target="_blank" rel="noopener noreferrer" aria-label="Share Legocita Makes on Facebook">Facebook</a>
         <a class="share-button" href="https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Flegocitamakes.com&description=Legocita%20Makes%20%E2%80%94%20handmade%20jewelry%2C%20tiny%20treasures%20and%20creative%20goods" target="_blank" rel="noopener noreferrer" aria-label="Share Legocita Makes on Pinterest">Pinterest</a>
+        <a class="share-button" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Flegocitamakes.com&text=Take%20a%20look%20at%20Legocita%20Makes%20%E2%80%94%20handmade%20jewelry%2C%20tiny%20treasures%20and%20creative%20goods." target="_blank" rel="noopener noreferrer" aria-label="Share Legocita Makes on X">X</a>
+        <a class="share-button" href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="Open TikTok to share Legocita Makes">TikTok</a>
         <a class="share-button" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Flegocitamakes.com" target="_blank" rel="noopener noreferrer" aria-label="Share Legocita Makes on LinkedIn">LinkedIn</a>
         <a class="share-button" href="mailto:?subject=Legocita%20Makes&body=Take%20a%20look%20at%20Legocita%20Makes%3A%20https%3A%2F%2Flegocitamakes.com" aria-label="Share Legocita Makes by email">Email</a>
         <a class="share-button" href="sms:?&body=Take%20a%20look%20at%20Legocita%20Makes%3A%20https%3A%2F%2Flegocitamakes.com" aria-label="Share Legocita Makes by text message">Text</a>
