@@ -312,7 +312,7 @@
         </div>
         <form class="inquiry-form" action="https://api.web3forms.com/submit" method="POST">
   <input type="hidden" name="access_key" value="5ef8556f-ba6d-4b30-981e-00300d3ad825">
-
+<input type="hidden" name="redirect" value="https://legocitamakes.com/#message-sent">
   <label for="inquiryItem">Item or collection</label>
   <input id="inquiryItem" name="item" type="text" value="General Question">
 
@@ -324,6 +324,7 @@
 
   <button class="button button-dark" type="submit">Send Message</button>
 </form>
+        <p id="message-sent" hidden><strong>Thank you! Your message was sent successfully. I’ll get back to you soon.</strong></p>
       </div>
     </section>
 
@@ -385,7 +386,11 @@ ${inquiryMessage.value}`;
         copyStatus.textContent = 'Email: legocitamakes@gmail.com';
       }
     });
-
+if (window.location.hash === '#message-sent') {
+  const sentMessage = document.getElementById('message-sent');
+  sentMessage.hidden = false;
+  sentMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
