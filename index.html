@@ -315,7 +315,7 @@
     <h2>Con gusto te ayudo en español.</h2>
     <p>Joyería, pedidos personalizados, regalos, detalles para eventos y otras creaciones hechas a mano.</p>
     <p>Si ves algo que te gusta, envíame un mensaje. También puedo ayudarte con colores, estilos, regalos especiales y pedidos personalizados.</p>
-    <button class="button button-dark inquiry-link" type="button" data-item="Consulta en Español">Enviar mensaje</button>
+    <button class="button button-dark inquiry-link" type="button" data-item="Consulta en Español" data-language="es">Enviar mensaje</button>
   </div>
 </section>
     <section class="section" id="sewing">
@@ -358,35 +358,35 @@
     <section class="section inquiry-section" id="inquiry">
       <div class="inquiry-card">
         <div>
-          <p class="eyebrow">QUICK INQUIRY</p>
-          <h2>Send a Message</h2>
-<p>Questions about an item, availability, or a custom order? Send me a message below.</p>
+          <p class="eyebrow" id="inquiryEyebrow">QUICK INQUIRY</p>
+          <h2 id="inquiryTitle">Send a Message</h2>
+<p id="inquiryIntro">Questions about an item, availability, or a custom order? Send me a message below.</p>
         </div>
         <form class="inquiry-form" action="https://api.web3forms.com/submit" method="POST">
   <input type="hidden" name="access_key" value="5ef8556f-ba6d-4b30-981e-00300d3ad825">
 <input type="hidden" name="redirect" value="https://legocitamakes.com/#message-sent">
-  <label for="inquiryItem">Item or collection</label>
+  <label for="inquiryItem" id="labelItem">Item or collection</label>
   <input id="inquiryItem" name="item" type="text" value="General Question">
 
-  <label for="customerEmail">Your email</label>
+  <label for="customerEmail" id="labelEmail">Your email</label>
 <input id="customerEmail" name="email" type="email" placeholder="you@example.com">
 
-<label for="customerPhone">Best number to text you</label>
+<label for="customerPhone" id="labelPhone">Best number to text you</label>
 <input id="customerPhone" name="phone" type="tel" placeholder="863-555-1234">
 
-<label>Preferred contact</label>
-<label><input type="radio" name="preferred_contact" value="Text"> Text me</label>
-<label><input type="radio" name="preferred_contact" value="Email"> Email me</label>
+<label id="labelPreferred">Preferred contact</label>
+<label><input type="radio" name="preferred_contact" value="Text"> <span id="textMeText">Text me</span></label>
+<label><input type="radio" name="preferred_contact" value="Email"> <span id="emailMeText">Email me</span></label>
 
-<label>Order delivery</label>
-<label><input type="radio" name="delivery" value="Pickup"> I’ll pick it up</label>
-<label><input type="radio" name="delivery" value="Shipping"> I need shipping</label>
+<label id="labelDelivery">Order delivery</label>
+<label><input type="radio" name="delivery" value="Pickup"> <span id="pickupText">I’ll pick it up</span></label>
+<label><input type="radio" name="delivery" value="Shipping"> <span id="shippingText">I need shipping</span></label>
 
-<label for="inquiryMessage">Message</label>
+<label for="inquiryMessage" id="labelMessage">Message</label>
 <textarea id="inquiryMessage" name="message" rows="5" placeholder="Hi Carmen, I’m interested in this item. Please text me at the number above." required></textarea>
 
-<a class="button button-outline" href="sms:8633705142">Text Carmen</a>
-<button class="button button-dark" type="submit">Send Message</button>
+<a class="button button-outline" href="sms:8633705142" id="textCarmenButton">Text Carmen</a>
+<button class="button button-dark" type="submit" id="sendMessageButton">Send Message</button>
 </form>
         <p id="message-sent" hidden><strong>Thank you! Your message was sent successfully. I’ll get back to you soon.</strong></p>
       </div>
@@ -424,11 +424,73 @@
     const inquiryItem = document.getElementById('inquiryItem');
     const inquiryMessage = document.getElementById('inquiryMessage');
 
+    const formText = {
+      en: {
+        eyebrow: 'QUICK INQUIRY',
+        title: 'Send a Message',
+        intro: 'Questions about an item, availability, or a custom order? Send me a message below.',
+        item: 'Item or collection',
+        email: 'Your email',
+        phone: 'Best number to text you',
+        preferred: 'Preferred contact',
+        textMe: 'Text me',
+        emailMe: 'Email me',
+        delivery: 'Order delivery',
+        pickup: 'I’ll pick it up',
+        shipping: 'I need shipping',
+        message: 'Message',
+        textCarmen: 'Text Carmen',
+        send: 'Send Message',
+        placeholder: 'Hi Carmen, I’m interested in this item. Please text me at the number above.'
+      },
+      es: {
+        eyebrow: 'CONSULTA RÁPIDA',
+        title: 'Envíame un mensaje',
+        intro: '¿Tienes preguntas sobre un artículo, disponibilidad o un pedido personalizado? Envíame un mensaje.',
+        item: 'Artículo o colección',
+        email: 'Tu correo electrónico',
+        phone: 'Mejor número para enviarte un mensaje de texto',
+        preferred: 'Contacto preferido',
+        textMe: 'Envíame un texto',
+        emailMe: 'Envíame un correo electrónico',
+        delivery: 'Cómo recibirás tu pedido',
+        pickup: 'Lo recogeré',
+        shipping: 'Necesito envío',
+        message: 'Mensaje',
+        textCarmen: 'Enviar texto a Carmen',
+        send: 'Enviar mensaje',
+        placeholder: 'Hola Carmen, me interesa este artículo. Por favor, envíame un texto al número indicado arriba.'
+      }
+    };
+
+    function setInquiryLanguage(lang) {
+      const t = formText[lang] || formText.en;
+      const ids = {
+        inquiryEyebrow:'eyebrow', inquiryTitle:'title', inquiryIntro:'intro',
+        labelItem:'item', labelEmail:'email', labelPhone:'phone',
+        labelPreferred:'preferred', textMeText:'textMe', emailMeText:'emailMe',
+        labelDelivery:'delivery', pickupText:'pickup', shippingText:'shipping',
+        labelMessage:'message', textCarmenButton:'textCarmen', sendMessageButton:'send'
+      };
+      Object.entries(ids).forEach(([id,key]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[key];
+      });
+      if (inquiryMessage) inquiryMessage.placeholder = t.placeholder;
+    }
+
     document.querySelectorAll('.inquiry-link').forEach(button => {
       button.addEventListener('click', () => {
         const item = button.dataset.item || 'General Question';
+        const lang = button.dataset.language === 'es' ? 'es' : 'en';
+        setInquiryLanguage(lang);
+
         if (inquiryItem) inquiryItem.value = item;
-        if (inquiryMessage) inquiryMessage.value = 'Hi Carmen, I’m interested in ' + item + ' from Legocita Makes. Is it available?';
+        if (inquiryMessage) {
+          inquiryMessage.value = lang === 'es'
+            ? 'Hola Carmen, me interesa ' + item + ' de Legocita Makes. ¿Está disponible?'
+            : 'Hi Carmen, I’m interested in ' + item + ' from Legocita Makes. Is it available?';
+        }
 
         const inquirySection = document.getElementById('inquiry');
         if (inquirySection) inquirySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
