@@ -295,7 +295,76 @@
         padding: 9px 12px;
       }
     }
-  </style>
+  
+    /* HASH-PAGE NAVIGATION + PLAYFUL BUTTONS */
+    .site-nav a::after { content: none !important; display: none !important; }
+    .site-nav a:hover, .site-nav a:focus-visible, .site-nav a.active {
+      color:#273126 !important;
+      background:#f4efe5 !important;
+      box-shadow:0 3px 12px rgba(0,0,0,.20);
+      transform:translateY(-1px);
+    }
+
+    .button, .plain-link-button {
+      transition: transform .2s ease, background-color .2s ease, color .2s ease,
+                  border-color .2s ease, box-shadow .2s ease !important;
+    }
+    .button:hover, .button:focus-visible, .plain-link-button:hover, .plain-link-button:focus-visible {
+      background:#e8b58f !important;
+      color:#273126 !important;
+      border-color:#e8b58f !important;
+      transform:translateY(-3px) rotate(-.35deg);
+      box-shadow:0 9px 22px rgba(39,49,38,.18);
+      outline:none;
+    }
+    .product-card:nth-child(3n+2) .button:hover,
+    .mini-card:nth-child(even) .button:hover { background:#a9b99b !important; border-color:#a9b99b !important; }
+    .product-card:nth-child(3n+3) .button:hover { background:#d8bb78 !important; border-color:#d8bb78 !important; }
+
+    /* Each main section behaves as its own page. */
+    main > section.hash-page { display:none !important; }
+    main > section.hash-page.active-page { display:block !important; }
+    main > section.hash-page.hero.active-page { display:grid !important; }
+
+    /* Home-only creative coffee animation */
+    .maker-moment {
+      padding:52px 6%;
+      text-align:center;
+      background:linear-gradient(135deg,#f5efe5,#e7eee3);
+      overflow:hidden;
+    }
+    .brew-animation { position:relative; max-width:760px; height:175px; margin:8px auto 0; }
+    .brew-stage {
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      gap:24px; color:#273126; opacity:0;
+    }
+    .brew-earrings { font-size:4.4rem; animation:brewEarrings 10s infinite; }
+    .brew-coffee { font-size:4rem; animation:brewCoffee 10s infinite; }
+    .brew-pour { font-size:1.7rem; transform:rotate(55deg); }
+    .brew-quote {
+      font:italic clamp(1.35rem,3vw,2.15rem)/1.35 Georgia,serif;
+      padding:15px; animation:brewQuote 10s infinite;
+    }
+    @keyframes brewEarrings {
+      0%,25% { opacity:1; transform:scale(1); }
+      31%,100% { opacity:0; transform:scale(.7) rotate(-8deg); }
+    }
+    @keyframes brewCoffee {
+      0%,28% { opacity:0; transform:scale(.7); }
+      36%,59% { opacity:1; transform:scale(1); }
+      65%,100% { opacity:0; transform:scale(.8); }
+    }
+    @keyframes brewQuote {
+      0%,61% { opacity:0; transform:translateY(15px); }
+      70%,94% { opacity:1; transform:translateY(0); }
+      100% { opacity:0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .brew-stage { animation:none !important; }
+      .brew-earrings,.brew-coffee { display:none; }
+      .brew-quote { opacity:1; }
+    }
+</style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -325,7 +394,7 @@
   </header>
 
   <main id="main">
-    <section class="hero" id="home">
+    <section class="hero hash-page" id="home">
       <div class="hero-copy">
         <p class="eyebrow">HANDMADE BY CARMEN</p>
         <h1>Made by hand.<br>Made with imagination. <span class="strawberry-mark" aria-hidden="true">🍓</span></h1>
@@ -340,13 +409,22 @@
       </div>
     </section>
 
-    <section class="intro-band" aria-label="Legocita Makes highlights">
+    <section class="intro-band hash-page home-extra" aria-label="Legocita Makes highlights" id="home-extra-1">
       <div><strong>Small-batch</strong><span>Handmade pieces</span></div>
       <div><strong>One of a kind</strong><span>Designed with character</span></div>
       <div><strong>Custom friendly</strong><span>Made for meaningful gifts</span></div>
     </section>
 
-    <section class="section" id="jewelry">
+
+    <section class="maker-moment hash-page home-extra" id="creative-coffee">
+      <p class="eyebrow">CREATIVITY IS BREWING</p>
+      <div class="brew-animation" aria-label="Earrings transform into coffee and an uplifting quote">
+        <div class="brew-stage brew-earrings" aria-hidden="true"><span>⌒◇</span><span>⌒◇</span></div>
+        <div class="brew-stage brew-coffee" aria-hidden="true"><span>◢</span><span class="brew-pour">•••</span><span>☕</span></div>
+        <div class="brew-stage brew-quote">“A little creativity, a little coffee, and suddenly… possibilities.”</div>
+      </div>
+    </section>
+    <section class="section hash-page" id="jewelry">
       <div class="section-heading">
         <p class="eyebrow">JEWELRY FIRST</p>
         <h2>Wearable pieces with a little personality.</h2>
@@ -455,7 +533,7 @@
       <button class="button button-dark inquiry-link" type="button" data-item="Purchase Request">Request to Buy</button>
     </section>
 
-    <section class="section section-soft" id="tiny-treasures">
+    <section class="section section-soft hash-page" id="tiny-treasures">
       <div class="split">
         <div class="split-media">
           <img src="assets/fern-cloche.jpg" alt="Legocita Makes handmade illuminated fern cloche">
@@ -470,7 +548,7 @@
       </div>
     </section>
 
-    <section class="section" id="3d-printed-treasures">
+    <section class="section hash-page" id="3d-printed-treasures">
       <div class="section-heading">
         <p class="eyebrow">3D PRINTED TREASURES</p>
         <h2>Useful, playful, and made layer by layer.</h2>
@@ -498,7 +576,7 @@
       </div>
     </section>
 
-    <section class="section section-soft" id="healing-hands">
+    <section class="section section-soft hash-page" id="healing-hands">
       <div class="section-heading">
         <p class="eyebrow">HEALING HANDS</p>
         <h2>Made for the people who help others heal.</h2>
@@ -532,7 +610,7 @@
       </div>
     </section>
 
-    <section class="section section-deep" id="collections">
+    <section class="section section-deep hash-page" id="collections">
       <div class="section-heading light">
         <p class="eyebrow">EXPLORE</p>
         <h2>More from the studio.</h2>
@@ -563,7 +641,7 @@
       </div>
     </section>
 
-    <section class="section" id="custom">
+    <section class="section hash-page" id="custom">
       <div class="custom-card">
         <div>
           <p class="eyebrow">CUSTOM ORDERS</p>
@@ -574,7 +652,7 @@
       </div>
     </section>
 
-    <section class="section" id="events">
+    <section class="section hash-page" id="events">
       <div class="section-heading">
         <p class="eyebrow">EVENTS &amp; CREATIVE SERVICES</p>
         <h2>Handmade details for meaningful celebrations.</h2>
@@ -596,7 +674,7 @@
       </div>
     </section>
 
-    <section class="section section-soft" id="espanol">
+    <section class="section section-soft hash-page" id="espanol">
       <div class="section-heading">
         <p class="eyebrow">HABLO ESPAÑOL</p>
         <h2>Con gusto te ayudo en español.</h2>
@@ -606,7 +684,7 @@
       </div>
     </section>
 
-    <section class="section" id="sewing">
+    <section class="section hash-page" id="sewing">
       <div class="section-heading">
         <p class="eyebrow">SEWING &amp; FABRIC</p>
         <h2>Fabric projects made with a handmade touch.</h2>
@@ -616,7 +694,7 @@
       </div>
     </section>
 
-    <section class="section section-soft" id="about">
+    <section class="section section-soft hash-page" id="about">
       <div class="split reverse">
         <div class="split-copy">
           <p class="eyebrow">MEET THE MAKER</p>
@@ -631,7 +709,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section hash-page home-extra" id="home-extra-2">
       <div class="split">
         <div class="split-media workbench-photo">
           <img src="assets/carmen-making-jewelry.jpg" alt="Carmen making jewelry at her workbench">
@@ -644,7 +722,7 @@
       </div>
     </section>
 
-    <section class="section inquiry-section" id="inquiry">
+    <section class="section inquiry-section hash-page" id="inquiry">
       <div class="inquiry-card">
         <div>
           <p class="eyebrow" id="inquiryEyebrow">QUICK INQUIRY</p>
@@ -1065,6 +1143,35 @@
         }
       });
     }
+
+
+    const pageIds = new Set(['home','jewelry','tiny-treasures','3d-printed-treasures','healing-hands','collections','custom','events','sewing','about','inquiry']);
+
+    function showHashPage() {
+      let id = (window.location.hash || '#home').slice(1);
+      if (id === 'espanol') {
+        setSiteLanguage(currentSiteLanguage === 'en' ? 'es' : 'en');
+        history.replaceState(null, '', '#home');
+        id = 'home';
+      }
+      if (!pageIds.has(id)) id = 'home';
+
+      document.querySelectorAll('main > .hash-page').forEach(section => {
+        const isHomeExtra = section.classList.contains('home-extra');
+        const show = section.id === id || (id === 'home' && isHomeExtra);
+        section.classList.toggle('active-page', show);
+      });
+
+      document.querySelectorAll('#site-nav a').forEach(link => {
+        const target = (link.getAttribute('href') || '').replace('#','');
+        link.classList.toggle('active', target === id);
+      });
+
+      window.scrollTo({top:0, behavior:'auto'});
+    }
+
+    window.addEventListener('hashchange', showHashPage);
+    showHashPage();
 
     const year = document.getElementById('year');
     if (year) year.textContent = new Date().getFullYear();
