@@ -365,6 +365,111 @@
       .brew-quote { opacity:1; }
     }
 </style>
+
+<style id="legocita-final-fixes">
+/* Absolutely no strawberry separators in header or footer navigation. */
+.site-header .site-nav a::before,
+.site-header .site-nav a::after,
+.site-footer .footer-nav a::before,
+.site-footer .footer-nav a::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* Make every footer navigation button feel like a button and highlight on hover. */
+.site-footer .footer-nav a {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px !important;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 9px;
+  transition: transform .2s ease, background-color .2s ease, color .2s ease,
+              border-color .2s ease, box-shadow .2s ease !important;
+}
+.site-footer .footer-nav a:hover,
+.site-footer .footer-nav a:focus-visible {
+  color: #273126 !important;
+  background: #f3c9a8 !important;
+  border-color: #f3c9a8 !important;
+  box-shadow: 0 7px 18px rgba(0,0,0,.22);
+  transform: translateY(-2px);
+  outline: none;
+}
+.site-footer .footer-nav a:nth-child(3n+2):hover,
+.site-footer .footer-nav a:nth-child(3n+2):focus-visible {
+  background:#a9b99b !important;
+  border-color:#a9b99b !important;
+}
+.site-footer .footer-nav a:nth-child(3n+3):hover,
+.site-footer .footer-nav a:nth-child(3n+3):focus-visible {
+  background:#d8bb78 !important;
+  border-color:#d8bb78 !important;
+}
+
+/* Social/share footer buttons get the same playful highlighting. */
+.site-footer .share-button:hover,
+.site-footer .share-button:focus-visible {
+  background:#e8b58f !important;
+  color:#273126 !important;
+  border-color:#e8b58f !important;
+  box-shadow:0 8px 20px rgba(0,0,0,.22);
+  transform:translateY(-2px) scale(1.035);
+  outline:none;
+}
+
+/* The animation is deliberately visible on the HOME hash page. */
+#creative-coffee {
+  min-height: 285px;
+}
+#creative-coffee.active-page {
+  display:block !important;
+}
+.brew-animation {
+  position:relative !important;
+  height:180px !important;
+  max-width:760px;
+  margin:8px auto 0;
+}
+.brew-stage {
+  position:absolute !important;
+  inset:0 !important;
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+  gap:24px;
+  color:#273126;
+  opacity:0;
+  pointer-events:none;
+}
+.brew-earrings { font-size:4.5rem; animation:legEarrings 12s infinite both !important; }
+.brew-coffee { font-size:4.1rem; animation:legCoffee 12s infinite both !important; }
+.brew-quote {
+  font:italic clamp(1.35rem,3vw,2.15rem)/1.35 Georgia,serif;
+  padding:15px;
+  animation:legQuote 12s infinite both !important;
+}
+@keyframes legEarrings {
+  0%, 25% { opacity:1; transform:scale(1); }
+  30%, 100% { opacity:0; transform:scale(.72) rotate(-8deg); }
+}
+@keyframes legCoffee {
+  0%, 27% { opacity:0; transform:scale(.7); }
+  34%, 60% { opacity:1; transform:scale(1); }
+  66%, 100% { opacity:0; transform:scale(.82); }
+}
+@keyframes legQuote {
+  0%, 61% { opacity:0; transform:translateY(16px); }
+  69%, 94% { opacity:1; transform:translateY(0); }
+  100% { opacity:0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brew-earrings,.brew-coffee { display:none !important; }
+  .brew-quote { opacity:1 !important; animation:none !important; }
+}
+</style>
+
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -1149,16 +1254,11 @@
 
     function showHashPage() {
       let id = (window.location.hash || '#home').slice(1);
-      if (id === 'espanol') {
-        setSiteLanguage(currentSiteLanguage === 'en' ? 'es' : 'en');
-        history.replaceState(null, '', '#home');
-        id = 'home';
-      }
       if (!pageIds.has(id)) id = 'home';
 
-      document.querySelectorAll('main > .hash-page').forEach(section => {
-        const isHomeExtra = section.classList.contains('home-extra');
-        const show = section.id === id || (id === 'home' && isHomeExtra);
+      document.querySelectorAll('main section.hash-page').forEach(section => {
+        const homeCompanion = section.id === 'creative-coffee' || section.classList.contains('home-extra');
+        const show = section.id === id || (id === 'home' && homeCompanion);
         section.classList.toggle('active-page', show);
       });
 
@@ -1166,8 +1266,7 @@
         const target = (link.getAttribute('href') || '').replace('#','');
         link.classList.toggle('active', target === id);
       });
-
-      window.scrollTo({top:0, behavior:'auto'});
+      window.scrollTo(0,0);
     }
 
     window.addEventListener('hashchange', showHashPage);
