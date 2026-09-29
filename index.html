@@ -14,8 +14,12 @@
 
   <header class="site-header">
     <div class="nav-shell">
-      <a class="wordmark wordmark-approved" href="#home" aria-label="Legocita Makes home">
-        <img class="approved-logo header-logo" src="assets/legocita-logo-white.png" alt="Legocita Makes">
+      <a class="wordmark wordmark-approved header-brand" href="#home" aria-label="Legocita Makes home">
+        <span class="header-brand-text" aria-hidden="true">
+          <span class="header-legocita">LEGOCITA</span>
+          <span class="header-makes">Makes</span>
+        </span>
+        <img class="header-brand-leaf" src="assets/icon-leaf-line.svg" alt="">
       </a>
 
       <button class="menu-button" aria-expanded="false" aria-controls="site-nav">Menu</button>
@@ -31,7 +35,7 @@
         <a href="#sewing">Sewing &amp; Fabric</a>
         <a href="#about">About</a>
         <a href="#inquiry">Contact</a>
-        <a href="#espanol">Hablo Español</a>
+        <a href="#espanol" id="languageToggle">Hablo Español</a>
         
       </nav>
     </div>
@@ -421,6 +425,197 @@
       });
     }
 
+    const translations = {
+      'Menu':'Menú',
+      'Jewelry':'Joyería',
+      'Tiny Treasures':'Pequeños Tesoros',
+      '3D Printed Treasures':'Tesoros Impresos en 3D',
+      'Healing Hands':'Manos que Cuidan',
+      'Collections':'Colecciones',
+      'Custom Orders':'Pedidos Personalizados',
+      'Events':'Eventos',
+      'Sewing & Fabric':'Costura y Tela',
+      'About':'Acerca de mí',
+      'Contact':'Contacto',
+      'Hablo Español':'English',
+      'HANDMADE BY CARMEN':'HECHO A MANO POR CARMEN',
+      'Made by hand.':'Hecho a mano.',
+      'Made with imagination.':'Hecho con imaginación.',
+      'Handcrafted jewelry, wearable art, tiny treasures and creative goods — thoughtfully made in Florida, one piece at a time.':'Joyería artesanal, arte para llevar, pequeños tesoros y creaciones hechas con cariño en Florida, una pieza a la vez.',
+      'Shop Jewelry':'Ver Joyería',
+      'Explore Collections':'Explorar Colecciones',
+      'Small-batch':'Edición pequeña',
+      'Handmade pieces':'Piezas hechas a mano',
+      'One of a kind':'Piezas únicas',
+      'Designed with character':'Diseñadas con personalidad',
+      'Custom friendly':'Personalizable',
+      'Made for meaningful gifts':'Hecho para regalos con significado',
+      'JEWELRY FIRST':'PRIMERO, LA JOYERÍA',
+      'Wearable pieces with a little personality.':'Piezas para llevar con un toque de personalidad.',
+      'Earrings are at the heart of Legocita Makes, joined by bracelets, necklaces and wearable art. Many pieces are made in very small quantities.':'Los aretes son el corazón de Legocita Makes, acompañados de pulseras, collares y arte para llevar. Muchas piezas se crean en cantidades muy pequeñas.',
+      'Featured':'Destacado',
+      'Handcrafted Earrings':'Aretes Artesanales',
+      'Wire, beads, resin and mixed-media details, finished by hand.':'Alambre, cuentas, resina y detalles de técnicas mixtas, terminados a mano.',
+      'Check availability →':'Consultar disponibilidad →',
+      'Plant City Edition':'Edición Plant City',
+      'Strawberry Pieces':'Piezas de Fresa',
+      'Playful hometown-inspired jewelry and seasonal strawberry designs.':'Joyería alegre inspirada en nuestra comunidad y diseños de fresa de temporada.',
+      'One of a Kind':'Pieza Única',
+      'Small-Batch Finds':'Hallazgos de Edición Pequeña',
+      'Pieces that may not be repeated exactly once they are sold.':'Piezas que quizá no vuelvan a repetirse exactamente una vez vendidas.',
+      'Seasonal':'De temporada',
+      'Game Day':'Día de Juego',
+      'Football earrings and fall-inspired game-day combinations.':'Aretes de fútbol y combinaciones para el día de juego inspiradas en el otoño.',
+      'Check availability':'Consultar disponibilidad',
+      'Halloween Collection':'Colección de Halloween',
+      'Ghosts, spiders, pumpkins, bats, and other playful Halloween favorites.':'Fantasmas, arañas, calabazas, murciélagos y otros favoritos divertidos de Halloween.',
+      'Autumn Harvest':'Cosecha de Otoño',
+      'Pumpkins, acorns, leaves, pie, jack-o’-lanterns, and other cozy fall favorites.':'Calabazas, bellotas, hojas, pastel y otros favoritos acogedores del otoño.',
+      'Playful Favorites':'Favoritos Divertidos',
+      'Sweet Treats':'Dulces Detalles',
+      'Donuts, cupcakes, coffee, bakery-inspired earrings, and other playful treats.':'Donas, cupcakes, café, aretes inspirados en repostería y otros dulces detalles.',
+      'Handcrafted':'Hecho a mano',
+      'Handcrafted Copper Earrings':'Aretes Artesanales de Cobre',
+      'Small-batch copper earrings in a variety of styles, with and without beads.':'Aretes de cobre en pequeñas cantidades, en varios estilos, con y sin cuentas.',
+      'HOW TO BUY':'CÓMO COMPRAR',
+      'See something you love?':'¿Viste algo que te encanta?',
+      'Send a quick request with the piece or collection name. I’ll confirm availability, price and pickup/shipping details before anything is finalized.':'Envíame una consulta rápida con el nombre de la pieza o colección. Confirmaré disponibilidad, precio y detalles de recogida o envío antes de finalizar el pedido.',
+      'Request to Buy':'Solicitar Compra',
+      'TINY TREASURES':'PEQUEÑOS TESOROS',
+      'Little worlds, handmade.':'Pequeños mundos hechos a mano.',
+      'Miniature scenes, botanical pieces, cloches and small decorative creations made for shelves, desks and thoughtful gifts.':'Escenas en miniatura, piezas botánicas, campanas decorativas y pequeñas creaciones para estantes, escritorios y regalos especiales.',
+      'Because these pieces are handmade in small quantities, availability changes often.':'Como estas piezas se hacen a mano en pequeñas cantidades, la disponibilidad cambia con frecuencia.',
+      'Ask about Tiny Treasures':'Preguntar por Pequeños Tesoros',
+      '3D PRINTED TREASURES':'TESOROS IMPRESOS EN 3D',
+      'Useful, playful, and made layer by layer.':'Útiles, divertidos y creados capa por capa.',
+      'Small 3D-printed creations made for jewelry, gifts, décor, miniatures, useful everyday pieces, and seasonal designs.':'Pequeñas creaciones impresas en 3D para joyería, regalos, decoración, miniaturas, artículos útiles y diseños de temporada.',
+      '3D Jewelry & Creations':'Joyería y Creaciones 3D',
+      'Earrings, charms, miniatures, decorative pieces, and playful printed designs made layer by layer.':'Aretes, dijes, miniaturas, piezas decorativas y diseños impresos creados capa por capa.',
+      'Miniatures & Creative Pieces':'Miniaturas y Piezas Creativas',
+      'Small decorative creations, seasonal pieces, useful printed items, and one-of-a-kind experiments.':'Pequeñas creaciones decorativas, piezas de temporada, artículos impresos útiles y experimentos únicos.',
+      'Ask about 3D Printed Treasures':'Preguntar por Tesoros Impresos en 3D',
+      'HEALING HANDS':'MANOS QUE CUIDAN',
+      'Made for the people who help others heal.':'Hecho para quienes ayudan a otros a sanar.',
+      'Healthcare-inspired jewelry, badge toppers, badge covers, and custom profession-themed pieces for coworkers, teams, students, graduates, and thoughtful gifts.':'Joyería inspirada en el cuidado de la salud, adornos para identificaciones y piezas personalizadas para compañeros, equipos, estudiantes, graduados y regalos especiales.',
+      'Badge Toppers':'Adornos para Identificaciones',
+      'Lightweight badge accessories available year-round in healthcare, seasonal, school, and custom designs.':'Accesorios ligeros para identificaciones disponibles todo el año en diseños de salud, temporada, escuela y personalizados.',
+      'Popular professions:':'Profesiones populares:',
+      'Custom colors available.':'Colores personalizados disponibles.',
+      'Style & Color Inspiration':'Inspiración de Estilo y Color',
+      'Actual designs vary. Choose your profession, color, and preferred style.':'Los diseños pueden variar. Elige tu profesión, color y estilo preferido.',
+      'Explore Healing Hands':'Explorar Manos que Cuidan',
+      'EXPLORE':'EXPLORAR',
+      'More from the studio.':'Más del estudio.',
+      'Legocita Makes is intentionally varied — jewelry comes first, but creativity does not stay in one lane.':'Legocita Makes es intencionalmente variado: la joyería va primero, pero la creatividad no se limita a una sola categoría.',
+      'Botanical Elegance':'Elegancia Botánica',
+      'Nature-inspired pieces':'Piezas inspiradas en la naturaleza',
+      'Wild Elegance':'Elegancia Salvaje',
+      'Animal prints & bold details':'Estampados animales y detalles atrevidos',
+      'Crochet & Fiber':'Crochet y Fibra',
+      'Soft goods & accessories':'Accesorios y artículos suaves',
+      'Watercolor':'Acuarela',
+      'Art, cards & paper goods':'Arte, tarjetas y artículos de papel',
+      '3D Creations':'Creaciones 3D',
+      'Useful, playful printed pieces':'Piezas impresas útiles y divertidas',
+      'CUSTOM ORDERS':'PEDIDOS PERSONALIZADOS',
+      'Have an idea? Let’s make it personal.':'¿Tienes una idea? Hagámosla personal.',
+      'Tell me the occasion, colors, style and what you have in mind. Custom orders are accepted when the materials and timeline are a good fit.':'Cuéntame la ocasión, los colores, el estilo y lo que tienes en mente. Acepto pedidos personalizados cuando los materiales y el tiempo lo permiten.',
+      'Start a Custom Order':'Iniciar Pedido Personalizado',
+      'EVENTS & CREATIVE SERVICES':'EVENTOS Y SERVICIOS CREATIVOS',
+      'Handmade details for meaningful celebrations.':'Detalles hechos a mano para celebraciones especiales.',
+      'Need a little creative help for a party, shower, workplace event, gift table, or special occasion?':'¿Necesitas ayuda creativa para una fiesta, celebración, evento de trabajo, mesa de regalos u ocasión especial?',
+      'Event Décor & Setup':'Decoración y Montaje de Eventos',
+      'Flower arranging, small celebration setup, themed décor, gift-table styling, and creative finishing touches.':'Arreglos florales, montaje de pequeñas celebraciones, decoración temática, mesas de regalos y detalles creativos.',
+      'Ask about event help':'Preguntar por ayuda para eventos',
+      'Custom Event Details':'Detalles Personalizados para Eventos',
+      'Handmade favors, custom signs, small gifts, personalized details, and creative pieces made to fit your theme.':'Recuerdos hechos a mano, letreros personalizados, pequeños regalos y detalles creativos adaptados a tu tema.',
+      'Ask about custom details':'Preguntar por detalles personalizados',
+      'SEWING & FABRIC':'COSTURA Y TELA',
+      'Fabric projects made with a handmade touch.':'Proyectos de tela con un toque hecho a mano.',
+      'Simple sewing projects, scrunchies, fabric accessories, custom fabric gifts, and other small-batch creations.':'Proyectos sencillos de costura, scrunchies, accesorios de tela, regalos personalizados y otras creaciones en pequeñas cantidades.',
+      'Limited availability while the sewing studio is being updated.':'Disponibilidad limitada mientras se actualiza el espacio de costura.',
+      'Ask about Sewing & Fabric':'Preguntar por Costura y Tela',
+      'MEET THE MAKER':'CONOCE A LA ARTESANA',
+      'Hi, I’m Carmen.':'Hola, soy Carmen.',
+      'Legocita Makes grew from a love of making things by hand — jewelry, watercolor, fiber, miniatures and whatever creative idea comes next.':'Legocita Makes nació de mi amor por crear cosas a mano: joyería, acuarela, fibra, miniaturas y cualquier idea creativa que venga después.',
+      'I like pieces that feel thoughtful, useful, playful or beautifully unexpected. The common thread is simple: each one is made with care and imagination.':'Me gustan las piezas que se sienten especiales, útiles, divertidas o bellamente inesperadas. El hilo común es sencillo: cada una está hecha con cuidado e imaginación.',
+      'Contact Legocita Makes →':'Contactar a Legocita Makes →',
+      'BEHIND THE SCENES':'DETRÁS DE ESCENA',
+      'Made by hand, one piece at a time.':'Hecho a mano, una pieza a la vez.',
+      'A little glimpse into the making process behind Legocita Makes.':'Un pequeño vistazo al proceso creativo detrás de Legocita Makes.',
+      'QUICK INQUIRY':'CONSULTA RÁPIDA',
+      'Send a Message':'Envíame un Mensaje',
+      'Questions about an item, availability, or a custom order? Send me a message below.':'¿Tienes preguntas sobre un artículo, disponibilidad o un pedido personalizado? Envíame un mensaje.',
+      'Item or collection':'Artículo o colección',
+      'Your email':'Tu correo electrónico',
+      'Best number to text you':'Mejor número para enviarte un mensaje de texto',
+      'Preferred contact':'Contacto preferido',
+      'Text me':'Envíame un texto',
+      'Email me':'Envíame un correo electrónico',
+      'Order delivery':'Cómo recibirás tu pedido',
+      'I’ll pick it up':'Lo recogeré',
+      'I need shipping':'Necesito envío',
+      'Message':'Mensaje',
+      'Text Carmen':'Enviar texto a Carmen',
+      'Send Message':'Enviar mensaje',
+      'Thank you! Your message was sent successfully. I’ll get back to you soon.':'¡Gracias! Tu mensaje fue enviado correctamente. Me comunicaré contigo pronto.',
+      'MADE BY HAND. MADE WITH IMAGINATION. ♥':'HECHO A MANO. HECHO CON IMAGINACIÓN. ♥'
+    };
+
+    const englishText = new WeakMap();
+    let currentSiteLanguage = 'en';
+
+    function translateTextNodes(root, lang) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+
+      nodes.forEach(node => {
+        const original = englishText.has(node) ? englishText.get(node) : node.nodeValue;
+        if (!englishText.has(node)) englishText.set(node, original);
+        if (lang === 'en') {
+          node.nodeValue = original;
+          return;
+        }
+        const trimmed = original.trim();
+        if (!trimmed || !translations[trimmed]) return;
+        const leading = original.match(/^\s*/)?.[0] || '';
+        const trailing = original.match(/\s*$/)?.[0] || '';
+        node.nodeValue = leading + translations[trimmed] + trailing;
+      });
+    }
+
+    function setSiteLanguage(lang) {
+      currentSiteLanguage = lang;
+      document.documentElement.lang = lang;
+      translateTextNodes(document.body, lang);
+
+      const toggle = document.getElementById('languageToggle');
+      if (toggle) toggle.textContent = lang === 'es' ? 'English' : 'Hablo Español';
+
+      const menu = document.querySelector('.menu-button');
+      if (menu) menu.textContent = lang === 'es' ? 'Menú' : 'Menu';
+
+      const messageBox = document.getElementById('inquiryMessage');
+      if (messageBox) {
+        messageBox.placeholder = lang === 'es'
+          ? 'Hola Carmen, me interesa este artículo. Por favor, envíame un texto al número indicado arriba.'
+          : 'Hi Carmen, I’m interested in this item. Please text me at the number above.';
+      }
+
+      document.title = lang === 'es'
+        ? 'Legocita Makes | Joyería artesanal, pequeños tesoros y creaciones'
+        : 'Legocita Makes | Handmade Jewelry, Tiny Treasures & Creative Goods';
+    }
+
+    const languageToggle = document.getElementById('languageToggle');
+    if (languageToggle) {
+      languageToggle.addEventListener('click', (event) => {
+        event.preventDefault();
+        setSiteLanguage(currentSiteLanguage === 'en' ? 'es' : 'en');
+      });
+    }
+
     const inquiryItem = document.getElementById('inquiryItem');
     const inquiryMessage = document.getElementById('inquiryMessage');
 
@@ -482,7 +677,7 @@
     document.querySelectorAll('.inquiry-link').forEach(button => {
       button.addEventListener('click', () => {
         const item = button.dataset.item || 'General Question';
-        const lang = button.dataset.language === 'es' ? 'es' : 'en';
+        const lang = (button.dataset.language === 'es' || currentSiteLanguage === 'es') ? 'es' : 'en';
         setInquiryLanguage(lang);
 
         if (inquiryItem) inquiryItem.value = item;
