@@ -317,12 +317,24 @@
   <input id="inquiryItem" name="item" type="text" value="General Question">
 
   <label for="customerEmail">Your email</label>
-  <input id="customerEmail" name="email" type="email" required>
+<input id="customerEmail" name="email" type="email" placeholder="you@example.com">
 
-  <label for="inquiryMessage">Message</label>
-  <textarea id="inquiryMessage" name="message" rows="5" placeholder="Hi Carmen, I’m interested in this Legocita Makes item. Is it available?" required></textarea>
+<label for="customerPhone">Best number to text you</label>
+<input id="customerPhone" name="phone" type="tel" placeholder="863-555-1234">
 
-  <button class="button button-dark" type="submit">Send Message</button>
+<label>Preferred contact</label>
+<label><input type="radio" name="preferred_contact" value="Text"> Text me</label>
+<label><input type="radio" name="preferred_contact" value="Email"> Email me</label>
+
+<label>Order delivery</label>
+<label><input type="radio" name="delivery" value="Pickup"> I’ll pick it up</label>
+<label><input type="radio" name="delivery" value="Shipping"> I need shipping</label>
+
+<label for="inquiryMessage">Message</label>
+<textarea id="inquiryMessage" name="message" rows="5" placeholder="Hi Carmen, I’m interested in this item. Please text me at the number above." required></textarea>
+
+<a class="button button-outline" href="sms:8633705142">Text Carmen</a>
+<button class="button button-dark" type="submit">Send Message</button>
 </form>
         <p id="message-sent" hidden><strong>Thank you! Your message was sent successfully. I’ll get back to you soon.</strong></p>
       </div>
