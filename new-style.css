@@ -650,3 +650,49 @@ img{max-width:100%;display:block} a{color:inherit}
   .button{width:100%;}
   .hero-actions{width:100%;}
 }
+
+
+/* HEADER LOGO PROMINENCE — final responsive override */
+@media (min-width:1361px){
+  .wordmark-approved .approved-logo,
+  .wordmark .header-logo{
+    width:500px!important;
+    max-width:36vw!important;
+    max-height:82px!important;
+    height:auto!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+    filter:contrast(1.08) brightness(1.04)!important;
+  }
+  .nav-shell{
+    min-height:112px!important;
+    padding-left:14px!important;
+    padding-right:20px!important;
+  }
+}
+
+@media (min-width:721px) and (max-width:1360px){
+  .wordmark-approved .approved-logo,
+  .wordmark .header-logo{
+    width:360px!important;
+    max-width:58vw!important;
+    max-height:72px!important;
+    height:auto!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+    filter:contrast(1.06) brightness(1.03)!important;
+  }
+}
+
+@media (max-width:720px){
+  .wordmark-approved .approved-logo,
+  .wordmark .header-logo{
+    width:285px!important;
+    max-width:70vw!important;
+    max-height:64px!important;
+    height:auto!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+    filter:contrast(1.05) brightness(1.03)!important;
+  }
+}
