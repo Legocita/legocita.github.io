@@ -720,15 +720,15 @@ img{max-width:100%;display:block} a{color:inherit}
 }
 
 
-/* HEADER LOGO — use the approved label wordmark */
+/* HEADER LOGO — approved horizontal website wordmark */
 .header-brand{gap:0;flex:0 0 auto;}
-.header-approved-logo{display:block;width:clamp(300px,25vw,360px);height:auto;max-width:calc(100vw - 130px);object-fit:contain;filter:none;}
+.header-approved-logo{display:block;width:min(440px,31vw);height:auto;max-width:calc(100vw - 130px);object-fit:contain;filter:none;}
 .nav-shell{min-height:148px!important;}
 @media (max-width:1360px){
-  .nav-shell{min-height:146px!important;}
-  .header-approved-logo{width:min(340px,50vw);max-width:calc(100vw - 130px);}
+  .nav-shell{min-height:132px!important;}
+  .header-approved-logo{width:min(380px,52vw);max-width:calc(100vw - 130px);}
 }
 @media (max-width:720px){
-  .nav-shell{min-height:108px!important;}
-  .header-approved-logo{width:min(235px,62vw);max-width:calc(100vw - 112px);}
+  .nav-shell{min-height:100px!important;}
+  .header-approved-logo{width:min(245px,65vw);max-width:calc(100vw - 125px);}
 }
