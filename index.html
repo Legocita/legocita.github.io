@@ -1233,10 +1233,20 @@ body{background:#fbf7ef!important}
             : 'Hi Carmen, I’m interested in ' + item + ' from Legocita Makes. Is it available?';
         }
 
-        const inquirySection = document.getElementById('inquiry');
-        if (inquirySection) {
-          inquirySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // The site uses hash-based pages, so make the inquiry page active first.
+        if (window.location.hash !== '#inquiry') {
+          window.location.hash = 'inquiry';
+        } else {
+          showHashPage();
         }
+
+        requestAnimationFrame(() => {
+          const inquirySection = document.getElementById('inquiry');
+          if (inquirySection) {
+            inquirySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          if (inquiryMessage) inquiryMessage.focus({ preventScroll: true });
+        });
       });
     });
 
